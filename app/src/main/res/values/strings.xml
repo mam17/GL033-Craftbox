@@ -1,0 +1,93 @@
+<resources>
+    <string name="app_name" translatable="false">My Application</string>
+
+    <string name="txt_english" translatable="false">English</string>
+    <string name="txt_arabic" translatable="false">Arabic</string>
+    <string name="txt_hindi" translatable="false">Hindi</string>
+    <string name="txt_spanish" translatable="false">Spanish</string>
+    <string name="txt_chinese" translatable="false">Chinese</string>
+    <string name="txt_portuguese" translatable="false">Portuguese</string>
+    <string name="txt_germany" translatable="false">Germany</string>
+    <string name="txt_russian" translatable="false">Russian</string>
+    <string name="txt_indonesian" translatable="false">Indonesian</string>
+    <string name="txt_french" translatable="false">French</string>
+
+
+    <string name="txt_select">Select</string>
+    <string name="txt_cancel">Cancel</string>
+    <string name="txt_yes">Yes</string>
+    <string name="txt_choose_one">Choose one</string>
+    <string name="txt_next">Next</string>
+    <string name="txt_get_start">Get Start</string>
+    <string name="txt_are_you_sure">Are you sure?</string>
+    <string name="txt_exit_app">You want to exit the application?</string>
+    <string name="txt_try_again">Try Again</string>
+    <string name="txt_loading">Loading…</string>
+    <string name="txt_this_action_contain_ads">This action contain ads</string>
+    <string name="txt_title_onb1">Welcome to Home AI</string>
+    <string name="txt_desc_onb1">Instantly redesign your home with AI</string>
+    <string name="txt_title_onb2">Redesign Your Dream\nSpace Instantly</string>
+    <string name="txt_title_onb3">Endless trendy design inspiration options</string>
+    <string name="txt_desc_onb2">Capture or upload an image. Let AI turn your room into a designer masterpiece</string>
+    <string name="txt_desc_onb3">Discover many design ideas crafted to match your taste, budget, and space</string>
+    <string name="txt_confirm">Confirm</string>
+    <string name="txt_no_alarm_permission_yet">No alarm permission yet</string>
+    <string name="txt_permission_access">Permission access</string>
+    <string name="txt_cont_permission">The application needs permissions to function properly</string>
+    <string name="txt_notification_permission">Notification permission</string>
+    <string name="txt_go_to_setting">Go to Setting</string>
+    <string name="txt_fullscreen_intent_permission">Fullscreen Intent Permission</string>
+    <string name="txt_overlay">Overlay</string>
+    <string name="txt_exact_alarm">Exact Alarm</string>
+    <string name="txt_title_uninstall">We’re truly sorry if we haven’t met your expectations. Please let us know how we can improve.</string>
+    <string name="txt_not_much_more_useful_than_the_default_feature">Not much more useful than the default feature</string>
+    <string name="txt_explore">Explore</string>
+    <string name="txt_unresponsive_or_laggy">Unresponsive or Laggy</string>
+    <string name="txt_don_t_uninstall_yet">Don’t uninstall yet</string>
+    <string name="txt_still_want_to_uninstall">Still want to uninstall</string>
+    <string name="txt_why_did_you_uninstall_the_app">Why did you uninstall the app?</string>
+    <string name="txt_ask_1">Difficult to use</string>
+    <string name="txt_ask_2">Too many ads</string>
+    <string name="txt_ask_3">Error Not Working</string>
+    <string name="txt_ask_4">Fast battery drain</string>
+    <string name="txt_ask_5">Others</string>
+    <string name="txt_uninstall">Uninstall</string>
+    <string name="txt_want_uninstall">You want to uninstall this app?</string>
+    <string name="txt_title_noti_full">🔥 Your Roblox Outfit Could Go Viral</string>
+    <string name="txt_body_noti_full">Create eye-catching Roblox clothes with AI and make your style stand out from millions of players.</string>
+    <string name="txt_network_error">Network error</string>
+    <string name="txt_network_error_message">No network connection, please try again!</string>
+    <string name="txt_notifiction_granted">The right to notify has been granted.</string>
+    <string name="txt_enable_full_screen_permission">Enable full screen permission</string>
+    <string name="txt_my_designs">My Design</string>
+    <string name="txt_delete">Delete</string>
+    <string name="txt_delete_design_confirm">Are you sure you want to delete this design?</string>
+    <string name="txt_downloaded">Downloaded</string>
+    <string name="txt_redownload_design_confirm">Are you sure you want to download this design again?</string>
+    <string name="txt_title_update">Update App for Better Performance</string>
+    <string name="txt_cont_update">To continue using the app, please update to the latest version.</string>
+    <string name="txt_update_now">Update Now</string>
+
+    <!-- Onboarding Reminder Notification Contents -->
+    <string name="txt_noti_title_1">👕 Design Your Dream Roblox Outfit</string>
+    <string name="txt_noti_body_1">Create stylish Roblox shirts and pants with AI in just a few taps!</string>
+    <string name="txt_noti_title_2">🎨 AI Roblox Clothes Generator</string>
+    <string name="txt_noti_body_2">Turn your ideas into unique Roblox outfits instantly with AI.</string>
+    <string name="txt_noti_title_3">🔥 New Roblox Outfit Ideas</string>
+    <string name="txt_noti_body_3">Discover trending Roblox clothing styles and create your own today.</string>
+    <string name="txt_noti_title_4">✨ Make Viral Roblox Shirts</string>
+    <string name="txt_noti_body_4">Design cool Roblox shirts, hoodies, and outfits everyone will love.</string>
+    <string name="txt_noti_title_5">🧢 Customize Roblox Fashion</string>
+    <string name="txt_noti_body_5">Create aesthetic, cute, or edgy Roblox clothes with powerful AI tools.</string>
+    <string name="txt_noti_title_6">🚀 Your Roblox Designer Studio</string>
+    <string name="txt_noti_body_6">Generate amazing Roblox outfit textures and customize every detail.</string>
+    <string name="txt_noti_title_7">🌈 Endless Roblox Creativity</string>
+    <string name="txt_noti_body_7">Design anime, streetwear, Y2K, and fantasy Roblox outfits easily.</string>
+    <string name="txt_noti_title_8">📸 Create Roblox Clothes from Images</string>
+    <string name="txt_noti_body_8">Upload inspiration photos and transform them into Roblox outfit templates.</string>
+    <string name="txt_noti_title_9">💎 Stand Out in Roblox</string>
+    <string name="txt_noti_body_9">Create unique Roblox clothing styles and impress your friends online.</string>
+    <string name="txt_noti_title_10">🎭 Design Cute &amp; Cool Roblox Fits</string>
+    <string name="txt_noti_body_10">Make custom Roblox outfits for boys, girls, anime fans, and more.</string>
+    <string name="txt_report">Report</string>
+</resources>

@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/transparent">
+
+    <com.example.myapplication.views.RoundImageView
+        android:id="@+id/btnCloseNoti"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="@dimen/size16"
+        android:padding="@dimen/size2"
+        app:bgColor="@color/gray"
+        app:iconTint="@color/white"
+        app:isOval="true"
+        android:src="@drawable/ic_close"
+        app:layout_constraintBottom_toTopOf="@+id/llNotiBottom"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <LinearLayout
+        android:id="@+id/llNotiBottom"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/bg_dialog"
+        android:orientation="vertical"
+        android:paddingVertical="@dimen/size16"
+        app:layout_constraintBottom_toBottomOf="parent">
+
+        <com.example.myapplication.views.RoundImageView
+            app:cornerRadius="@dimen/size12"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/size200"
+            android:layout_marginHorizontal="@dimen/size16"
+            android:scaleType="fitXY"
+            android:src="@drawable/ic_rating_star_border" />
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="@dimen/size16"
+            android:layout_marginTop="@dimen/size16">
+
+            <com.example.myapplication.views.RoundImageView
+                android:id="@+id/ivLogoNoti"
+                android:layout_width="@dimen/size48"
+                android:layout_height="@dimen/size48"
+                android:src="@mipmap/ic_launcher"
+                app:cornerRadius="@dimen/size12"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/tvTitleNoti"
+                style="@style/TextView_6"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/size8"
+                android:text="@string/txt_title_noti_full"
+                android:textColor="@color/black"
+                android:textSize="14sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/ivLogoNoti"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/tvContNoti"
+                style="@style/TextView_4"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:textColor="@color/gray"
+                android:layout_marginStart="@dimen/size8"
+                android:text="@string/txt_body_noti_full"
+                android:textSize="12sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/ivLogoNoti"
+                app:layout_constraintTop_toBottomOf="@+id/tvTitleNoti" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btnTryAgain"
+            style="@style/TextView_6"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="@dimen/size16"
+            android:layout_marginTop="@dimen/size16"
+            android:background="@drawable/bg_btn_r10_main"
+            android:stateListAnimator="@null"
+            android:text="@string/txt_try_again"
+            android:textAllCaps="false"
+            android:textColor="@color/white" />
+    </LinearLayout>
+
+    <View
+        android:id="@+id/vOpenSplash"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+</androidx.constraintlayout.widget.ConstraintLayout>

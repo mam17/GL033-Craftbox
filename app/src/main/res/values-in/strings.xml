@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="txt_select">Memilih</string>
+    <string name="txt_cancel">Membatalkan</string>
+    <string name="txt_yes">Ya</string>
+    <string name="txt_choose_one">Pilih salah satu</string>
+    <string name="txt_next">Berikutnya</string>
+    <string name="txt_get_start">Mulai</string>
+    <string name="txt_are_you_sure">Apa kamu yakin?</string>
+    <string name="txt_exit_app">Anda ingin keluar dari aplikasi?</string>
+    <string name="txt_try_again">Coba Lagi</string>
+    <string name="txt_loading">Memuat…</string>
+</resources>

@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white">
+
+    <androidx.appcompat.widget.AppCompatImageButton
+        android:id="@+id/btnBack"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="?android:selectableItemBackground"
+        android:padding="@dimen/size10"
+        android:src="@drawable/ic_back"
+        android:tint="@color/black"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btnBack">
+
+        <TextView
+            android:id="@+id/tvTitleUninstall"
+            style="@style/TextView_4"
+            android:layout_width="0dp"
+            android:layout_marginHorizontal="@dimen/size16"
+            android:layout_marginTop="@dimen/size16"
+            android:text="@string/txt_title_uninstall"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <LinearLayout
+            android:id="@+id/linearLayout2"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/size66"
+            android:layout_marginHorizontal="@dimen/size16"
+            android:layout_marginTop="@dimen/size16"
+            android:background="@drawable/bg_item_lang"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:paddingHorizontal="@dimen/size16"
+            app:layout_constraintTop_toBottomOf="@+id/tvTitleUninstall"
+            tools:layout_editor_absoluteX="18dp">
+
+            <TextView
+                style="@style/TextView_4"
+                android:layout_width="0dp"
+                android:layout_marginEnd="@dimen/size24"
+                android:layout_weight="1"
+                android:ellipsize="end"
+                android:maxLines="2"
+                android:text="@string/txt_not_much_more_useful_than_the_default_feature"
+                android:textStyle="bold" />
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/btnExplore1"
+                style="@style/TextView_4"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/bg_btn_r10_main"
+                android:text="@string/txt_explore"
+                android:textAllCaps="false"
+                android:textColor="@color/white" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/size66"
+            android:layout_marginHorizontal="@dimen/size16"
+            android:layout_marginTop="@dimen/size16"
+            android:background="@drawable/bg_item_lang"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:paddingHorizontal="@dimen/size16"
+            app:layout_constraintTop_toBottomOf="@+id/linearLayout2">
+
+            <TextView
+                style="@style/TextView_4"
+                android:layout_width="0dp"
+                android:layout_marginEnd="@dimen/size24"
+                android:layout_weight="1"
+                android:ellipsize="end"
+                android:maxLines="2"
+                android:text="@string/txt_unresponsive_or_laggy"
+                android:textStyle="bold" />
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/btnExplore2"
+                style="@style/TextView_4"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/bg_btn_r10_main"
+                android:text="@string/txt_explore"
+                android:textAllCaps="false"
+                android:textColor="@color/white" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/size20"
+            android:orientation="vertical"
+            android:paddingHorizontal="@dimen/size16"
+            android:paddingVertical="@dimen/size12"
+            app:layout_constraintBottom_toBottomOf="parent">
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/btnDontUninstall"
+                style="@style/TextView_6"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/bg_btn_r10_main"
+                android:stateListAnimator="@null"
+                android:text="@string/txt_don_t_uninstall_yet"
+                android:textColor="@color/white" />
+
+            <TextView
+                android:id="@+id/tvStill"
+                style="@style/TextView_4"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/size10"
+                android:background="?selectableItemBackground"
+                android:gravity="center"
+                android:text="@string/txt_still_want_to_uninstall" />
+        </LinearLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

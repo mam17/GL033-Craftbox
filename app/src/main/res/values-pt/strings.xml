@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="txt_select">Selecione</string>
+    <string name="txt_cancel">Cancelar</string>
+    <string name="txt_yes">Sim</string>
+    <string name="txt_choose_one">Escolha uma</string>
+    <string name="txt_next">Próximo</string>
+    <string name="txt_get_start">Comece agora</string>
+    <string name="txt_are_you_sure">Tem certeza?</string>
+    <string name="txt_exit_app">Deseja sair do aplicativo?</string>
+    <string name="txt_try_again">Tente novamente</string>
+    <string name="txt_loading">Carregando…</string>
+</resources>

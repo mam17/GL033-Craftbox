@@ -1,0 +1,7 @@
+interface:
+  display_name: "GL027 SMS Theme Android"
+  short_description: "GL027 SMS Android project rules"
+  default_prompt: "Use $gl027-sms-theme-android when changing the GL027 SMS customization Android app."
+
+policy:
+  allow_implicit_invocation: true

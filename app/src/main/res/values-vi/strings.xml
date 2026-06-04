@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="txt_select">Lựa chọn</string>
+    <string name="txt_cancel">Hủy bỏ</string>
+    <string name="txt_yes">Đúng</string>
+    <string name="txt_choose_one">Chọn một</string>
+    <string name="txt_next">Kế tiếp</string>
+    <string name="txt_get_start">Bắt đầu</string>
+    <string name="txt_are_you_sure">Bạn chắc chắn chứ?</string>
+    <string name="txt_exit_app">Bạn muốn thoát khỏi ứng dụng?</string>
+    <string name="txt_try_again">Thử lại</string>
+    <string name="txt_loading">Đang tải…</string>
+</resources>

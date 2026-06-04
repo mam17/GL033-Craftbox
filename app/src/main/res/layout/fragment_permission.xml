@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:paddingVertical="@dimen/size20">
+
+    <TextView
+        style="@style/TextView_6"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/size16"
+        android:layout_marginTop="@dimen/size12"
+        android:text="@string/txt_permission_access"
+        android:textSize="@dimen/size20" />
+
+    <TextView
+        style="@style/TextView_4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="@dimen/size16"
+        android:text="@string/txt_cont_permission"
+        android:textSize="@dimen/size14" />
+
+    <LinearLayout
+        android:id="@+id/llNotification"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/size44"
+        android:layout_marginHorizontal="@dimen/size16"
+        android:layout_marginTop="@dimen/size16"
+        android:background="@drawable/bg_item_lang"
+        android:orientation="horizontal"
+        android:paddingHorizontal="@dimen/size12">
+
+        <TextView
+            style="@style/TextView_4"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:ellipsize="end"
+            android:maxLines="1"
+            android:text="@string/txt_notification_permission"
+            android:textSize="14sp" />
+
+        <androidx.appcompat.widget.SwitchCompat
+            android:id="@+id/swNotification"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:clickable="false"
+            android:focusable="false"
+            android:theme="@style/SwitchTheme" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/llFullIntent"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/size44"
+        android:layout_marginHorizontal="@dimen/size16"
+        android:layout_marginTop="@dimen/size16"
+        android:background="@drawable/bg_item_lang"
+        android:orientation="horizontal"
+        android:paddingHorizontal="@dimen/size12">
+
+        <TextView
+            style="@style/TextView_4"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:ellipsize="end"
+            android:maxLines="1"
+            android:text="@string/txt_fullscreen_intent_permission"
+            android:textSize="14sp" />
+
+        <androidx.appcompat.widget.SwitchCompat
+            android:id="@+id/swFullIntent"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:clickable="false"
+            android:focusable="false"
+            android:theme="@style/SwitchTheme" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/llExactAlarm"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/size44"
+        android:layout_marginHorizontal="@dimen/size16"
+        android:layout_marginTop="@dimen/size16"
+        android:background="@drawable/bg_item_lang"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:paddingHorizontal="@dimen/size12">
+
+        <TextView
+            style="@style/TextView_4"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:ellipsize="end"
+            android:maxLines="1"
+            android:text="@string/txt_exact_alarm"
+            android:textSize="14sp" />
+
+        <androidx.appcompat.widget.SwitchCompat
+            android:id="@+id/swExactAlarm"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:clickable="false"
+            android:focusable="false" />
+    </LinearLayout>
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btnGoSetting"
+        style="@style/TextView_6"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/size46"
+        android:layout_marginHorizontal="@dimen/size16"
+        android:layout_marginTop="@dimen/size16"
+        android:background="@drawable/bg_btn_r10_main"
+        android:text="@string/txt_go_to_setting"
+        android:textAllCaps="false"
+        android:textColor="@color/white" />
+</LinearLayout>

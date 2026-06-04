@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="txt_select">选择</string>
+    <string name="txt_cancel">取消</string>
+    <string name="txt_yes">是的</string>
+    <string name="txt_choose_one">选择一个</string>
+    <string name="txt_next">下一个</string>
+    <string name="txt_get_start">开始使用</string>
+    <string name="txt_are_you_sure">你确定吗？</string>
+    <string name="txt_exit_app">您想退出应用程序吗？</string>
+    <string name="txt_try_again">重试</string>
+    <string name="txt_loading">加载中…</string>
+</resources>

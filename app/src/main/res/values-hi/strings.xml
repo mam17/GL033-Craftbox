@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="txt_select">चुनना</string>
+    <string name="txt_cancel">रद्द करना</string>
+    <string name="txt_yes">हाँ</string>
+    <string name="txt_choose_one">एक का चयन</string>
+    <string name="txt_next">अगला</string>
+    <string name="txt_get_start">शुरुआत करें</string>
+    <string name="txt_are_you_sure">क्या आपको यकीन है?</string>
+    <string name="txt_exit_app">क्या आप एप्लिकेशन से बाहर निकलना चाहते हैं?</string>
+    <string name="txt_try_again">पुनः प्रयास करें</string>
+    <string name="txt_loading">लोड हो रहा है…</string>
+</resources>

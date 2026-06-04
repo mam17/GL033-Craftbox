@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="txt_select">Выбирать</string>
+    <string name="txt_cancel">Отмена</string>
+    <string name="txt_yes">Да</string>
+    <string name="txt_choose_one">Выберите один вариант</string>
+    <string name="txt_next">Следующий</string>
+    <string name="txt_get_start">Начать</string>
+    <string name="txt_are_you_sure">Вы уверены?</string>
+    <string name="txt_exit_app">Вы хотите выйти из приложения?</string>
+    <string name="txt_try_again">Попробуйте еще раз</string>
+    <string name="txt_loading">Загрузка…</string>
+</resources>
