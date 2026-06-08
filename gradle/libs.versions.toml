@@ -30,6 +30,7 @@ activityKtx = "1.13.0"
 lifecycleProcess = "2.10.0"
 workRuntimeKtx = "2.11.2"
 lifecycleExtensions = "2.2.0"
+android-smsmms = "c3e678befd"
 
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
@@ -101,6 +102,9 @@ okhttp-logging = { group = "com.squareup.okhttp3", name = "logging-interceptor",
 firebase-bom = { group = "com.google.firebase", name = "firebase-bom", version.ref = "firebaseBom" }
 firebase-config = { group = "com.google.firebase", name = "firebase-config-ktx" }
 firebase-analytics = { group = "com.google.firebase", name = "firebase-analytics" }
+
+# Lib sms
+android-smsmms = { module = "com.github.tibbi:android-smsmms", version.ref = "android-smsmms" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }

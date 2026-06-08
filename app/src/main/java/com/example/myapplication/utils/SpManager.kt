@@ -2,17 +2,17 @@ package com.example.myapplication.utils
 
 import android.content.Context
 import android.content.SharedPreferences
+import androidx.core.content.edit
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
-import androidx.core.content.edit
-
 import dagger.hilt.android.qualifiers.ApplicationContext
 import javax.inject.Inject
 import javax.inject.Singleton
 
 @Singleton
 class SpManager @Inject constructor(@ApplicationContext context: Context) {
-    private val prefs: SharedPreferences = context.getSharedPreferences(PREF_NAME, Context.MODE_PRIVATE)
+    private val prefs: SharedPreferences =
+        context.getSharedPreferences(PREF_NAME, Context.MODE_PRIVATE)
     val gson = Gson()
 
     companion object {
@@ -75,7 +75,12 @@ class SpManager @Inject constructor(@ApplicationContext context: Context) {
     }
 
     fun getDouble(key: String, defaultValue: Double = 0.0): Double {
-        return java.lang.Double.longBitsToDouble(prefs.getLong(key, java.lang.Double.doubleToRawLongBits(defaultValue)))
+        return java.lang.Double.longBitsToDouble(
+            prefs.getLong(
+                key,
+                java.lang.Double.doubleToRawLongBits(defaultValue)
+            )
+        )
     }
 
     // ArrayList (Generic using Gson)
@@ -104,4 +109,41 @@ class SpManager @Inject constructor(@ApplicationContext context: Context) {
     var isCompletedOnboarding: Boolean
         get() = getBoolean("is_completed_onboarding", false)
         set(value) = putBoolean("is_completed_onboarding", value)
+
+    private fun normalizePhoneNumber(address: String): String {
+        return address.replace(" ", "").replace("-", "").replace("+", "").let {
+            if (it.startsWith("84")) "0" + it.substring(2) else it
+        }
+    }
+
+    fun getMessageBackground(address: String): String? = getString("bg_$address", "")
+    fun setBlocked(address: String, isBlocked: Boolean) {
+        val normalized = normalizePhoneNumber(address)
+        putBoolean("blocked_$normalized", isBlocked)
+    }
+
+    fun isBlocked(address: String): Boolean {
+        val normalized = normalizePhoneNumber(address)
+        return getBoolean("blocked_$normalized", false)
+    }
+
+    fun setArchived(address: String, isArchived: Boolean) {
+        putBoolean("archived_$address", isArchived)
+    }
+
+    fun isArchived(address: String): Boolean = getBoolean("archived_$address", false)
+
+    fun setNotificationsEnabled(address: String, enabled: Boolean) {
+        putBoolean("notify_$address", enabled)
+    }
+
+    fun areNotificationsEnabled(address: String): Boolean = getBoolean("notify_$address", true)
+
+    fun setNotificationPreviewMode(address: String, mode: Int) {
+        putInt("notification_preview_mode_$address", mode)
+    }
+
+    fun getNotificationPreviewMode(address: String): Int =
+        getInt("notification_preview_mode_$address", 0)
+
 }

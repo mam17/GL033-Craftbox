@@ -23,6 +23,7 @@ import com.example.myapplication.R
 import com.example.myapplication.ui.dialog.DialogLoading
 import com.example.myapplication.utils.SpManager
 import com.example.myapplication.utils.SystemUtil
+import androidx.core.content.ContextCompat
 import javax.inject.Inject
 
 abstract class BaseActivity<VB : ViewBinding>(
@@ -51,6 +52,7 @@ abstract class BaseActivity<VB : ViewBinding>(
 //        setBaseDefault()
         setBaseStatusBar(isVisible = true, isLightIcons = true)
         setBaseHideNavigation()
+        window.statusBarColor = ContextCompat.getColor(this, R.color.white)
 
         initView()
         initData()

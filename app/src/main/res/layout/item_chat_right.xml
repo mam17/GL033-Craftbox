@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:paddingHorizontal="@dimen/size16"
+    android:paddingVertical="@dimen/size4">
+
+    <com.example.myapplication.views.MessageBubbleView
+        android:id="@+id/bubbleView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:bubbleColor="@color/col_main"
+        app:caretPosition="none"
+        app:cornerRadiusBBV="@dimen/size16"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <FrameLayout
+                android:id="@+id/flMedia"
+                android:layout_width="@dimen/size200"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/size4"
+                android:visibility="gone">
+
+                <com.example.myapplication.views.RoundImageView
+                    android:id="@+id/ivImage"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:adjustViewBounds="true"
+                    android:scaleType="fitCenter"
+                    app:cornerRadius="@dimen/size8" />
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/ivPlayVideo"
+                    android:layout_width="@dimen/size40"
+                    android:layout_height="@dimen/size40"
+                    android:layout_gravity="center"
+                    android:src="@drawable/ic_play"
+                    android:visibility="gone" />
+            </FrameLayout>
+
+            <TextView
+                android:id="@+id/tvBody"
+                style="@style/TextView_4"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:maxWidth="@dimen/size280"
+                android:paddingHorizontal="@dimen/size16"
+                android:paddingVertical="@dimen/size10"
+                android:text="@string/txt_empty" />
+
+        </LinearLayout>
+    </com.example.myapplication.views.MessageBubbleView>
+
+    <TextView
+        android:id="@+id/tvTime"
+        style="@style/TextView_4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/size2"
+        android:text="@string/txt_empty"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/bubbleView"
+        app:layout_constraintTop_toBottomOf="@+id/bubbleView" />
+
+    <TextView
+        android:id="@+id/tvStatus"
+        style="@style/TextView_4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/size2"
+        android:text="@string/txt_send_fail_touch_to_retry"
+        android:visibility="gone"
+        app:layout_constraintEnd_toEndOf="@+id/bubbleView"
+        app:layout_constraintTop_toBottomOf="@+id/tvTime" />
+
+    <ImageView
+        android:id="@+id/ivDone"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_done_all_1"
+        app:layout_constraintEnd_toStartOf="@+id/tvTime"
+        app:layout_constraintTop_toBottomOf="@+id/bubbleView" />
+</androidx.constraintlayout.widget.ConstraintLayout>

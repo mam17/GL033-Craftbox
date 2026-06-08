@@ -34,7 +34,9 @@ class RoundImageView @JvmOverloads constructor(
 
     init {
         isClickable = true
-        scaleType = ScaleType.CENTER_CROP
+        if (!hasScaleTypeAttribute(attrs)) {
+            scaleType = ScaleType.FIT_CENTER
+        }
 
         attrs?.let {
             context.withStyledAttributes(it, R.styleable.RoundImageView) {
@@ -53,6 +55,21 @@ class RoundImageView @JvmOverloads constructor(
             }
         }
         updatePath()
+    }
+
+    private fun hasScaleTypeAttribute(attrs: AttributeSet?): Boolean {
+        if (attrs == null) return false
+        val typedArray = context.obtainStyledAttributes(
+            attrs,
+            intArrayOf(android.R.attr.scaleType),
+            0,
+            0
+        )
+        return try {
+            typedArray.hasValue(0)
+        } finally {
+            typedArray.recycle()
+        }
     }
 
     override fun onSizeChanged(w: Int, h: Int, oldw: Int, oldh: Int) {

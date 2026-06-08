@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<TextView xmlns:android="http://schemas.android.com/apk/res/android"
+    style="@style/TextView_4"
+    android:id="@+id/tvDate"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:gravity="center"
+    android:padding="@dimen/size16"
+    android:text="10:00 AM, October 10, 2025"
+    android:textColor="@color/col_main" />

@@ -22,7 +22,7 @@
             android:id="@+id/tvTitle"
             style="@style/TextView_6"
             android:text="@string/txt_are_you_sure"
-            android:textColor="@color/black"
+            android:textColor="@color/col_main"
             android:textSize="@dimen/size20" />
 
         <TextView
@@ -31,7 +31,7 @@
             android:layout_marginTop="@dimen/size8"
             android:paddingHorizontal="@dimen/size20"
             android:text="@string/txt_exit_app"
-            android:textColor="@color/black"
+            android:textColor="@color/col_main"
             android:textSize="@dimen/size14" />
 
         <LinearLayout
@@ -44,29 +44,32 @@
             <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/btnCancel"
                 style="@style/TextView_6"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="@dimen/size44"
-                android:background="?android:selectableItemBackground"
+                android:layout_weight="1"
+                android:background="@drawable/bg_btn_cancel"
                 android:ellipsize="end"
                 android:maxLines="1"
                 android:paddingHorizontal="@dimen/size20"
                 android:stateListAnimator="@null"
                 android:text="@string/txt_cancel"
                 android:textAllCaps="false"
-                android:textColor="@color/black"
+                android:textColor="@color/col_main"
                 android:textSize="@dimen/size14"
                 tools:ignore="SpUsage" />
 
             <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/btnYes"
                 style="@style/TextView_6"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="@dimen/size44"
-                android:background="?android:selectableItemBackground"
+                android:layout_marginStart="@dimen/size16"
+                android:layout_weight="1"
+                android:background="@drawable/bg_btn_ok"
                 android:stateListAnimator="@null"
                 android:text="@string/txt_yes"
                 android:textAllCaps="false"
-                android:textColor="@color/black"
+                android:textColor="@color/white"
                 android:textSize="@dimen/size14" />
         </LinearLayout>
     </LinearLayout>

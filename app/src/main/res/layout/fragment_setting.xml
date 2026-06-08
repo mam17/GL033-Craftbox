@@ -1,0 +1,490 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/clTopBar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="@dimen/size16"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <TextView
+            android:id="@+id/tvTitle"
+            style="@style/TextView_7"
+            android:text="@string/txt_settings"
+            android:textColor="@color/col_main"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <View
+        android:id="@+id/vLine"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/size1"
+        android:background="@color/col_14000000"
+        app:layout_constraintTop_toBottomOf="@+id/clTopBar" />
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_marginTop="@dimen/size12"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/vLine">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <!-- Notification -->
+            <LinearLayout
+                android:id="@+id/llNotification"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="?attr/selectableItemBackground"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:paddingHorizontal="@dimen/size16"
+                android:paddingVertical="@dimen/size12">
+
+                <ImageView
+                    android:layout_width="@dimen/size24"
+                    android:layout_height="@dimen/size24"
+                    android:src="@drawable/ic_setting_notification"
+                    app:tint="@color/col_main" />
+
+                <TextView
+                    style="@style/TextView_6"
+                    android:layout_marginStart="@dimen/size16"
+                    android:text="@string/txt_notification"
+                    android:textColor="@color/col_main" />
+            </LinearLayout>
+
+            <!-- Language -->
+            <LinearLayout
+                android:id="@+id/llLanguage"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="?attr/selectableItemBackground"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:paddingHorizontal="@dimen/size16"
+                android:paddingVertical="@dimen/size12">
+
+                <ImageView
+                    android:layout_width="@dimen/size24"
+                    android:layout_height="@dimen/size24"
+                    android:src="@drawable/ic_setting_language"
+                    app:tint="@color/col_main" />
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/size16"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <TextView
+                        style="@style/TextView_6"
+                        android:text="@string/txt_language"
+                        android:textColor="@color/col_main" />
+
+                    <TextView
+                        style="@style/TextView_4"
+                        android:text="@string/txt_english"
+                        android:textColor="@color/col_main" />
+                </LinearLayout>
+            </LinearLayout>
+
+            <!-- Delayed sending -->
+            <LinearLayout
+                android:id="@+id/llDelayedSending"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="?attr/selectableItemBackground"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:paddingHorizontal="@dimen/size16"
+                android:paddingVertical="@dimen/size12">
+
+                <ImageView
+                    android:layout_width="@dimen/size24"
+                    android:layout_height="@dimen/size24"
+                    android:src="@drawable/ic_setting_delay"
+                    app:tint="@color/col_main" />
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/size16"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <TextView
+                        style="@style/TextView_6"
+                        android:text="@string/txt_delayed_sending"
+                        android:textColor="@color/col_main" />
+
+                    <TextView
+                        style="@style/TextView_4"
+                        android:text="@string/txt_no_delay"
+                        android:textColor="@color/col_main" />
+                </LinearLayout>
+            </LinearLayout>
+
+            <!-- Swipe actions -->
+            <LinearLayout
+                android:id="@+id/llSwipeActions"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="?attr/selectableItemBackground"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:paddingHorizontal="@dimen/size16"
+                android:paddingVertical="@dimen/size12">
+
+                <ImageView
+                    android:layout_width="@dimen/size24"
+                    android:layout_height="@dimen/size24"
+                    android:src="@drawable/ic_setting_swipe"
+                    app:tint="@color/col_main" />
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/size16"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <TextView
+                        style="@style/TextView_6"
+                        android:text="@string/txt_swipe_actions"
+                        android:textColor="@color/col_main" />
+
+                    <TextView
+                        style="@style/TextView_4"
+                        android:text="@string/txt_swipe_actions_desc"
+                        android:textColor="@color/col_main" />
+                </LinearLayout>
+            </LinearLayout>
+
+            <!-- Delivery confirmations -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:paddingHorizontal="@dimen/size16"
+                android:paddingVertical="@dimen/size12">
+
+                <ImageView
+                    android:layout_width="@dimen/size24"
+                    android:layout_height="@dimen/size24"
+                    android:src="@drawable/ic_setting_send"
+                    app:tint="@color/col_main" />
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/size16"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <TextView
+                        style="@style/TextView_6"
+                        android:text="@string/txt_delivery_confirmations"
+                        android:textColor="@color/col_main" />
+
+                    <TextView
+                        style="@style/TextView_4"
+                        android:text="@string/txt_delivery_confirmations_desc"
+                        android:textColor="@color/col_main" />
+                </LinearLayout>
+
+                <androidx.appcompat.widget.SwitchCompat
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:checked="true"
+                    app:thumbTint="@color/col_main"
+                    app:trackTint="@color/col_category_unselected" />
+            </LinearLayout>
+
+            <!-- Signature -->
+            <LinearLayout
+                android:id="@+id/llSignature"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="?attr/selectableItemBackground"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:paddingHorizontal="@dimen/size16"
+                android:paddingVertical="@dimen/size12">
+
+                <ImageView
+                    android:layout_width="@dimen/size24"
+                    android:layout_height="@dimen/size24"
+                    android:src="@drawable/ic_setting_signature"
+                    app:tint="@color/col_main" />
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/size16"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <TextView
+                        style="@style/TextView_6"
+                        android:text="@string/txt_signature"
+                        android:textColor="@color/col_main" />
+
+                    <TextView
+                        style="@style/TextView_4"
+                        android:text="@string/txt_signature_desc"
+                        android:textColor="@color/col_main" />
+                </LinearLayout>
+            </LinearLayout>
+
+            <!-- Strip accents -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:paddingHorizontal="@dimen/size16"
+                android:paddingVertical="@dimen/size12">
+
+                <ImageView
+                    android:layout_width="@dimen/size24"
+                    android:layout_height="@dimen/size24"
+                    android:src="@drawable/ic_setting_person"
+                    app:tint="@color/col_main" />
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/size16"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <TextView
+                        style="@style/TextView_6"
+                        android:text="@string/txt_strip_accents"
+                        android:textColor="@color/col_main" />
+
+                    <TextView
+                        style="@style/TextView_4"
+                        android:text="@string/txt_strip_accents_desc"
+                        android:textColor="@color/col_main" />
+                </LinearLayout>
+
+                <androidx.appcompat.widget.SwitchCompat
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:checked="true"
+                    app:thumbTint="@color/col_main"
+                    app:trackTint="@color/col_category_unselected" />
+            </LinearLayout>
+
+            <!-- Mobile numbers only -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:paddingHorizontal="@dimen/size16"
+                android:paddingVertical="@dimen/size12">
+
+                <ImageView
+                    android:layout_width="@dimen/size24"
+                    android:layout_height="@dimen/size24"
+                    android:src="@drawable/ic_setting_123"
+                    app:tint="@color/col_main" />
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/size16"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <TextView
+                        style="@style/TextView_6"
+                        android:text="@string/txt_mobile_numbers_only"
+                        android:textColor="@color/col_main" />
+
+                    <TextView
+                        style="@style/TextView_4"
+                        android:text="@string/txt_mobile_numbers_only_desc"
+                        android:textColor="@color/col_main" />
+                </LinearLayout>
+
+                <androidx.appcompat.widget.SwitchCompat
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:checked="false"
+                    app:thumbTint="@color/black"
+                    app:trackTint="@color/grey" />
+            </LinearLayout>
+
+            <!-- Send long messages as MMS -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:paddingHorizontal="@dimen/size16"
+                android:paddingVertical="@dimen/size12">
+
+                <ImageView
+                    android:layout_width="@dimen/size24"
+                    android:layout_height="@dimen/size24"
+                    android:src="@drawable/ic_setting_chat"
+                    app:tint="@color/col_main" />
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/size16"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <TextView
+                        style="@style/TextView_6"
+                        android:text="@string/txt_send_long_messages_as_mms"
+                        android:textColor="@color/col_main" />
+
+                    <TextView
+                        style="@style/TextView_4"
+                        android:text="@string/txt_send_long_messages_as_mms_desc"
+                        android:textColor="@color/col_main" />
+                </LinearLayout>
+
+                <androidx.appcompat.widget.SwitchCompat
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:checked="true"
+                    app:thumbTint="@color/col_main"
+                    app:trackTint="@color/col_category_unselected" />
+            </LinearLayout>
+
+            <!-- Auto-compress MMS -->
+            <LinearLayout
+                android:id="@+id/llAutoCompress"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="?attr/selectableItemBackground"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:paddingHorizontal="@dimen/size16"
+                android:paddingVertical="@dimen/size12">
+
+                <ImageView
+                    android:layout_width="@dimen/size24"
+                    android:layout_height="@dimen/size24"
+                    android:src="@drawable/ic_setting_zoom"
+                    app:tint="@color/col_main" />
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/size16"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <TextView
+                        style="@style/TextView_6"
+                        android:text="@string/txt_auto_compress_mms"
+                        android:textColor="@color/col_main" />
+
+                    <TextView
+                        style="@style/TextView_4"
+                        android:text="@string/txt_300kb"
+                        android:textColor="@color/col_main" />
+                </LinearLayout>
+            </LinearLayout>
+
+            <!-- Sync messages -->
+            <LinearLayout
+                android:id="@+id/llSync"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/size16"
+                android:background="?attr/selectableItemBackground"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:paddingHorizontal="@dimen/size16"
+                android:paddingVertical="@dimen/size12">
+
+                <ImageView
+                    android:layout_width="@dimen/size24"
+                    android:layout_height="@dimen/size24"
+                    android:src="@drawable/ic_setting_mail"
+                    app:tint="@color/col_main" />
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/size16"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <TextView
+                        style="@style/TextView_6"
+                        android:text="@string/txt_sync_messages"
+                        android:textColor="@color/col_main" />
+
+                    <TextView
+                        style="@style/TextView_4"
+                        android:text="@string/txt_sync_messages_desc"
+                        android:textColor="@color/col_main" />
+                </LinearLayout>
+            </LinearLayout>
+
+            <!-- About -->
+            <LinearLayout
+                android:id="@+id/llAbout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="?attr/selectableItemBackground"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:paddingHorizontal="@dimen/size16"
+                android:paddingVertical="@dimen/size12">
+
+                <ImageView
+                    android:layout_width="@dimen/size24"
+                    android:layout_height="@dimen/size24"
+                    android:src="@drawable/ic_setting_about"
+                    app:tint="@color/col_main" />
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/size16"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <TextView
+                        style="@style/TextView_6"
+                        android:text="@string/txt_about_color_sms"
+                        android:textColor="@color/col_main" />
+
+                    <TextView
+                        style="@style/TextView_4"
+                        android:text="@string/txt_version"
+                        android:textColor="@color/col_main" />
+                </LinearLayout>
+            </LinearLayout>
+
+        </LinearLayout>
+    </androidx.core.widget.NestedScrollView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

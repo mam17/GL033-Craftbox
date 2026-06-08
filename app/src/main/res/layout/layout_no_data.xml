@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <LinearLayout
+        android:id="@+id/llNoData"
+        android:visibility="gone"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:orientation="vertical">
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:layout_width="@dimen/size200"
+            android:layout_height="@dimen/size200"
+            android:src="@drawable/img_empty" />
+
+        <TextView
+            android:id="@+id/tvBodyNoData"
+            style="@style/TextView_4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/size16"
+            android:text="@string/txt_your_blocked_numbers_will_appear_here"
+            android:textColor="@color/col_main" />
+    </LinearLayout>
+
+
+    <ProgressBar
+        android:id="@+id/prLoading"
+        android:layout_width="@dimen/size40"
+        android:layout_height="@dimen/size40"
+        android:layout_gravity="center"
+        android:indeterminateTint="@color/col_main" />
+</FrameLayout>

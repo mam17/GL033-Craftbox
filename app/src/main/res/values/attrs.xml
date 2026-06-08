@@ -10,4 +10,64 @@
         <attr name="strokeColor" format="color" />
         <attr name="strokeWidth" format="dimension" />
     </declare-styleable>
+
+    <declare-styleable name="BubbleView">
+
+        <attr name="bubbleType">
+            <enum name="round" value="0" />
+            <enum name="roundRightTail" value="1" />
+            <enum name="leftCut" value="2" />
+            <enum name="oval" value="3" />
+            <enum name="leftTail" value="4" />
+            <enum name="bottomRightTail" value="5" />
+        </attr>
+
+        <attr name="bubbleRadius" format="dimension" />
+        <attr name="bubbleTailSize" format="dimension" />
+        <attr name="bubbleColor1" format="color" />
+        <attr name="bubbleStrokeColor" format="color" />
+        <attr name="bubbleStrokeWidth" format="dimension" />
+
+    </declare-styleable>
+    <declare-styleable name="MessageBubbleView">
+        <attr name="cornerRadiusBBV" format="dimension" />
+        <attr name="bubbleColor" format="color" />
+        <attr name="caretWidth" />
+        <attr name="caretHeight" />
+        <attr name="caretPosition" />
+        <attr name="wrapContentMaxWidthPercent" format="fraction" />
+    </declare-styleable>
+    <attr name="caretPosition" format="integer">
+        <flag name="none" value="0x0" />
+        <flag name="top" value="0x30" />
+        <flag name="bottom" value="0x50" />
+        <flag name="left" value="0x03" />
+        <flag name="right" value="0x05" />
+        <flag name="start" value="0x00800003" />
+        <flag name="end" value="0x00800005" />
+        <flag name="vertical" value="0x80" />
+
+        <flag name="topLeft" value="0x33" />
+        <flag name="topRight" value="0x35" />
+        <flag name="topCenter" value="0xB0" />
+        <flag name="bottomLeft" value="0x53" />
+        <flag name="bottomRight" value="0x55" />
+        <flag name="bottomCenter" value="0xD0" />
+
+        <flag name="centerLeft" value="0x0b" />
+        <flag name="centerRight" value="0x0d" />
+        <flag name="centerStart" value="0x0080000b" />
+        <flag name="centerEnd" value="0x0080000d" />
+
+        <flag name="topStart" value="0x00800033" />
+        <flag name="topEnd" value="0x00800035" />
+        <flag name="bottomStart" value="0x00800053" />
+        <flag name="bottomEnd" value="0x00800055" />
+    </attr>
+    <attr name="caretWidth" format="dimension|enum">
+        <enum name="view_width" value="-1" />
+    </attr>
+    <attr name="caretHeight" format="dimension|enum">
+        <enum name="view_height" value="-1" />
+    </attr>
 </resources>

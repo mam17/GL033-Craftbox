@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="?attr/selectableItemBackground"
+    android:padding="@dimen/size16">
+
+    <RelativeLayout
+        android:id="@+id/rlAvatar"
+        android:layout_width="@dimen/size50"
+        android:layout_height="@dimen/size50"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <com.example.myapplication.views.RoundImageView
+            android:id="@+id/ivAvatar"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:src="@drawable/ic_person"
+            android:padding="@dimen/size6"
+            app:bgColor="@color/col_main"
+            app:isOval="true" />
+
+        <TextView
+            android:id="@+id/tvFirstName"
+            style="@style/TextView_5"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:includeFontPadding="false"
+            android:text="@string/txt_empty" />
+    </RelativeLayout>
+
+    <TextView
+        android:id="@+id/tvSender"
+        style="@style/TextView_7"
+        android:layout_marginStart="@dimen/size16"
+        android:text="@string/txt_viettel_5g"
+        app:layout_constraintStart_toEndOf="@+id/rlAvatar"
+        app:layout_constraintTop_toTopOf="@+id/rlAvatar" />
+
+    <TextView
+        android:id="@+id/tvMessage"
+        style="@style/TextView_4"
+        android:layout_width="0dp"
+        android:layout_marginTop="@dimen/size4"
+        android:ellipsize="end"
+        android:maxLines="2"
+        android:text="@string/txt_message_placeholder"
+        app:layout_constraintEnd_toStartOf="@+id/ivUnread"
+        app:layout_constraintHorizontal_bias="0"
+        app:layout_constraintStart_toStartOf="@+id/tvSender"
+        app:layout_constraintTop_toBottomOf="@+id/tvSender" />
+
+    <TextView
+        android:id="@+id/tvDate"
+        style="@style/TextView_4"
+        android:text="@string/txt_date_placeholder"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/tvSender" />
+
+    <View
+        android:id="@+id/ivUnread"
+        android:layout_width="@dimen/size10"
+        android:layout_height="@dimen/size10"
+        android:background="@drawable/bg_circle_green"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvDate" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

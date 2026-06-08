@@ -14,6 +14,9 @@ import androidx.core.net.toUri
 import com.example.myapplication.R
 import com.example.myapplication.ui.splash.SplashActivity
 import com.facebook.shimmer.BuildConfig
+import java.text.SimpleDateFormat
+import java.util.Date
+import java.util.Locale
 
 
 object AppEx {
@@ -121,5 +124,27 @@ object AppEx {
             Log.e("AppEx", "No email app found: ${e.message}")
             false
         }
+    }
+
+    fun Long.formatToOrdinalDate(): String {
+        val date = Date(this)
+        val day = SimpleDateFormat("d", Locale.ENGLISH).format(date).toInt()
+        val month = SimpleDateFormat("MMM", Locale.ENGLISH).format(date)
+        val year = SimpleDateFormat("yyyy", Locale.ENGLISH).format(date)
+
+        val suffix = when {
+            day in 11..13 -> "th"
+            day % 10 == 1 -> "st"
+            day % 10 == 2 -> "nd"
+            day % 10 == 3 -> "rd"
+            else -> "th"
+        }
+
+        return "$month $day$suffix, $year"
+    }
+
+    fun Long.isSameDay(other: Long): Boolean {
+        val fmt = SimpleDateFormat("yyyyMMdd", Locale.ENGLISH)
+        return fmt.format(Date(this)) == fmt.format(Date(other))
     }
 }

@@ -1,0 +1,286 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:clickable="true"
+    android:focusable="true">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/clTopBar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="@dimen/size16"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <ImageView
+            android:id="@+id/ivBack"
+            android:layout_width="@dimen/size24"
+            android:layout_height="@dimen/size24"
+            android:contentDescription="@null"
+            android:src="@drawable/ic_arr_left"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:tint="@color/col_main" />
+
+        <TextView
+            android:id="@+id/tvTitle"
+            style="@style/TextView_7"
+            android:layout_marginStart="@dimen/size16"
+            android:text="@string/txt_details"
+            android:textColor="@color/col_main"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/ivBack"
+            app:layout_constraintTop_toTopOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <View
+        android:id="@+id/vLineTop"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/size1"
+        android:background="@color/col_14000000"
+        app:layout_constraintTop_toBottomOf="@+id/clTopBar" />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/vLineTop">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
+            android:orientation="vertical"
+            android:paddingBottom="@dimen/size24">
+
+            <com.example.myapplication.views.RoundImageView
+                android:id="@+id/ivAvatar"
+                android:layout_width="@dimen/size50"
+                android:layout_height="@dimen/size50"
+                android:layout_marginTop="@dimen/size24"
+                android:padding="@dimen/size6"
+                android:src="@drawable/ic_person"
+                app:bgColor="@color/col_main"
+                app:iconTint="@color/white"
+                app:isOval="true" />
+
+            <TextView
+                android:id="@+id/tvName"
+                style="@style/TextView_7"
+                android:layout_marginTop="@dimen/size12"
+                android:text="VIETTEL"
+                android:textColor="@color/col_main" />
+
+            <LinearLayout
+                android:id="@+id/llBackground"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/size32"
+                android:background="?selectableItemBackground"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:paddingHorizontal="@dimen/size16"
+                android:paddingVertical="@dimen/size16">
+
+                <ImageView
+                    android:layout_width="@dimen/size24"
+                    android:layout_height="@dimen/size24"
+                    android:contentDescription="@null"
+                    android:src="@drawable/ic_image"
+                    app:tint="@color/col_main" />
+
+                <TextView
+                    style="@style/TextView_5"
+                    android:layout_marginStart="@dimen/size16"
+                    android:text="@string/txt_background"
+                    android:textColor="@color/col_main" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/llSetPassword"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="?selectableItemBackground"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:paddingHorizontal="@dimen/size16"
+                android:paddingVertical="@dimen/size16">
+
+                <ImageView
+                    android:layout_width="@dimen/size24"
+                    android:layout_height="@dimen/size24"
+                    android:contentDescription="@null"
+                    android:src="@drawable/ic_lock"
+                    app:tint="@color/col_main" />
+
+                <TextView
+                    style="@style/TextView_5"
+                    android:layout_marginStart="@dimen/size16"
+                    android:text="@string/txt_set_password"
+                    android:textColor="@color/col_main" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/llNotifications"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="?selectableItemBackground"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:paddingHorizontal="@dimen/size16"
+                android:paddingVertical="@dimen/size16">
+
+                <ImageView
+                    android:layout_width="@dimen/size24"
+                    android:layout_height="@dimen/size24"
+                    android:contentDescription="@null"
+                    android:src="@drawable/ic_notification"
+                    app:tint="@color/col_main" />
+
+                <TextView
+                    style="@style/TextView_5"
+                    android:layout_marginStart="@dimen/size16"
+                    android:text="@string/txt_notification"
+                    android:textColor="@color/col_main" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/llArchive"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="?selectableItemBackground"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:paddingHorizontal="@dimen/size16"
+                android:paddingVertical="@dimen/size16">
+
+                <ImageView
+                    android:layout_width="@dimen/size24"
+                    android:layout_height="@dimen/size24"
+                    android:contentDescription="@null"
+                    android:src="@drawable/ic_archive"
+                    app:tint="@color/col_main" />
+
+                <TextView
+                    android:id="@+id/tvArchive"
+                    style="@style/TextView_5"
+                    android:layout_marginStart="@dimen/size16"
+                    android:text="@string/txt_archive"
+                    android:textColor="@color/col_main" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/llUnarchive"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="?selectableItemBackground"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:paddingHorizontal="@dimen/size16"
+                android:paddingVertical="@dimen/size16"
+                android:visibility="gone">
+
+                <ImageView
+                    android:layout_width="@dimen/size24"
+                    android:layout_height="@dimen/size24"
+                    android:contentDescription="@null"
+                    android:src="@drawable/ic_archive"
+                    app:tint="@color/col_main" />
+
+                <TextView
+                    style="@style/TextView_5"
+                    android:layout_marginStart="@dimen/size16"
+                    android:text="@string/txt_unarchive"
+                    android:textColor="@color/col_main" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/llBlock"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="?selectableItemBackground"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:paddingHorizontal="@dimen/size16"
+                android:paddingVertical="@dimen/size16">
+
+                <ImageView
+                    android:layout_width="@dimen/size24"
+                    android:layout_height="@dimen/size24"
+                    android:contentDescription="@null"
+                    android:src="@drawable/ic_block"
+                    app:tint="@color/col_main" />
+
+                <TextView
+                    android:id="@+id/tvBlock"
+                    style="@style/TextView_5"
+                    android:layout_marginStart="@dimen/size16"
+                    android:text="@string/txt_block"
+                    android:textColor="@color/col_main" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/llUnblock"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="?selectableItemBackground"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:paddingHorizontal="@dimen/size16"
+                android:paddingVertical="@dimen/size16"
+                android:visibility="gone">
+
+                <ImageView
+                    android:layout_width="@dimen/size24"
+                    android:layout_height="@dimen/size24"
+                    android:contentDescription="@null"
+                    android:src="@drawable/ic_block"
+                    app:tint="@color/col_main" />
+
+                <TextView
+                    style="@style/TextView_5"
+                    android:layout_marginStart="@dimen/size16"
+                    android:text="@string/txt_unblock"
+                    android:textColor="@color/col_main" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/llDelete"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="?selectableItemBackground"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:paddingHorizontal="@dimen/size16"
+                android:paddingVertical="@dimen/size16">
+
+                <ImageView
+                    android:layout_width="@dimen/size24"
+                    android:layout_height="@dimen/size24"
+                    android:contentDescription="@null"
+                    android:src="@drawable/ic_delete"
+                    app:tint="@color/red" />
+
+                <TextView
+                    style="@style/TextView_5"
+                    android:layout_marginStart="@dimen/size16"
+                    android:text="@string/txt_delete_conversation"
+                    android:textColor="@color/red" />
+            </LinearLayout>
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rcvMedia"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/size16"
+                android:layout_marginStart="@dimen/size10"
+                android:orientation="horizontal"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
+        </LinearLayout>
+    </ScrollView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/clTopBar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="@dimen/size16"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <ImageView
+            android:id="@+id/ivBack"
+            android:layout_width="@dimen/size24"
+            android:layout_height="@dimen/size24"
+            android:contentDescription="@null"
+            android:src="@drawable/ic_arr_left"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:tint="@color/col_main" />
+
+        <TextView
+            android:id="@+id/tvTitle"
+            style="@style/TextView_7"
+            android:layout_marginStart="@dimen/size16"
+            android:text="@string/txt_sticker_store"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/ivBack"
+            app:layout_constraintTop_toTopOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <LinearLayout
+        android:id="@+id/llTabs"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:paddingHorizontal="@dimen/size16"
+        android:paddingVertical="@dimen/size12"
+        app:layout_constraintTop_toBottomOf="@+id/clTopBar">
+
+        <TextView
+            android:id="@+id/tvAll"
+            style="@style/TextView_7"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="@drawable/bg_category_selected"
+            android:gravity="center"
+            android:paddingVertical="@dimen/size12"
+            android:text="@string/txt_all"
+            android:textColor="@color/white" />
+
+        <TextView
+            android:id="@+id/tvYourStickers"
+            style="@style/TextView_7"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/size16"
+            android:layout_weight="1"
+            android:background="@drawable/bg_tab_unselected"
+            android:gravity="center"
+            android:paddingVertical="@dimen/size12"
+            android:text="@string/txt_your_stickers"
+            android:textColor="@color/col_main" />
+    </LinearLayout>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rvStickers"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:paddingHorizontal="@dimen/size8"
+        app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/llTabs"
+        app:spanCount="2"
+        tools:listitem="@layout/item_sticker_pack" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

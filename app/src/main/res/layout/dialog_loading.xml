@@ -6,28 +6,33 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginHorizontal="@dimen/size30"
+        android:layout_height="match_parent"
         android:background="@drawable/bg_dialog"
-        android:paddingVertical="@dimen/size16"
         android:gravity="center"
         android:orientation="vertical"
+        android:paddingVertical="@dimen/size16"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
-        <ProgressBar
-            android:layout_width="@dimen/size40"
-            android:layout_height="@dimen/size40"
-            android:indeterminateTint="@color/red" />
+        <!--        <ProgressBar-->
+        <!--            android:layout_width="@dimen/size40"-->
+        <!--            android:layout_height="@dimen/size40"-->
+        <!--            android:indeterminateTint="@color/red" />-->
+        <com.airbnb.lottie.LottieAnimationView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:lottie_autoPlay="true"
+            app:lottie_loop="true"
+            app:lottie_rawRes="@raw/loading_3" />
 
         <TextView
             android:id="@+id/tvTitleLoading"
-            android:layout_marginTop="@dimen/size8"
+            style="@style/TextView_5"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            style="@style/TextView_5"
+            android:layout_marginTop="@dimen/size8"
             android:text="@string/txt_loading" />
 
 
