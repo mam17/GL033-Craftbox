@@ -31,6 +31,7 @@ import com.example.myapplication.ui.components.mess.adapter.MessengerChatAdapter
 import com.example.myapplication.ui.components.mess.fragment.MessengerDetailFragment
 import com.example.myapplication.ui.components.mess.MessengerViewModel
 import com.example.myapplication.ui.components.preview.activity.MediaPreviewActivity
+import com.example.myapplication.ui.main.MainActivity
 import com.example.myapplication.utils.Constant
 import com.example.myapplication.utils.ImageUtils
 import com.example.myapplication.utils.PermissionUtils
@@ -65,6 +66,9 @@ class MessengerActivity :
     }
     private val contactName: String? by lazy { intent.getStringExtra(EXTRA_CONTACT_NAME) }
     private val contactPhotoUri: String? by lazy { intent.getStringExtra(EXTRA_CONTACT_PHOTO_URI) }
+    private val isOpenedFromNotification: Boolean by lazy {
+        intent.getBooleanExtra(Constant.EXTRA_OPEN_MESSENGER_FROM_NOTIFICATION, false)
+    }
     private val chatAdapter: MessengerChatAdapter by lazy {
         MessengerChatAdapter(contactName, contactPhotoUri)
     }
@@ -523,6 +527,16 @@ class MessengerActivity :
             } else {
                 binding.frMessDetail.visibility = View.GONE
             }
+            return
+        }
+
+        if (isOpenedFromNotification) {
+            startActivity(
+                Intent(this, MainActivity::class.java).apply {
+                    flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+                }
+            )
+            finish()
             return
         }
 

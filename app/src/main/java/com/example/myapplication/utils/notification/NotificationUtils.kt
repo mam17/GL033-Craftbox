@@ -26,8 +26,8 @@ import com.example.myapplication.works.NotificationReminderWorker
 
 object NotificationUtils {
     private const val TAG = "TAG_NOTI_10"
-    private const val CHANNEL_ID = "rbx_reminder_channel"
-    private const val CHANNEL_NAME = "RBX reminders"
+    private const val CHANNEL_ID = "sms_reminder_channel"
+    private const val CHANNEL_NAME = "SMS Color reminders"
     private const val ONBOARDING_REMINDER_DISMISS_REQUEST_CODE = 1002
     private const val NOTIFICATION_ID = 1003
     private const val ONBOARDING_REMINDER_DELAY_MS = 3_000L

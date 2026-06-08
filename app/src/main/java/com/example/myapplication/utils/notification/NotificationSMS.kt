@@ -1,17 +1,22 @@
 package com.example.myapplication.utils.notification
 
+import android.Manifest
 import android.app.NotificationChannel
 import android.app.NotificationManager
 import android.app.PendingIntent
 import android.content.Context
 import android.content.Intent
+import android.content.pm.PackageManager
 import android.os.Build
 import android.widget.RemoteViews
+import androidx.core.app.ActivityCompat
 import androidx.core.app.NotificationCompat
+import androidx.core.app.NotificationManagerCompat
 import com.example.myapplication.R
-import com.example.myapplication.ui.components.mess.activity.MessengerActivity
+import com.example.myapplication.ui.splash.SplashActivity
 import com.example.myapplication.utils.Constant
 import com.example.myapplication.utils.ContactUtils
+import com.example.myapplication.utils.PermissionUtils
 import com.example.myapplication.utils.SpManager
 
 object NotificationSMS {
@@ -20,6 +25,8 @@ object NotificationSMS {
     private const val CHANNEL_NAME = "SMS Notifications"
 
     fun showNotification(context: Context, address: String, body: String) {
+        if (!PermissionUtils.isNotificationPermissionGranted(context)) return
+
         val notificationManager =
             context.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
 
@@ -32,9 +39,11 @@ object NotificationSMS {
             notificationManager.createNotificationChannel(channel)
         }
 
-        val intent = Intent(context, MessengerActivity::class.java).apply {
+        val intent = Intent(context, SplashActivity::class.java).apply {
             flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
-            putExtra(Constant.EXTRA_ADDRESS, address)
+            putExtra(NotificationUtils.EXTRA_OPEN_FROM_NOTIFICATION, true)
+            putExtra(Constant.EXTRA_SMS_NOTIFICATION_ADDRESS, address)
+            putExtra(Constant.EXTRA_SMS_NOTIFICATION_BODY, body)
         }
 
         val pendingIntent = PendingIntent.getActivity(
@@ -87,6 +96,8 @@ object NotificationSMS {
 
         val notificationBuilder = NotificationCompat.Builder(context, CHANNEL_ID)
             .setSmallIcon(R.mipmap.ic_launcher)
+            .setContentTitle(displayTitle)
+            .setContentText(displayBody)
             .setPriority(NotificationCompat.PRIORITY_HIGH)
             .setAutoCancel(true)
             .setContentIntent(pendingIntent)
@@ -95,7 +106,14 @@ object NotificationSMS {
             .setStyle(NotificationCompat.DecoratedCustomViewStyle())
 
         val notification = notificationBuilder.build()
-        notificationManager.notify(address.hashCode(), notification)
+        if (ActivityCompat.checkSelfPermission(
+                context,
+                Manifest.permission.POST_NOTIFICATIONS
+            ) != PackageManager.PERMISSION_GRANTED
+        ) {
+            return
+        }
+        NotificationManagerCompat.from(context).notify(address.hashCode(), notification)
     }
 
     fun cancelNotification(context: Context, address: String) {

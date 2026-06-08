@@ -11,6 +11,7 @@ import com.example.myapplication.base.activity.BaseActivity
 import com.example.myapplication.databinding.ActivitySplashBinding
 import com.example.myapplication.ui.language.LanguageActivity
 import com.example.myapplication.ui.main.MainActivity
+import com.example.myapplication.ui.components.mess.activity.MessengerActivity
 import com.example.myapplication.ui.uninstall.UninstallActivity
 import com.example.myapplication.utils.Constant
 import com.example.myapplication.utils.DialogEx.showDialogAlert
@@ -31,6 +32,11 @@ class SplashActivity : BaseActivity<ActivitySplashBinding>(ActivitySplashBinding
     private var isCheckUninstall = false
     private var isStartingNextScreen = false
     private var isNetworkDialogShowing = false
+    private val notificationSmsAddress: String
+        get() = intent.getStringExtra(Constant.EXTRA_SMS_NOTIFICATION_ADDRESS).orEmpty()
+    private val notificationSmsBody: String
+        get() = intent.getStringExtra(Constant.EXTRA_SMS_NOTIFICATION_BODY).orEmpty()
+
     override fun initView() {
         isCheckUninstall = intent.getBooleanExtra(Constant.KEY_OPEN_SPLASH, false)
         trackNotificationOpen(intent)
@@ -81,7 +87,7 @@ class SplashActivity : BaseActivity<ActivitySplashBinding>(ActivitySplashBinding
 
     fun goToNextAction() {
         if (isStartingNextScreen) return
-        if (!NetworkUtil.isNetworkAvailable(this)) {
+        if (notificationSmsAddress.isBlank() && !NetworkUtil.isNetworkAvailable(this)) {
             showNetworkErrorDialog()
             return
         }
@@ -95,6 +101,11 @@ class SplashActivity : BaseActivity<ActivitySplashBinding>(ActivitySplashBinding
     }
 
     private fun openNextScreen() {
+        if (notificationSmsAddress.isNotBlank()) {
+            openMessengerFromNotification()
+            return
+        }
+
         if (isCheckUninstall) {
             startNextActivity(UninstallActivity::class.java, isFinish = true)
         } else {
@@ -105,6 +116,18 @@ class SplashActivity : BaseActivity<ActivitySplashBinding>(ActivitySplashBinding
                 startNextActivity(LanguageActivity::class.java, bundle, isFinish = true)
             }
         }
+    }
+
+    private fun openMessengerFromNotification() {
+        startActivity(
+            Intent(this, MessengerActivity::class.java).apply {
+                putExtra(MessengerActivity.EXTRA_ADDRESS, notificationSmsAddress)
+                putExtra(MessengerActivity.EXTRA_CONTACT_NAME, notificationSmsAddress)
+                putExtra(Constant.EXTRA_OPEN_MESSENGER_FROM_NOTIFICATION, true)
+                addFlags(Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK)
+            }
+        )
+        finish()
     }
 
     private fun showNetworkErrorDialog() {
