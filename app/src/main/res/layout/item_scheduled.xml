@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:paddingHorizontal="@dimen/size16"
+    android:paddingVertical="@dimen/size10">
+    <!-- Name + Date -->
+    <LinearLayout
+        android:id="@+id/llHeader"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <TextView
+            android:id="@+id/tvAddressScheduled"
+            style="@style/TextView_7"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:ellipsize="end"
+            android:maxLines="1"
+            android:text="John Doe"
+            android:textColor="@color/col_main"
+            android:textSize="@dimen/size14" />
+
+        <TextView
+            android:id="@+id/tvTimeScheduled"
+            style="@style/TextView_4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Feb 5th"
+            android:textSize="@dimen/size12" />
+    </LinearLayout>
+
+
+    <!-- Message body -->
+    <TextView
+        android:id="@+id/tvBodyScheduled"
+        style="@style/TextView_4"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="2dp"
+        android:ellipsize="end"
+        android:maxLines="2"
+        android:text="[TB] Grab these special data packages hahahahahahahahahahah for Tet!..."
+        android:textColor="@color/gray"
+        android:textSize="@dimen/size12"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/llHeader" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

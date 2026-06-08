@@ -1,66 +1,69 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
+    android:layout_height="@dimen/size44"
     android:gravity="center_vertical"
     android:orientation="horizontal"
     android:paddingHorizontal="@dimen/size10"
-    android:paddingVertical="@dimen/size8"
-    android:weightSum="10">
+    android:paddingVertical="@dimen/size8">
 
-    <RelativeLayout
-        android:layout_width="0dp"
+
+    <androidx.appcompat.widget.AppCompatImageButton
+        android:id="@+id/btnBack"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_weight="2">
-
-        <androidx.appcompat.widget.AppCompatImageButton
-            android:id="@+id/btnBack"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentStart="true"
-            android:layout_centerVertical="true"
-            android:background="?selectableItemBackgroundBorderless"
-            android:padding="@dimen/size10"
-            android:src="@drawable/ic_back" />
-    </RelativeLayout>
+        android:background="?selectableItemBackgroundBorderless"
+        android:padding="@dimen/size6"
+        android:src="@drawable/ic_arr_left"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/tvTitle"
-        style="@style/TextView_4"
+        style="@style/TextView_5"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_weight="6"
+        android:layout_marginStart="@dimen/size8"
+        android:layout_weight="1"
         android:ellipsize="end"
-        android:gravity="center"
+        android:gravity="start"
         android:maxLines="1"
         android:text="@string/app_name"
-        android:textSize="@dimen/size20"
-        android:textStyle="bold" />
-
-    <RelativeLayout
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_weight="2">
+        android:textColor="@color/col_main"
+        android:textSize="@dimen/size16"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/btnSelect"
+        app:layout_constraintStart_toEndOf="@+id/btnBack"
+        app:layout_constraintTop_toTopOf="parent" />
 
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/btnSelect"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
             android:layout_centerVertical="true"
+            android:layout_marginEnd="@dimen/size8"
             android:background="?selectableItemBackground"
+            android:gravity="center"
             android:text="@string/txt_select"
             android:textAllCaps="false"
-            android:visibility="gone" />
+            android:visibility="invisible"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
-        <androidx.appcompat.widget.AppCompatImageButton
-            android:id="@+id/btnAction"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentEnd="true"
-            android:layout_centerVertical="true"
-            android:background="?selectableItemBackgroundBorderless"
-            android:padding="@dimen/size10"
-            android:src="@drawable/ic_back" />
-    </RelativeLayout>
-
-</LinearLayout>
+    <androidx.appcompat.widget.AppCompatImageButton
+        android:id="@+id/btnAction"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_centerVertical="true"
+        android:background="?selectableItemBackgroundBorderless"
+        android:padding="@dimen/size10"
+        android:src="@drawable/ic_done_all_1"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -11,6 +11,7 @@
         android:id="@+id/clTop"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/size40"
         android:padding="@dimen/size16"
         app:layout_constraintTop_toTopOf="parent">
 
@@ -97,7 +98,8 @@
             android:background="?attr/selectableItemBackground"
             android:gravity="center_vertical"
             android:orientation="horizontal"
-            android:paddingVertical="@dimen/size16">
+            android:paddingVertical="@dimen/size16"
+            android:visibility="gone">
 
             <ImageView
                 android:layout_width="@dimen/size24"
@@ -158,6 +160,42 @@
                 android:textColor="@color/col_main" />
         </LinearLayout>
 
+    </LinearLayout>
+    <!-- About -->
+    <LinearLayout
+        android:id="@+id/llAbout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="?attr/selectableItemBackground"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:paddingHorizontal="@dimen/size16"
+        android:paddingVertical="@dimen/size12"
+        app:layout_constraintBottom_toBottomOf="parent">
+
+        <ImageView
+            android:layout_width="@dimen/size24"
+            android:layout_height="@dimen/size24"
+            android:src="@drawable/ic_setting_about"
+            app:tint="@color/col_main" />
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/size16"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <TextView
+                style="@style/TextView_6"
+                android:text="@string/txt_about_color_sms"
+                android:textColor="@color/col_main" />
+
+            <TextView
+                style="@style/TextView_4"
+                android:text="@string/txt_version"
+                android:textColor="@color/col_main" />
+        </LinearLayout>
     </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

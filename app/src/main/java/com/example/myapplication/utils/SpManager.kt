@@ -3,6 +3,7 @@ package com.example.myapplication.utils
 import android.content.Context
 import android.content.SharedPreferences
 import androidx.core.content.edit
+import com.example.myapplication.domain.layer.ThemeMessModel
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
 import dagger.hilt.android.qualifiers.ApplicationContext
@@ -117,6 +118,30 @@ class SpManager @Inject constructor(@ApplicationContext context: Context) {
     }
 
     fun getMessageBackground(address: String): String? = getString("bg_$address", "")
+
+    fun setConversationPassword(address: String, password: String?) {
+        val normalized = normalizePhoneNumber(address)
+        putString("password_$normalized", password)
+    }
+
+    fun getConversationPassword(address: String): String? {
+        val normalized = normalizePhoneNumber(address)
+        return getString("password_$normalized")
+    }
+
+    fun hasConversationPassword(address: String): Boolean {
+        return !getConversationPassword(address).isNullOrBlank()
+    }
+
+    fun getPasswordAddresses(): List<String> {
+        return prefs.all
+            .filter { (key, value) ->
+                key.startsWith("password_") && (value as? String).isNullOrBlank().not()
+            }
+            .map { (key, _) -> key.removePrefix("password_") }
+            .sorted()
+    }
+
     fun setBlocked(address: String, isBlocked: Boolean) {
         val normalized = normalizePhoneNumber(address)
         putBoolean("blocked_$normalized", isBlocked)
@@ -127,11 +152,29 @@ class SpManager @Inject constructor(@ApplicationContext context: Context) {
         return getBoolean("blocked_$normalized", false)
     }
 
-    fun setArchived(address: String, isArchived: Boolean) {
-        putBoolean("archived_$address", isArchived)
+    fun getBlockedAddresses(): List<String> {
+        return prefs.all
+            .filter { (key, value) -> key.startsWith("blocked_") && value == true }
+            .map { (key, _) -> key.removePrefix("blocked_") }
+            .sorted()
     }
 
-    fun isArchived(address: String): Boolean = getBoolean("archived_$address", false)
+    fun setArchived(address: String, isArchived: Boolean) {
+        val normalized = normalizePhoneNumber(address)
+        putBoolean("archived_$normalized", isArchived)
+    }
+
+    fun isArchived(address: String): Boolean {
+        val normalized = normalizePhoneNumber(address)
+        return getBoolean("archived_$normalized", false)
+    }
+
+    fun getArchivedAddresses(): List<String> {
+        return prefs.all
+            .filter { (key, value) -> key.startsWith("archived_") && value == true }
+            .map { (key, _) -> key.removePrefix("archived_") }
+            .sorted()
+    }
 
     fun setNotificationsEnabled(address: String, enabled: Boolean) {
         putBoolean("notify_$address", enabled)
@@ -145,5 +188,55 @@ class SpManager @Inject constructor(@ApplicationContext context: Context) {
 
     fun getNotificationPreviewMode(address: String): Int =
         getInt("notification_preview_mode_$address", 0)
+
+    fun addScheduledMessage(message: com.example.myapplication.data.model.ScheduledMessage) {
+        val list = getArrayList<com.example.myapplication.data.model.ScheduledMessage>("scheduled_messages") ?: arrayListOf()
+        list.add(message)
+        putArrayList("scheduled_messages", list)
+    }
+
+    fun getScheduledMessages(): ArrayList<com.example.myapplication.data.model.ScheduledMessage> {
+        return getArrayList<com.example.myapplication.data.model.ScheduledMessage>("scheduled_messages") ?: arrayListOf()
+    }
+
+    fun removeScheduledMessage(id: String) {
+        val list = getScheduledMessages()
+        list.removeAll { it.id == id }
+        putArrayList("scheduled_messages", list)
+    }
+
+    fun updateScheduledMessage(message: com.example.myapplication.data.model.ScheduledMessage) {
+        val list = getScheduledMessages()
+        val index = list.indexOfFirst { it.id == message.id }
+        if (index != -1) {
+            list[index] = message
+        } else {
+            list.add(message)
+        }
+        putArrayList("scheduled_messages", list)
+    }
+
+    fun markScheduledMessageSent(id: String) {
+        val list = getScheduledMessages()
+        val index = list.indexOfFirst { it.id == id }
+        if (index != -1) {
+            val old = list[index]
+            list[index] = old.copy(isSent = true)
+            putArrayList("scheduled_messages", list)
+        }
+    }
+
+    fun saveCurrentTheme(theme: ThemeMessModel) {
+        saveObject(Constant.KEY_SP_CURRENT_THEME, theme)
+    }
+
+    fun getCurrentTheme(): ThemeMessModel? {
+        return getObject<ThemeMessModel>(Constant.KEY_SP_CURRENT_THEME)
+    }
+    fun <T> saveObject(key: String, value: T) {
+        prefs.edit {
+            putString(key, Gson().toJson(value))
+        }
+    }
 
 }

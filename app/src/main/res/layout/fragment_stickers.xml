@@ -13,24 +13,12 @@
         android:padding="@dimen/size16"
         app:layout_constraintTop_toTopOf="parent">
 
-        <ImageView
-            android:id="@+id/ivBack"
-            android:layout_width="@dimen/size24"
-            android:layout_height="@dimen/size24"
-            android:contentDescription="@null"
-            android:src="@drawable/ic_arr_left"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:tint="@color/col_main" />
-
         <TextView
             android:id="@+id/tvTitle"
             style="@style/TextView_7"
-            android:layout_marginStart="@dimen/size16"
             android:text="@string/txt_sticker_store"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/ivBack"
+            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>

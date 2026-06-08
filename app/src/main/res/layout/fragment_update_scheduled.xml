@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:paddingVertical="@dimen/size16"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
+
+        <TextView
+            style="@style/TextView_7"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="@dimen/size16"
+            android:text="@string/txt_update_the_message" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="@dimen/size10"
+            android:layout_marginTop="@dimen/size16"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/tvTimeDate"
+                style="@style/TextView_4"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="17:33 8/6/2026"
+                android:layout_marginStart="@dimen/size6"
+                android:layout_marginEnd="@dimen/size12"
+                android:layout_weight="1" />
+
+            <androidx.appcompat.widget.AppCompatImageButton
+                android:id="@+id/btnEditTime"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="?selectableItemBackgroundBorderless"
+                android:padding="@dimen/size6"
+                android:src="@drawable/ic_edit"
+                android:tint="@color/col_main" />
+        </LinearLayout>
+
+        <EditText
+            android:id="@+id/edtMessage"
+            style="@style/TextView_4"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="@dimen/size16"
+            android:layout_marginTop="@dimen/size16"
+            android:background="@drawable/bg_border_r12_fef"
+            android:hint="@string/txt_message"
+            android:imeOptions="actionDone"
+            android:importantForAutofill="no"
+            android:inputType="text"
+            android:paddingHorizontal="@dimen/size12"
+            android:paddingVertical="@dimen/size10"
+            android:singleLine="true"
+            android:textColor="@color/black"
+            android:textColorHighlight="@color/grey"
+            android:textColorHint="@color/grey" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btnUpdate"
+            style="@style/TextView_6"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="@dimen/size16"
+            android:layout_marginTop="@dimen/size16"
+            android:background="@drawable/bg_btn_r10_main"
+            android:stateListAnimator="@null"
+            android:text="@string/txt_update_now"
+            android:textColor="@color/white" />
+    </LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,4 +1,4 @@
-package com.example.myapplication.ui.main.func
+package com.example.myapplication.ui.main.func.theme
 
 import android.view.View
 import androidx.core.view.ViewCompat

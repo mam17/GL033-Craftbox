@@ -4,6 +4,7 @@ plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.hilt.android)
     alias(libs.plugins.ksp)
+    id("kotlin-parcelize")
     id("com.google.gms.google-services")
     id("com.google.firebase.crashlytics")
 }
@@ -136,4 +137,6 @@ dependencies {
     implementation(libs.firebase.analytics)
 
     implementation(libs.android.smsmms)
+
+    implementation("it.xabaras.android:recyclerview-swipedecorator:1.4")
 }

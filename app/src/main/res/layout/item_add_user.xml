@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_margin="@dimen/size4"
+    android:id="@+id/cvUser"
+    app:cardBackgroundColor="@color/col_main"
+    app:cardCornerRadius="@dimen/size40">
+
+    <LinearLayout
+        android:id="@+id/llItemUser"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:orientation="horizontal"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <com.example.myapplication.views.RoundImageView
+            android:id="@+id/ivAvatar"
+            android:layout_width="@dimen/size40"
+            app:strokeColor="@color/grey"
+            app:strokeWidth="@dimen/size1"
+            app:strokeEnable="true"
+            android:layout_height="@dimen/size40"
+            android:padding="@dimen/size6"
+            android:src="@drawable/ic_person"
+            app:isOval="true" />
+
+        <TextView
+            android:id="@+id/tvName"
+            style="@style/TextView_5"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="@dimen/size8"
+            android:includeFontPadding="false"
+            android:text="@string/app_name"
+            android:textColor="@color/white" />
+
+        <com.example.myapplication.views.RoundImageView
+            android:id="@+id/btnRemove"
+            android:layout_width="@dimen/size16"
+            android:layout_height="@dimen/size16"
+            android:layout_marginEnd="@dimen/size8"
+            android:src="@drawable/ic_cancel"
+            app:bgColor="@color/red"
+            app:isOval="true" />
+    </LinearLayout>
+
+</com.google.android.material.card.MaterialCardView>

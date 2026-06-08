@@ -63,12 +63,11 @@
     <string name="txt_delete">Delete</string>
     <string name="txt_delete_design_confirm">Are you sure you want to delete this design?</string>
     <string name="txt_downloaded">Downloaded</string>
+    <string name="txt_download_failed">Download failed</string>
     <string name="txt_redownload_design_confirm">Are you sure you want to download this design again?</string>
     <string name="txt_title_update">Update App for Better Performance</string>
     <string name="txt_cont_update">To continue using the app, please update to the latest version.</string>
     <string name="txt_update_now">Update Now</string>
-
-    <!-- Onboarding Reminder Notification Contents -->
     <string name="txt_noti_title_1">👕 Design Your Dream Roblox Outfit</string>
     <string name="txt_noti_body_1">Create stylish Roblox shirts and pants with AI in just a few taps!</string>
     <string name="txt_noti_title_2">🎨 AI Roblox Clothes Generator</string>
@@ -90,24 +89,30 @@
     <string name="txt_noti_title_10">🎭 Design Cute &amp; Cool Roblox Fits</string>
     <string name="txt_noti_body_10">Make custom Roblox outfits for boys, girls, anime fans, and more.</string>
     <string name="txt_report">Report</string>
-    <string name="txt_nav_home" translatable="false">Home</string>
-    <string name="txt_nav_themes" translatable="false">Themes</string>
-    <string name="txt_nav_stickers" translatable="false">Stickers</string>
-    <string name="txt_nav_setting" translatable="false">Setting</string>
+    <string name="txt_nav_home">Home</string>
+    <string name="txt_nav_themes">Themes</string>
+    <string name="txt_nav_stickers">Stickers</string>
+    <string name="txt_nav_setting">Setting</string>
     <string name="txt_search_messages">Search messages&#8230;</string>
-    <string name="txt_viettel_5g" translatable="false">VIETTEL_5G</string>
-    <string name="txt_message_placeholder" translatable="false">[TB] Grab these special data packages for Tet!&#8230;</string>
-    <string name="txt_date_placeholder" translatable="false">Feb 5th, 2026</string>
+    <string name="txt_viettel_5g">VIETTEL_5G</string>
+    <string name="txt_message_placeholder">[TB] Grab these special data packages for Tet!&#8230;</string>
+    <string name="txt_date_placeholder">Feb 5th, 2026</string>
     <string name="txt_unknown_sender">Unknown sender</string>
-    <string name="txt_empty" translatable="false"></string>
+    <string name="txt_empty"></string>
     <string name="txt_menu">Menu</string>
+    <string name="txt_me">Me</string>
     <string name="txt_archived">Archived</string>
     <string name="txt_backup_and_restore">Backup and restore</string>
+    <string name="txt_feature_coming_soon">Feature coming soon</string>
     <string name="txt_set_password">Set Password</string>
+    <string name="txt_remove_password">Remove Password</string>
     <string name="txt_confirm_password">Confirm Password</string>
     <string name="txt_please_enter_pin">Please enter a 4-digit PIN and save it for security</string>
+    <string name="txt_remove_password_desc">Re-enter your password to confirm removal.</string>
     <string name="txt_passwords_do_not_match">Passwords do not match</string>
     <string name="txt_password_set_successfully">Password set successfully</string>
+    <string name="txt_password_removed_successfully">Password removed successfully</string>
+    <string name="txt_wrong_password_try_again">Nhập sai password, xin thử lại</string>
     <string name="txt_scheduled">Scheduled</string>
     <string name="txt_blocking">Blocking</string>
     <string name="txt_themes">Themes</string>
@@ -121,6 +126,7 @@
     <string name="txt_settings">Settings</string>
     <string name="txt_general">General</string>
     <string name="txt_notification">Notification</string>
+    <string name="txt_unnotification">UnNotification</string>
     <string name="txt_language">Language</string>
     <string name="txt_delayed_sending">Delayed sending</string>
     <string name="txt_no_delay">No delay</string>
@@ -144,9 +150,18 @@
     <string name="txt_version">Version x.x.x</string>
     <string name="txt_message">Message</string>
     <string name="txt_schedule_message">Schedule message</string>
+    <string name="txt_please_enter_message">Please enter a message.</string>
+    <string name="txt_no_sim_available">No SIM card available.</string>
+    <string name="txt_select_future_time">Please select a future time.</string>
+    <string name="txt_no_scheduled_messages">No scheduled messages.</string>
+    <string name="txt_cancel_schedule">Cancel schedule</string>
+    <string name="txt_open_conversation">Open conversation</string>
     <string name="txt_take_a_photo">Take a photo</string>
     <string name="txt_attach_a_photo">Attach a photo</string>
     <string name="txt_your_blocked_numbers_will_appear_here">Your blocked numbers will appear here</string>
+    <string name="txt_no_phone_numbers_are_blocked">No phone numbers are blocked.</string>
+    <string name="txt_no_phone_numbers_are_archive">No phone numbers are archive.</string>
+    <string name="txt_no_numbers_are_password_protected">No numbers are password protected.</string>
     <string name="txt_new_message">New message</string>
     <string name="txt_private">Private</string>
     <string name="txt_blocked">Number blocked</string>
@@ -161,6 +176,18 @@
     <string name="txt_mms_requires_data">Sending a message with a picture requires you to turn on mobile data.</string>
     <string name="txt_failed_to_process_image">Failed to process image</string>
     <string name="txt_failed_to_send">Message sent failed.</string>
+    <string name="txt_message_sent">Message sent.</string>
     <string name="txt_set_as_default_sms_required">Set Color SMS as the default SMS app to send messages.</string>
     <string name="txt_send_fail_touch_to_retry">Send fail. Touch to retry</string>
+    <string name="txt_private_policy">Private Policy</string>
+    <string name="txt_rate_us">Rate Us</string>
+    <string name="txt_download">Download</string>
+    <string name="txt_media_preview">Media preview</string>
+    <string name="txt_scheduled_messages">Scheduled messages</string>
+    <string name="txt_update_the_message">Update the message</string>
+    <string name="txt_send_now">Send now</string>
+    <string name="txt_schedule">"Schedule: "</string>
+    <string name="txt_no_search_results_found">No search results found.</string>
+    <string name="txt_type_a_name_phone_number">Type a name, phone number</string>
+    <string name="txt_no_contact_found">No contact found</string>
 </resources>

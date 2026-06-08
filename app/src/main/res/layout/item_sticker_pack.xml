@@ -1,41 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+<com.example.myapplication.views.RoundImageView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:layout_margin="@dimen/size8"
-    app:cardCornerRadius="@dimen/size12"
-    app:cardElevation="@dimen/size0">
-
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="#F5F5F5"
-        android:paddingBottom="@dimen/size8">
-
-        <ImageView
-            android:id="@+id/ivPreview"
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/size120"
-            android:contentDescription="@null"
-            android:padding="@dimen/size12"
-            android:scaleType="centerInside"
-            android:src="@drawable/ic_sticker"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <TextView
-            android:id="@+id/tvPackName"
-            style="@style/TextView_6"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/size4"
-            android:gravity="center"
-            android:text="Cute Fire"
-            android:textColor="#FF9800"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/ivPreview" />
-
-    </androidx.constraintlayout.widget.ConstraintLayout>
-
-</androidx.cardview.widget.CardView>
+    android:layout_height="@dimen/size100"
+    android:layout_margin="@dimen/size6"
+    app:cornerRadius="@dimen/size12" />

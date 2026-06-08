@@ -11,6 +11,7 @@ import androidx.viewbinding.ViewBinding
 import com.bumptech.glide.Glide
 import com.example.myapplication.R
 import com.example.myapplication.base.adapter.BaseMultiListAdapter
+import com.example.myapplication.data.model.SmsMessage
 import com.example.myapplication.databinding.ItemChatDateBinding
 import com.example.myapplication.databinding.ItemChatLeftBinding
 import com.example.myapplication.databinding.ItemChatRightBinding
@@ -25,6 +26,8 @@ class MessengerChatAdapter(
     private val senderContactName: String?,
     private val senderPhotoUri: String?
 ) : BaseMultiListAdapter<MessageItem>(DIFF_CALLBACK) {
+
+    private var onMediaClick: ((SmsMessage) -> Unit)? = null
 
     override fun getBinding(
         inflater: LayoutInflater,
@@ -52,7 +55,7 @@ class MessengerChatAdapter(
                     val isFailed = item.message.type == Telephony.Sms.MESSAGE_TYPE_FAILED
                     binding.tvStatus.isVisible = isFailed
                     binding.ivDone.isVisible = !isFailed
-                    bindMedia(binding, item.message.mediaUri)
+                    bindMedia(binding, item.message)
                 }
             }
             is ItemChatLeftBinding -> {
@@ -62,7 +65,7 @@ class MessengerChatAdapter(
                         ContextCompat.getColor(binding.root.context, R.color.black)
                     )
                     bindSenderAvatar(binding)
-                    bindMedia(binding, item.message.mediaUri)
+                    bindMedia(binding, item.message)
                 }
             }
         }
@@ -110,17 +113,22 @@ class MessengerChatAdapter(
         binding.tvFirstName.isVisible = firstNameLetter.isNotEmpty()
     }
 
-    private fun bindMedia(binding: ItemChatLeftBinding, mediaUri: String?) {
+    private fun bindMedia(binding: ItemChatLeftBinding, message: SmsMessage) {
+        val mediaUri = message.mediaUri
         Glide.with(binding.ivImage).clear(binding.ivImage)
         binding.ivPlayVideo.isVisible = false
 
         if (mediaUri.isNullOrBlank()) {
             binding.flMedia.isVisible = false
+            binding.flMedia.setOnClickListener(null)
             binding.ivImage.setImageDrawable(null)
             return
         }
 
         binding.flMedia.isVisible = true
+        binding.flMedia.setOnClickListener {
+            onMediaClick?.invoke(message)
+        }
         val radius = binding.root.resources.getDimensionPixelSize(R.dimen.size8)
         with(ImageUtils) {
             binding.ivImage.loadFromPathAction(
@@ -131,7 +139,8 @@ class MessengerChatAdapter(
         }
     }
 
-    private fun bindMedia(binding: ItemChatRightBinding, mediaUri: String?) {
+    private fun bindMedia(binding: ItemChatRightBinding, message: SmsMessage) {
+        val mediaUri = message.mediaUri
         binding.tvBody.setTextColor(ContextCompat.getColor(binding.root.context, R.color.white))
         binding.tvTime.setTextColor(ContextCompat.getColor(binding.root.context, R.color.grey))
         binding.tvStatus.setTextColor(ContextCompat.getColor(binding.root.context, R.color.red))
@@ -140,11 +149,15 @@ class MessengerChatAdapter(
 
         if (mediaUri.isNullOrBlank()) {
             binding.flMedia.isVisible = false
+            binding.flMedia.setOnClickListener(null)
             binding.ivImage.setImageDrawable(null)
             return
         }
 
         binding.flMedia.isVisible = true
+        binding.flMedia.setOnClickListener {
+            onMediaClick?.invoke(message)
+        }
         val radius = binding.root.resources.getDimensionPixelSize(R.dimen.size8)
         with(ImageUtils) {
             binding.ivImage.loadFromPathAction(
@@ -161,6 +174,10 @@ class MessengerChatAdapter(
 
     private fun Long.formatMessageTime(): String {
         return SimpleDateFormat("HH:mm", Locale.getDefault()).format(Date(this))
+    }
+
+    fun setOnMediaClick(callback: (SmsMessage) -> Unit) {
+        onMediaClick = callback
     }
 
     companion object {

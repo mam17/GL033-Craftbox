@@ -57,12 +57,22 @@ object PermissionUtils {
     fun getRequestDefaultSmsIntent(context: Context): Intent? {
         return if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
             val roleManager = context.getSystemService(RoleManager::class.java)
-            if (roleManager != null && roleManager.isRoleAvailable(RoleManager.ROLE_SMS) &&
-                !roleManager.isRoleHeld(RoleManager.ROLE_SMS)
-            ) {
-                roleManager.createRequestRoleIntent(RoleManager.ROLE_SMS)
-            } else {
-                null
+            val isRoleAvailable = roleManager?.isRoleAvailable(RoleManager.ROLE_SMS) == true
+            val isRoleHeld = roleManager?.isRoleHeld(RoleManager.ROLE_SMS) == true
+            Log.i(
+                "PermissionUtil",
+                "getRequestDefaultSmsIntent: roleAvailable=$isRoleAvailable, roleHeld=$isRoleHeld"
+            )
+            when {
+                roleManager != null && isRoleAvailable && !isRoleHeld -> {
+                    roleManager.createRequestRoleIntent(RoleManager.ROLE_SMS)
+                }
+                !isRoleHeld -> {
+                    Intent(Telephony.Sms.Intents.ACTION_CHANGE_DEFAULT).apply {
+                        putExtra(Telephony.Sms.Intents.EXTRA_PACKAGE_NAME, context.packageName)
+                    }
+                }
+                else -> null
             }
         } else {
             if (Telephony.Sms.getDefaultSmsPackage(context) != context.packageName) {

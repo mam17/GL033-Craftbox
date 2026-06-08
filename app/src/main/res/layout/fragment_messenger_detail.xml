@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/white"
@@ -72,7 +73,7 @@
                 android:id="@+id/tvName"
                 style="@style/TextView_7"
                 android:layout_marginTop="@dimen/size12"
-                android:text="VIETTEL"
+                android:text="@string/txt_empty"
                 android:textColor="@color/col_main" />
 
             <LinearLayout
@@ -103,6 +104,7 @@
             <LinearLayout
                 android:id="@+id/llSetPassword"
                 android:layout_width="match_parent"
+                android:visibility="gone"
                 android:layout_height="wrap_content"
                 android:background="?selectableItemBackground"
                 android:gravity="center_vertical"
@@ -111,13 +113,15 @@
                 android:paddingVertical="@dimen/size16">
 
                 <ImageView
+                    android:id="@+id/ivPassword"
                     android:layout_width="@dimen/size24"
                     android:layout_height="@dimen/size24"
                     android:contentDescription="@null"
-                    android:src="@drawable/ic_lock"
+                    android:src="@drawable/sl_password"
                     app:tint="@color/col_main" />
 
                 <TextView
+                    android:id="@+id/tvPassword"
                     style="@style/TextView_5"
                     android:layout_marginStart="@dimen/size16"
                     android:text="@string/txt_set_password"
@@ -135,13 +139,15 @@
                 android:paddingVertical="@dimen/size16">
 
                 <ImageView
+                    android:id="@+id/ivNotifications"
                     android:layout_width="@dimen/size24"
                     android:layout_height="@dimen/size24"
                     android:contentDescription="@null"
-                    android:src="@drawable/ic_notification"
+                    android:src="@drawable/sl_notification"
                     app:tint="@color/col_main" />
 
                 <TextView
+                    android:id="@+id/tvNotifications"
                     style="@style/TextView_5"
                     android:layout_marginStart="@dimen/size16"
                     android:text="@string/txt_notification"
@@ -159,10 +165,11 @@
                 android:paddingVertical="@dimen/size16">
 
                 <ImageView
+                    android:id="@+id/ivArchive"
                     android:layout_width="@dimen/size24"
                     android:layout_height="@dimen/size24"
                     android:contentDescription="@null"
-                    android:src="@drawable/ic_archive"
+                    android:src="@drawable/sl_archive"
                     app:tint="@color/col_main" />
 
                 <TextView
@@ -170,31 +177,6 @@
                     style="@style/TextView_5"
                     android:layout_marginStart="@dimen/size16"
                     android:text="@string/txt_archive"
-                    android:textColor="@color/col_main" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:id="@+id/llUnarchive"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="?selectableItemBackground"
-                android:gravity="center_vertical"
-                android:orientation="horizontal"
-                android:paddingHorizontal="@dimen/size16"
-                android:paddingVertical="@dimen/size16"
-                android:visibility="gone">
-
-                <ImageView
-                    android:layout_width="@dimen/size24"
-                    android:layout_height="@dimen/size24"
-                    android:contentDescription="@null"
-                    android:src="@drawable/ic_archive"
-                    app:tint="@color/col_main" />
-
-                <TextView
-                    style="@style/TextView_5"
-                    android:layout_marginStart="@dimen/size16"
-                    android:text="@string/txt_unarchive"
                     android:textColor="@color/col_main" />
             </LinearLayout>
 
@@ -209,10 +191,11 @@
                 android:paddingVertical="@dimen/size16">
 
                 <ImageView
+                    android:id="@+id/ivBlock"
                     android:layout_width="@dimen/size24"
                     android:layout_height="@dimen/size24"
                     android:contentDescription="@null"
-                    android:src="@drawable/ic_block"
+                    android:src="@drawable/sl_block"
                     app:tint="@color/col_main" />
 
                 <TextView
@@ -220,31 +203,6 @@
                     style="@style/TextView_5"
                     android:layout_marginStart="@dimen/size16"
                     android:text="@string/txt_block"
-                    android:textColor="@color/col_main" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:id="@+id/llUnblock"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="?selectableItemBackground"
-                android:gravity="center_vertical"
-                android:orientation="horizontal"
-                android:paddingHorizontal="@dimen/size16"
-                android:paddingVertical="@dimen/size16"
-                android:visibility="gone">
-
-                <ImageView
-                    android:layout_width="@dimen/size24"
-                    android:layout_height="@dimen/size24"
-                    android:contentDescription="@null"
-                    android:src="@drawable/ic_block"
-                    app:tint="@color/col_main" />
-
-                <TextView
-                    style="@style/TextView_5"
-                    android:layout_marginStart="@dimen/size16"
-                    android:text="@string/txt_unblock"
                     android:textColor="@color/col_main" />
             </LinearLayout>
 
@@ -276,10 +234,11 @@
                 android:id="@+id/rcvMedia"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/size16"
                 android:layout_marginStart="@dimen/size10"
+                android:layout_marginTop="@dimen/size16"
                 android:orientation="horizontal"
-                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                tools:listitem="@layout/item_media_mess" />
         </LinearLayout>
     </ScrollView>
 

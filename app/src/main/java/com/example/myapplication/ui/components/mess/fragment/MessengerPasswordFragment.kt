@@ -5,26 +5,26 @@ import android.text.Editable
 import android.text.TextWatcher
 import android.view.KeyEvent
 import androidx.fragment.app.FragmentManager
+import androidx.fragment.app.activityViewModels
 import com.example.myapplication.R
 import com.example.myapplication.base.fragment.BaseFragment
 import com.example.myapplication.databinding.FragmentMessengerPasswordBinding
+import com.example.myapplication.ui.components.mess.MessengerViewModel
 
 class MessengerPasswordFragment :
     BaseFragment<FragmentMessengerPasswordBinding>(FragmentMessengerPasswordBinding::inflate) {
 
+    private val viewModel: MessengerViewModel by activityViewModels()
     private var firstPin: String? = null
+    private var mode: String = MODE_SET
 
     override fun initView() {
+        readArguments()
         binding.ivClose.setOnClickListener {
             parentFragmentManager.popBackStack()
         }
 
-        if (firstPin != null) {
-            binding.tvTitle.text = getString(R.string.txt_confirm_password)
-        } else {
-            binding.tvTitle.text = getString(R.string.txt_set_password)
-        }
-
+        bindModeText()
         setupPinInputs()
     }
 
@@ -65,18 +65,57 @@ class MessengerPasswordFragment :
                 binding.edtPin3.text.toString() +
                 binding.edtPin4.text.toString()
 
-        if (firstPin == null) {
-            // Move to confirm screen
-            val confirmFragment = newInstance(pin)
-            addFragment(R.id.frMessDetail, confirmFragment, backStack = "password_confirm")
+        when (mode) {
+            MODE_REMOVE -> handleRemovePassword(pin)
+            MODE_CONFIRM_SET -> handleConfirmSetPassword(pin)
+            else -> {
+                val confirmFragment = newInstance(mode = MODE_CONFIRM_SET, firstPin = pin)
+                addFragment(R.id.frMessDetail, confirmFragment, backStack = "password_confirm")
+            }
+        }
+    }
+
+    private fun handleConfirmSetPassword(pin: String) {
+        if (pin == firstPin) {
+            viewModel.setConversationPassword(pin)
+            showToast(getString(R.string.txt_password_set_successfully))
+            parentFragmentManager.popBackStack(
+                "password_set",
+                FragmentManager.POP_BACK_STACK_INCLUSIVE
+            )
         } else {
-            if (pin == firstPin) {
-                showToast(getString(R.string.txt_password_set_successfully))
-                // Pop back to detail screen (pop twice)
-                parentFragmentManager.popBackStack("password_set", FragmentManager.POP_BACK_STACK_INCLUSIVE)
-            } else {
-                showToast(getString(R.string.txt_passwords_do_not_match))
-                clearInputs()
+            showToast(getString(R.string.txt_passwords_do_not_match))
+            clearInputs()
+        }
+    }
+
+    private fun handleRemovePassword(pin: String) {
+        if (viewModel.isConversationPassword(pin)) {
+            viewModel.removeConversationPassword()
+            showToast(getString(R.string.txt_password_removed_successfully))
+            parentFragmentManager.popBackStack(
+                "password_set",
+                FragmentManager.POP_BACK_STACK_INCLUSIVE
+            )
+        } else {
+            showToast(getString(R.string.txt_wrong_password_try_again))
+            clearInputs()
+        }
+    }
+
+    private fun bindModeText() {
+        when (mode) {
+            MODE_REMOVE -> {
+                binding.tvTitle.text = getString(R.string.txt_remove_password)
+                binding.tvDesc.text = getString(R.string.txt_remove_password_desc)
+            }
+            MODE_CONFIRM_SET -> {
+                binding.tvTitle.text = getString(R.string.txt_confirm_password)
+                binding.tvDesc.text = getString(R.string.txt_please_enter_pin)
+            }
+            else -> {
+                binding.tvTitle.text = getString(R.string.txt_set_password)
+                binding.tvDesc.text = getString(R.string.txt_please_enter_pin)
             }
         }
     }
@@ -90,15 +129,27 @@ class MessengerPasswordFragment :
     }
 
     override fun initData() {
+    }
+
+    private fun readArguments() {
         firstPin = arguments?.getString(EXTRA_FIRST_PIN)
+        mode = arguments?.getString(EXTRA_MODE) ?: MODE_SET
     }
 
     companion object {
         const val EXTRA_FIRST_PIN = "extra_first_pin"
+        const val EXTRA_MODE = "extra_mode"
+        const val MODE_SET = "mode_set"
+        const val MODE_CONFIRM_SET = "mode_confirm_set"
+        const val MODE_REMOVE = "mode_remove"
 
-        fun newInstance(firstPin: String? = null): MessengerPasswordFragment {
+        fun newInstance(
+            mode: String = MODE_SET,
+            firstPin: String? = null
+        ): MessengerPasswordFragment {
             val fragment = MessengerPasswordFragment()
             val args = Bundle()
+            args.putString(EXTRA_MODE, mode)
             args.putString(EXTRA_FIRST_PIN, firstPin)
             fragment.arguments = args
             return fragment

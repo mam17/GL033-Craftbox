@@ -208,38 +208,91 @@
         android:id="@+id/clMediaPreview"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginHorizontal="@dimen/size16"
-        android:layout_marginBottom="8dp"
+        android:background="@color/white"
+        android:paddingHorizontal="@dimen/size16"
         android:visibility="gone"
         app:layout_constraintBottom_toTopOf="@+id/clBottomBar">
 
-        <androidx.cardview.widget.CardView
-            android:layout_width="100dp"
-            android:layout_height="100dp"
-            app:cardCornerRadius="8dp"
-            app:cardElevation="0dp"
+        <com.example.myapplication.views.RoundImageView
+            android:id="@+id/ivPreview"
+            android:layout_width="@dimen/size70"
+            android:layout_height="@dimen/size70"
+            android:scaleType="centerCrop"
+            app:cornerRadius="@dimen/size10"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
+            app:layout_constraintTop_toTopOf="parent" />
 
-            <androidx.appcompat.widget.AppCompatImageView
-                android:id="@+id/ivPreview"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:scaleType="centerCrop" />
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/btnRemovePreview"
+            android:layout_width="@dimen/size20"
+            android:layout_height="@dimen/size20"
+            android:layout_gravity="top|end"
+            android:layout_margin="@dimen/size4"
+            android:background="@drawable/bg_circle_green"
+            android:padding="@dimen/size2"
+            android:src="@drawable/ic_close"
+            app:layout_constraintEnd_toEndOf="@+id/ivPreview"
+            app:layout_constraintTop_toTopOf="parent" />
 
-            <androidx.appcompat.widget.AppCompatImageView
-                android:id="@+id/btnRemovePreview"
-                android:layout_width="20dp"
-                android:layout_height="20dp"
-                android:layout_gravity="top|end"
-                android:layout_margin="4dp"
-                android:background="@drawable/bg_circle_green"
-                android:padding="2dp"
-                android:src="@drawable/ic_close" />
-
-        </androidx.cardview.widget.CardView>
     </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <LinearLayout
+        android:id="@+id/llTimeScheduled"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:visibility="gone"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:paddingHorizontal="@dimen/size30"
+        app:layout_constraintBottom_toBottomOf="@+id/rvChat">
+
+        <TextView
+            style="@style/TextView_5"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/txt_schedule"
+            android:textColor="@color/grey" />
+
+        <TextView
+            android:id="@+id/tvHour"
+            style="@style/TextView_4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="00:00"
+            android:textColor="@color/grey"
+            android:textSize="14sp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="@dimen/size8"
+            android:text="-"
+            android:textColor="@color/grey"
+            android:textSize="14sp" />
+
+        <TextView
+            android:id="@+id/tvDay"
+            style="@style/TextView_4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="8/6/2026"
+            android:textColor="@color/grey"
+            android:textSize="14sp" />
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/btnRemoveSchedule"
+            android:layout_width="@dimen/size20"
+            android:layout_height="@dimen/size20"
+            android:layout_gravity="end"
+            android:layout_marginStart="@dimen/size20"
+            android:background="@drawable/bg_circle_green"
+            android:padding="@dimen/size2"
+            android:src="@drawable/ic_close"
+            app:layout_constraintEnd_toEndOf="@+id/ivPreview"
+            app:layout_constraintTop_toTopOf="parent" />
+    </LinearLayout>
     <!-- Bottom Bar -->
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/clBottomBar"
@@ -327,7 +380,9 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="end"
-                android:text="@string/txt_empty" />
+                android:text="1"
+                android:textColor="@color/col_main"
+                android:textSize="10sp" />
 
             <ImageView
                 android:id="@+id/ivSim"
@@ -345,7 +400,6 @@
         android:id="@+id/frMessDetail"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_marginTop="@dimen/size12"
         android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toTopOf="parent" />

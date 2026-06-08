@@ -125,7 +125,13 @@ object AppEx {
             false
         }
     }
-
+    fun Context.dpToPx(dp: Int): Int {
+        return android.util.TypedValue.applyDimension(
+            android.util.TypedValue.COMPLEX_UNIT_DIP,
+            dp.toFloat(),
+            resources.displayMetrics
+        ).toInt()
+    }
     fun Long.formatToOrdinalDate(): String {
         val date = Date(this)
         val day = SimpleDateFormat("d", Locale.ENGLISH).format(date).toInt()
@@ -147,4 +153,28 @@ object AppEx {
         val fmt = SimpleDateFormat("yyyyMMdd", Locale.ENGLISH)
         return fmt.format(Date(this)) == fmt.format(Date(other))
     }
+
+    fun String.isImageUri(context: Context): Boolean {
+        val uri = toUri()
+        val mimeType = context.contentResolver.getType(uri)
+        if (mimeType != null) return mimeType.startsWith("image/")
+        return startsWith("content://mms/part") ||
+            endsWith(".jpg", ignoreCase = true) ||
+            endsWith(".jpeg", ignoreCase = true) ||
+            endsWith(".png", ignoreCase = true) ||
+            endsWith(".webp", ignoreCase = true)
+    }
+
+    fun String.isVideoUri(context: Context): Boolean {
+        val uri = toUri()
+        val mimeType = context.contentResolver.getType(uri)
+        if (mimeType != null) return mimeType.startsWith("video/")
+        return endsWith(".mp4", ignoreCase = true) ||
+            endsWith(".3gp", ignoreCase = true) ||
+            endsWith(".mkv", ignoreCase = true) ||
+            endsWith(".webm", ignoreCase = true) ||
+            endsWith(".mov", ignoreCase = true)
+    }
+
+
 }

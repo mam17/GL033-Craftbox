@@ -1,28 +1,52 @@
 package com.example.myapplication.ui.components.mess.activity
 
+import android.Manifest
+import android.annotation.SuppressLint
 import android.content.Intent
+import android.content.pm.PackageManager
 import android.net.Uri
+import android.telephony.SubscriptionInfo
+import android.telephony.SubscriptionManager
+import android.telephony.TelephonyManager
 import android.view.KeyEvent
 import android.view.View
 import android.view.inputmethod.EditorInfo
+import android.view.inputmethod.InputMethodManager
+import android.view.WindowManager
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.activity.viewModels
+import androidx.core.content.ContextCompat
 import androidx.core.content.FileProvider
 import androidx.core.net.toUri
+import androidx.core.view.ViewCompat
+import androidx.core.view.WindowInsetsCompat
 import androidx.core.view.isVisible
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.myapplication.R
 import com.example.myapplication.base.activity.BaseActivity
+import com.example.myapplication.data.model.SmsMessage
 import com.example.myapplication.databinding.ActivityMessengerBinding
 import com.example.myapplication.ui.components.mess.adapter.MessengerChatAdapter
 import com.example.myapplication.ui.components.mess.fragment.MessengerDetailFragment
 import com.example.myapplication.ui.components.mess.MessengerViewModel
+import com.example.myapplication.ui.components.preview.activity.MediaPreviewActivity
 import com.example.myapplication.utils.Constant
 import com.example.myapplication.utils.ImageUtils
 import com.example.myapplication.utils.PermissionUtils
+import com.example.myapplication.data.model.ScheduledMessage
+import com.example.myapplication.utils.ScheduledMessageScheduler
+import com.google.android.material.datepicker.MaterialDatePicker
+import com.google.android.material.timepicker.MaterialTimePicker
+import com.google.android.material.timepicker.TimeFormat
 import dagger.hilt.android.AndroidEntryPoint
 import java.io.File
+import java.text.SimpleDateFormat
+import java.util.Calendar
+import java.util.Date
+import java.util.Locale
+import java.util.UUID
+import kotlin.math.max
 
 @AndroidEntryPoint
 class MessengerActivity :
@@ -67,17 +91,36 @@ class MessengerActivity :
                 ).show()
             }
         }
+    private val requestPhoneStateLauncher =
+        registerForActivityResult(ActivityResultContracts.RequestPermission()) { granted ->
+            if (granted) {
+                setupSimSelector()
+            } else {
+                binding.llSim.isVisible = false
+            }
+        }
 
     private var isAddMenuOpen = false
     private var selectedMediaUri: Uri? = null
     private var pendingCameraUri: Uri? = null
+    private var activeSimInfos: List<SubscriptionInfo> = emptyList()
+    private var selectedSimIndex = 0
+    private var scheduledTimestamp: Long? = null
 
     override fun initView() {
+        window.setSoftInputMode(
+            WindowManager.LayoutParams.SOFT_INPUT_STATE_HIDDEN or
+                WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE
+        )
+        applyKeyboardInsets()
         binding.tvSenderName.text = contactName
             ?: address.ifBlank { getString(R.string.txt_unknown_sender) }
-        binding.tvNumberSim.text = "1"
         binding.rvChat.adapter = chatAdapter
+        chatAdapter.setOnMediaClick { message ->
+            openMediaPreview(message)
+        }
         (binding.rvChat.layoutManager as? LinearLayoutManager)?.stackFromEnd = true
+        setupSimSelector()
         updateNoDataState(isLoading = true)
 
         binding.ivBack.setOnClickListener {
@@ -95,6 +138,7 @@ class MessengerActivity :
             val shouldSend = actionId == EditorInfo.IME_ACTION_SEND || isEnterUp
             if (shouldSend) {
                 sendCurrentMessage()
+                hideKeyboard()
                 true
             } else {
                 false
@@ -105,6 +149,7 @@ class MessengerActivity :
         }
         binding.llSchedule.setOnClickListener {
             toggleAddMenu()
+            showDatePicker()
         }
         binding.llTakeCamera.setOnClickListener {
             toggleAddMenu()
@@ -117,11 +162,18 @@ class MessengerActivity :
         binding.btnRemovePreview.setOnClickListener {
             clearMediaPreview()
         }
+        binding.btnRemoveSchedule.setOnClickListener {
+            clearSchedulePreview()
+        }
         binding.ivMore.setOnClickListener {
             binding.frMessDetail.visibility = View.VISIBLE
             addFragment(
                 binding.frMessDetail.id,
-                MessengerDetailFragment.newInstance(contactName),
+                MessengerDetailFragment.newInstance(
+                    contactName = contactName,
+                    address = address,
+                    contactPhotoUri = contactPhotoUri
+                ),
                 backStack = "detail",
                 tag = "MessengerDetailFragment"
             )
@@ -130,6 +182,9 @@ class MessengerActivity :
             val intent = Intent(Intent.ACTION_DIAL)
             intent.data = "tel:${viewModel.address}".toUri()
             startActivity(intent)
+        }
+        binding.llSim.setOnClickListener {
+            switchSelectedSim()
         }
 
         supportFragmentManager.addOnBackStackChangedListener {
@@ -140,19 +195,134 @@ class MessengerActivity :
     }
 
     private fun sendCurrentMessage() {
-        if (!ensureDefaultSmsApp()) return
-
         val message = binding.edtMessage.text?.toString()?.trim().orEmpty()
         val mediaUri = selectedMediaUri
-        if (message.isBlank() && mediaUri == null) return
+        val timestamp = scheduledTimestamp
+
+        if (!hasReadySim()) {
+            Toast.makeText(this, getString(R.string.txt_no_sim_available), Toast.LENGTH_SHORT).show()
+            return
+        }
+
+        if (message.isBlank()) {
+            Toast.makeText(this, getString(R.string.txt_please_enter_message), Toast.LENGTH_SHORT).show()
+            return
+        }
+
+        if (timestamp != null && timestamp <= System.currentTimeMillis()) {
+            Toast.makeText(this, getString(R.string.txt_select_future_time), Toast.LENGTH_SHORT).show()
+            return
+        }
+
+        if (timestamp != null) {
+            scheduleMessage(message, timestamp)
+            binding.edtMessage.text?.clear()
+            clearSchedulePreview()
+            clearMediaPreview()
+            return
+        }
+
+        if (!ensureDefaultSmsApp()) return
 
         binding.edtMessage.text?.clear()
         if (mediaUri != null) {
-            viewModel.sendMms(this, mediaUri, message)
+            viewModel.sendMms(this, mediaUri, message, selectedSubscriptionId())
             clearMediaPreview()
         } else {
-            viewModel.sendSms(this, message)
+            viewModel.sendSms(this, message, selectedSubscriptionId())
         }
+    }
+
+    private fun setupSimSelector() {
+        if (ContextCompat.checkSelfPermission(
+                this,
+                Manifest.permission.READ_PHONE_STATE
+            ) != PackageManager.PERMISSION_GRANTED
+        ) {
+            binding.llSim.isVisible = false
+            requestPhoneStateLauncher.launch(Manifest.permission.READ_PHONE_STATE)
+            return
+        }
+
+        activeSimInfos = getActiveSimInfos()
+        selectedSimIndex = selectedSimIndex.coerceAtMost((activeSimInfos.size - 1).coerceAtLeast(0))
+        binding.llSim.isVisible = activeSimInfos.size > 1
+        updateSelectedSimUi()
+    }
+
+    @SuppressLint("MissingPermission")
+    private fun getActiveSimInfos(): List<SubscriptionInfo> {
+        return try {
+            val subscriptionManager = getSystemService(SubscriptionManager::class.java)
+            subscriptionManager?.activeSubscriptionInfoList.orEmpty()
+                .sortedBy { it.simSlotIndex }
+        } catch (e: SecurityException) {
+            emptyList()
+        }
+    }
+
+    private fun switchSelectedSim() {
+        if (activeSimInfos.size <= 1) return
+        selectedSimIndex = (selectedSimIndex + 1) % activeSimInfos.size
+        updateSelectedSimUi()
+    }
+
+    private fun updateSelectedSimUi() {
+        val simNumber = activeSimInfos
+            .getOrNull(selectedSimIndex)
+            ?.simSlotIndex
+            ?.plus(1)
+            ?: 1
+        binding.tvNumberSim.text = simNumber.toString()
+    }
+
+    private fun selectedSubscriptionId(): Int {
+        return activeSimInfos.getOrNull(selectedSimIndex)?.subscriptionId ?: -1
+    }
+
+    private fun applyKeyboardInsets() {
+        ViewCompat.setOnApplyWindowInsetsListener(binding.root) { view, insets ->
+            val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
+            val ime = insets.getInsets(WindowInsetsCompat.Type.ime())
+            view.setPadding(
+                systemBars.left,
+                systemBars.top,
+                systemBars.right,
+                max(systemBars.bottom, ime.bottom)
+            )
+            insets
+        }
+    }
+
+    private fun hideKeyboard() {
+        binding.edtMessage.clearFocus()
+        getSystemService(InputMethodManager::class.java)
+            ?.hideSoftInputFromWindow(binding.edtMessage.windowToken, 0)
+    }
+
+    private fun hasReadySim(): Boolean {
+        if (activeSimInfos.isNotEmpty()) return true
+        return getSystemService(TelephonyManager::class.java)
+            ?.simState == TelephonyManager.SIM_STATE_READY
+    }
+
+    private fun openMediaPreview(message: SmsMessage) {
+        val mediaUri = message.mediaUri ?: return
+        val senderName = if (message.type == android.provider.Telephony.Sms.MESSAGE_TYPE_SENT) {
+            getString(R.string.txt_me)
+        } else {
+            contactName?.takeIf { it.isNotBlank() }
+                ?: message.address.ifBlank {
+                    address.ifBlank { getString(R.string.txt_unknown_sender) }
+                }
+        }
+        startActivity(
+            Intent(this, MediaPreviewActivity::class.java).apply {
+                putExtra(MediaPreviewActivity.EXTRA_MEDIA_PATH, mediaUri)
+                putExtra(MediaPreviewActivity.EXTRA_SENDER_NAME, senderName)
+                putExtra(MediaPreviewActivity.EXTRA_SENT_TIME, message.date)
+            }
+        )
     }
 
     private fun ensureDefaultSmsApp(): Boolean {
@@ -184,19 +354,13 @@ class MessengerActivity :
     private fun showMediaPreview(uri: Uri) {
         selectedMediaUri = uri
         binding.clMediaPreview.isVisible = true
+        binding.ivPreview.isVisible = true
         with(ImageUtils) {
             binding.ivPreview.loadFromPathAction(
                 path = uri.toString(),
                 radius = resources.getDimensionPixelSize(R.dimen.size8)
             )
         }
-    }
-
-    private fun clearMediaPreview() {
-        selectedMediaUri = null
-        pendingCameraUri = null
-        binding.ivPreview.setImageDrawable(null)
-        binding.clMediaPreview.isVisible = false
     }
 
     private fun createCameraImageUri(): Uri {
@@ -207,6 +371,29 @@ class MessengerActivity :
             "$packageName.fileprovider",
             imageFile
         )
+    }
+
+    private fun scheduleMessage(body: String, timestamp: Long) {
+        val id = UUID.randomUUID().toString()
+        val scheduledMsg = ScheduledMessage(
+            id = id,
+            address = address,
+            contactName = contactName,
+            body = body,
+            scheduledTime = timestamp,
+            subId = selectedSubscriptionId()
+        )
+
+        spManager.addScheduledMessage(scheduledMsg)
+        ScheduledMessageScheduler.schedule(
+            context = this,
+            id = id,
+            address = address,
+            body = body,
+            scheduledTime = timestamp,
+            subscriptionId = selectedSubscriptionId()
+        )
+        Toast.makeText(this, getString(R.string.txt_scheduled), Toast.LENGTH_SHORT).show()
     }
 
     private fun toggleAddMenu() {
@@ -220,6 +407,67 @@ class MessengerActivity :
             binding.vScrim.visibility = View.GONE
             binding.llAddMenu.visibility = View.GONE
         }
+    }
+
+    private fun showDatePicker() {
+        val datePicker = MaterialDatePicker.Builder.datePicker()
+            .setTitleText(getString(R.string.txt_select))
+            .setTheme(R.style.CustomMaterialPicker)
+            .setSelection(MaterialDatePicker.todayInUtcMilliseconds())
+            .build()
+
+        datePicker.addOnPositiveButtonClickListener { selection ->
+            showTimePicker(selection)
+        }
+        datePicker.show(supportFragmentManager, "DATE_PICKER")
+    }
+
+    private fun showTimePicker(dateSelection: Long) {
+        val calendar = Calendar.getInstance()
+        val timePicker = MaterialTimePicker.Builder()
+            .setTimeFormat(TimeFormat.CLOCK_24H)
+            .setHour(calendar.get(Calendar.HOUR_OF_DAY))
+            .setMinute(calendar.get(Calendar.MINUTE))
+            .setTitleText(getString(R.string.txt_confirm))
+            .setTheme(R.style.CustomTimePicker)
+            .build()
+
+        timePicker.addOnPositiveButtonClickListener {
+            val selectedCalendar = Calendar.getInstance().apply {
+                timeInMillis = dateSelection
+                set(Calendar.HOUR_OF_DAY, timePicker.hour)
+                set(Calendar.MINUTE, timePicker.minute)
+            }
+            handleScheduledTime(selectedCalendar.timeInMillis)
+        }
+        timePicker.show(supportFragmentManager, "TIME_PICKER")
+    }
+
+    private fun handleScheduledTime(timestamp: Long) {
+        if (timestamp <= System.currentTimeMillis()) {
+            Toast.makeText(this, getString(R.string.txt_select_future_time), Toast.LENGTH_SHORT).show()
+            return
+        }
+        scheduledTimestamp = timestamp
+        binding.llTimeScheduled.isVisible = true
+
+        val sdfHour = SimpleDateFormat("HH:mm", Locale.getDefault())
+        val sdfDay = SimpleDateFormat("MMM dd, yyyy", Locale.getDefault())
+
+        binding.tvHour.text = sdfHour.format(Date(timestamp))
+        binding.tvDay.text = sdfDay.format(Date(timestamp))
+    }
+
+    private fun clearMediaPreview() {
+        selectedMediaUri = null
+        pendingCameraUri = null
+        binding.ivPreview.setImageDrawable(null)
+        binding.clMediaPreview.isVisible = false
+    }
+
+    private fun clearSchedulePreview() {
+        scheduledTimestamp = null
+        binding.llTimeScheduled.isVisible = false
     }
 
     override fun initData() {

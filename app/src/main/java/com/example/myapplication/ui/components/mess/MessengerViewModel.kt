@@ -62,6 +62,9 @@ class MessengerViewModel @Inject constructor(
     private val _notificationsEnabled = MutableLiveData<Boolean>()
     val notificationsEnabled: LiveData<Boolean> get() = _notificationsEnabled
 
+    private val _hasPassword = MutableLiveData<Boolean>()
+    val hasPassword: LiveData<Boolean> get() = _hasPassword
+
     private val _background = MutableLiveData<String>()
     val background: LiveData<String> get() = _background
 
@@ -98,6 +101,7 @@ class MessengerViewModel @Inject constructor(
         _isBlocked.value = spManager.isBlocked(address)
         _isArchived.value = spManager.isArchived(address)
         _notificationsEnabled.value = spManager.areNotificationsEnabled(address)
+        _hasPassword.value = spManager.hasConversationPassword(address)
         _background.value = spManager.getMessageBackground(address)
         refreshJob?.cancel()
         refreshJob = viewModelScope.launch {
@@ -189,7 +193,7 @@ class MessengerViewModel @Inject constructor(
 
         mContext?.let {
             val resId = if (newState) R.string.txt_blocked else R.string.txt_unblocked
-            Toast.makeText(it, it.getString(resId), Toast.LENGTH_SHORT).show()
+            makeText(it, it.getString(resId), Toast.LENGTH_SHORT).show()
         }
         smsRepository.notifyDataChanged()
     }
@@ -211,6 +215,20 @@ class MessengerViewModel @Inject constructor(
         val newState = !(_notificationsEnabled.value ?: true)
         spManager.setNotificationsEnabled(address, newState)
         _notificationsEnabled.value = newState
+    }
+
+    fun setConversationPassword(password: String) {
+        spManager.setConversationPassword(address, password)
+        _hasPassword.value = true
+    }
+
+    fun removeConversationPassword() {
+        spManager.setConversationPassword(address, null)
+        _hasPassword.value = false
+    }
+
+    fun isConversationPassword(password: String): Boolean {
+        return spManager.getConversationPassword(address) == password
     }
 
     fun blockConversation() {
@@ -272,29 +290,29 @@ class MessengerViewModel @Inject constructor(
                 if (mediaUri == null) {
                     val date = System.currentTimeMillis()
                     withContext(Dispatchers.IO) {
-                        // Use only the primary address for sending/inserting,
-                        // even though we use variants for fetching.
-                        val insertedUri = smsRepository.insertSentSms(
-                            context,
-                            address,
-                            body,
-                            date
-                        )
-
-                        val messageId = insertedUri?.lastPathSegment ?: ""
-
-                        val sentIntent = PendingIntent.getBroadcast(
-                            context,
-                            messageId.toIntOrNull() ?: System.currentTimeMillis().toInt(),
-                            Intent(context, SmsSentReceiver::class.java).apply {
-                                action = Constant.ACTION_SMS_SENT
-                                putExtra(Constant.EXTRA_MESSAGE_ID, messageId)
-                            },
-                            PendingIntent.FLAG_IMMUTABLE or PendingIntent.FLAG_UPDATE_CURRENT
-                        )
-
                         val smsManager = getSmsManager(context, subscriptionId)
-                        smsManager.sendTextMessage(address, null, body, sentIntent, null)
+                        recipients.forEach { recipient ->
+                            val insertedUri = smsRepository.insertSentSms(
+                                context,
+                                recipient,
+                                body,
+                                date
+                            )
+
+                            val messageId = insertedUri?.lastPathSegment ?: ""
+
+                            val sentIntent = PendingIntent.getBroadcast(
+                                context,
+                                messageId.toIntOrNull() ?: System.currentTimeMillis().toInt(),
+                                Intent(context, SmsSentReceiver::class.java).apply {
+                                    action = Constant.ACTION_SMS_SENT
+                                    putExtra(Constant.EXTRA_MESSAGE_ID, messageId)
+                                },
+                                PendingIntent.FLAG_IMMUTABLE or PendingIntent.FLAG_UPDATE_CURRENT
+                            )
+
+                            smsManager.sendTextMessage(recipient, null, body, sentIntent, null)
+                        }
                     }
                     fetchMessages(context)
                 }
@@ -326,7 +344,7 @@ class MessengerViewModel @Inject constructor(
             val isMms = message.mediaUri != null
             smsRepository.deleteMessage(context, message.id, isMms)
             if (isMms) {
-                sendMms(context, Uri.parse(message.mediaUri), message.body, subscriptionId)
+                sendMms(context, message.mediaUri.toUri(), message.body, subscriptionId)
             } else {
                 sendSms(context, message.body, subscriptionId)
             }

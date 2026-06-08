@@ -2,6 +2,10 @@ package com.example.myapplication.ui.main.func.home
 
 import android.view.View
 import android.content.Intent
+import android.text.Editable
+import android.text.TextWatcher
+import android.view.inputmethod.EditorInfo
+import android.view.inputmethod.InputMethodManager
 import androidx.core.content.ContextCompat
 import androidx.core.view.ViewCompat
 import androidx.core.view.isVisible
@@ -13,6 +17,7 @@ import com.example.myapplication.R
 import com.example.myapplication.base.fragment.BaseFragment
 import com.example.myapplication.databinding.FragmentHomeBinding
 import com.example.myapplication.sms_helper.SmsRepository
+import com.example.myapplication.ui.components.directory.DirectoryFragment
 import com.example.myapplication.ui.components.mess.activity.MessengerActivity
 import com.example.myapplication.ui.main.MainActivity
 import kotlinx.coroutines.launch
@@ -20,6 +25,7 @@ import kotlinx.coroutines.launch
 class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::inflate) {
     private val smsAdapter = HomeSmsMessageAdapter()
     private val smsRepository by lazy { SmsRepository(requireContext()) }
+    private var allMessages: List<com.example.myapplication.sms_helper.SmsMessageModel> = emptyList()
 
     override fun initView() {
         applySystemBarInsets(binding.clTopBar)
@@ -41,6 +47,30 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::infl
         binding.ivMenu.setOnClickListener {
             (activity as? MainActivity)?.openDrawer()
         }
+        binding.fabNewChat.setOnClickListener {
+            addFragment(
+                containerId = R.id.frMainContent,
+                fragment = DirectoryFragment(),
+                tag = DirectoryFragment::class.java.simpleName
+            )
+        }
+        binding.edtSearchHome.addTextChangedListener(object : TextWatcher {
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) = Unit
+
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+                submitFilteredMessages(s?.toString().orEmpty())
+            }
+
+            override fun afterTextChanged(s: Editable?) = Unit
+        })
+        binding.edtSearchHome.setOnEditorActionListener { view, actionId, _ ->
+            if (actionId == EditorInfo.IME_ACTION_SEARCH) {
+                hideSearchKeyboardAndClearFocus(view)
+                true
+            } else {
+                false
+            }
+        }
     }
 
     private fun applySystemBarInsets(view: View) {
@@ -56,7 +86,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::infl
 
     override fun onResume() {
         super.onResume()
-        reloadMessagesOnce()
+        refreshMessages()
     }
 
     override fun initObserver() {
@@ -69,21 +99,44 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::infl
                 smsRepository
                     .observeLatestMessagesByThread()
                     .collect { messages ->
-                        smsAdapter.submitList(messages) {
-                            updateNoDataState(isLoading = false)
-                        }
+                        allMessages = messages
+                        submitFilteredMessages(binding.edtSearchHome.text?.toString().orEmpty())
                     }
             }
         }
     }
 
-    private fun reloadMessagesOnce() {
+    fun refreshMessages() {
         viewLifecycleOwner.lifecycleScope.launch {
             val messages = smsRepository.getLatestMessagesByThread()
-            smsAdapter.submitList(messages) {
-                updateNoDataState(isLoading = false)
+            allMessages = messages
+            submitFilteredMessages(binding.edtSearchHome.text?.toString().orEmpty())
+        }
+    }
+
+    private fun submitFilteredMessages(query: String) {
+        val normalizedQuery = query.trim().lowercase()
+        val filteredMessages = if (normalizedQuery.isBlank()) {
+            allMessages
+        } else {
+            allMessages.filter { message ->
+                message.address.contains(normalizedQuery, ignoreCase = true) ||
+                    message.contactName.orEmpty().contains(normalizedQuery, ignoreCase = true) ||
+                    message.body.contains(normalizedQuery, ignoreCase = true)
             }
         }
+
+        smsAdapter.submitList(filteredMessages) {
+            updateNoDataState(isLoading = false)
+        }
+    }
+
+    private fun hideSearchKeyboardAndClearFocus(view: View) {
+        view.clearFocus()
+        binding.root.isFocusableInTouchMode = true
+        binding.root.requestFocus()
+        requireContext().getSystemService(InputMethodManager::class.java)
+            ?.hideSoftInputFromWindow(view.windowToken, 0)
     }
 
     private fun updateNoDataState(isLoading: Boolean) {
@@ -92,5 +145,6 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::infl
         binding.layoutNoData.prLoading.isVisible = isLoading
         binding.layoutNoData.llNoData.isVisible = !isLoading && isEmpty
         binding.rvMessages.isVisible = !isLoading && !isEmpty
+        binding.layoutNoData.tvBodyNoData.text = getString(R.string.txt_no_search_results_found)
     }
 }

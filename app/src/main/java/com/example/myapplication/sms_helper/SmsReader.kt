@@ -6,12 +6,14 @@ import android.content.pm.PackageManager
 import android.net.Uri
 import android.provider.Telephony
 import androidx.core.content.ContextCompat
+import com.example.myapplication.utils.SpManager
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 
 class SmsReader(private val context: Context) {
     private val contactInfoResolver = ContactInfoResolver(context)
     private val contactInfoCache = mutableMapOf<String, ContactInfo>()
+    private val spManager by lazy { SpManager.get(context) }
 
     suspend fun getAllMessages(): List<SmsMessageModel> = withContext(Dispatchers.IO) {
         if (!hasReadSmsPermission()) return@withContext emptyList()
@@ -114,6 +116,8 @@ class SmsReader(private val context: Context) {
 
             while (cursor.moveToNext() && messages.size < maxConversations) {
                 val threadId = cursor.getLong(threadIdIndex)
+                val address = cursor.getString(addressIndex).orEmpty()
+                if (spManager.isBlocked(address) || spManager.isArchived(address)) continue
                 if (!seenThreadIds.add(threadId)) continue
 
                 messages.add(
