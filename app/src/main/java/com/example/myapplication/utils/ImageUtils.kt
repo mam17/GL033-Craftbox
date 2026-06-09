@@ -185,6 +185,27 @@ object ImageUtils {
             null
         }
     }
+
+    fun copyAssetToInternal(context: Context, assetPath: String): Uri? {
+        return try {
+            val mediaFolder = File(context.filesDir, "media")
+            if (!mediaFolder.exists()) mediaFolder.mkdirs()
+
+            val extension = assetPath.substringAfterLast('.', "png")
+            val destFile = File(mediaFolder, "sticker_${System.currentTimeMillis()}.$extension")
+
+            context.assets.open(assetPath).use { input ->
+                FileOutputStream(destFile).use { output ->
+                    input.copyTo(output)
+                }
+            }
+            Uri.fromFile(destFile)
+        } catch (e: Exception) {
+            e.printStackTrace()
+            null
+        }
+    }
+
     fun compressImageToInternal(context: Context, uri: Uri, maxSizeKB: Int = 300): Uri? {
         return try {
             val mediaFolder = File(context.filesDir, "media")

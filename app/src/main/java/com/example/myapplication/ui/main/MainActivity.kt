@@ -19,7 +19,7 @@ import com.example.myapplication.ui.main.draws.password.SetPasswordFragment
 import com.example.myapplication.ui.main.draws.scheduled.ScheduledFragment
 import com.example.myapplication.ui.main.func.home.HomeFragment
 import com.example.myapplication.ui.main.func.SettingFragment
-import com.example.myapplication.ui.main.func.StickersFragment
+import com.example.myapplication.ui.main.func.sticker.StickersFragment
 import com.example.myapplication.ui.main.func.theme.ThemesFragment
 import com.example.myapplication.utils.DialogEx.showDialogAlert
 import com.example.myapplication.utils.PermissionUtils

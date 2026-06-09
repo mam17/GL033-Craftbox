@@ -75,6 +75,7 @@
             android:background="?attr/selectableItemBackground"
             android:gravity="center_vertical"
             android:orientation="horizontal"
+            android:visibility="gone"
             android:paddingVertical="@dimen/size16">
 
             <ImageView

@@ -129,8 +129,8 @@ class MessengerDetailFragment :
                 icon = binding.ivNotifications,
                 textView = binding.tvNotifications,
                 isSelected = enabled != false,
-                selectedText = getString(R.string.txt_unnotification),
-                unselectedText = getString(R.string.txt_notification)
+                selectedText = getString(R.string.txt_turn_notifications_off),
+                unselectedText = getString(R.string.txt_turn_notifications_on)
             )
         }
         viewModel.hasPassword.observe(viewLifecycleOwner) { hasPassword ->

@@ -233,6 +233,27 @@ class SpManager @Inject constructor(@ApplicationContext context: Context) {
     fun getCurrentTheme(): ThemeMessModel? {
         return getObject<ThemeMessModel>(Constant.KEY_SP_CURRENT_THEME)
     }
+
+    fun getAddedStickerNames(): ArrayList<String> {
+        return getArrayList<String>(Constant.KEY_SP_ADDED_STICKERS) ?: arrayListOf()
+    }
+
+    fun isStickerAdded(stickerName: String): Boolean {
+        return getAddedStickerNames().contains(stickerName)
+    }
+
+    fun setStickerAdded(stickerName: String, isAdded: Boolean) {
+        val stickerNames = getAddedStickerNames()
+        if (isAdded) {
+            if (!stickerNames.contains(stickerName)) {
+                stickerNames.add(stickerName)
+            }
+        } else {
+            stickerNames.remove(stickerName)
+        }
+        putArrayList(Constant.KEY_SP_ADDED_STICKERS, stickerNames)
+    }
+
     fun <T> saveObject(key: String, value: T) {
         prefs.edit {
             putString(key, Gson().toJson(value))

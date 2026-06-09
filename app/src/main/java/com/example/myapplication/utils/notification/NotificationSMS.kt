@@ -26,6 +26,7 @@ object NotificationSMS {
 
     fun showNotification(context: Context, address: String, body: String) {
         if (!PermissionUtils.isNotificationPermissionGranted(context)) return
+        if (!isConversationNotificationEnabled(context, address)) return
 
         val notificationManager =
             context.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
@@ -114,6 +115,31 @@ object NotificationSMS {
             return
         }
         NotificationManagerCompat.from(context).notify(address.hashCode(), notification)
+    }
+
+    private fun isConversationNotificationEnabled(context: Context, address: String): Boolean {
+        val spManager = SpManager.get(context)
+        return notificationAddressVariants(address).all { variant ->
+            spManager.areNotificationsEnabled(variant)
+        }
+    }
+
+    private fun notificationAddressVariants(address: String): Set<String> {
+        val compactAddress = address.replace(" ", "").replace("-", "")
+        val variants = mutableSetOf(address, compactAddress)
+
+        if (compactAddress.startsWith("0")) {
+            variants.add("+84" + compactAddress.substring(1))
+            variants.add("84" + compactAddress.substring(1))
+        } else if (compactAddress.startsWith("+84")) {
+            variants.add("0" + compactAddress.substring(3))
+            variants.add(compactAddress.removePrefix("+"))
+        } else if (compactAddress.startsWith("84")) {
+            variants.add("0" + compactAddress.substring(2))
+            variants.add("+$compactAddress")
+        }
+
+        return variants.filter { it.isNotBlank() }.toSet()
     }
 
     fun cancelNotification(context: Context, address: String) {

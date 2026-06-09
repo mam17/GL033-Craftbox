@@ -215,6 +215,9 @@ class MessengerViewModel @Inject constructor(
         val newState = !(_notificationsEnabled.value ?: true)
         spManager.setNotificationsEnabled(address, newState)
         _notificationsEnabled.value = newState
+        if (!newState) {
+            mContext?.let { cancelConversationNotifications(it) }
+        }
     }
 
     fun setConversationPassword(password: String) {

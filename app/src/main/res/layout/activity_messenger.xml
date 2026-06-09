@@ -242,10 +242,10 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/white"
-        android:visibility="gone"
         android:gravity="center_vertical"
         android:orientation="horizontal"
         android:paddingHorizontal="@dimen/size30"
+        android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="@+id/rvChat">
 
         <TextView
@@ -299,7 +299,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:padding="@dimen/size12"
-        app:layout_constraintBottom_toBottomOf="parent">
+        app:layout_constraintBottom_toTopOf="@+id/frChooseSticker">
 
         <ImageView
             android:id="@+id/ivAdd"
@@ -345,7 +345,7 @@
                 android:textColorHint="@color/grey" />
 
             <ImageView
-                android:id="@+id/ivEmoji"
+                android:id="@+id/btnSticker"
                 android:layout_width="@dimen/size24"
                 android:layout_height="@dimen/size24"
                 android:contentDescription="@null"

@@ -127,6 +127,8 @@
     <string name="txt_general">General</string>
     <string name="txt_notification">Notification</string>
     <string name="txt_unnotification">UnNotification</string>
+    <string name="txt_turn_notifications_on">Turn notifications on</string>
+    <string name="txt_turn_notifications_off">Turn notifications off</string>
     <string name="txt_language">Language</string>
     <string name="txt_delayed_sending">Delayed sending</string>
     <string name="txt_no_delay">No delay</string>
@@ -190,4 +192,5 @@
     <string name="txt_no_search_results_found">No search results found.</string>
     <string name="txt_type_a_name_phone_number">Type a name, phone number</string>
     <string name="txt_no_contact_found">No contact found</string>
+    <string name="txt_no_sticker_data_available">No sticker data available</string>
 </resources>

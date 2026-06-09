@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/cvCate"
+    android:layout_width="wrap_content"
+    app:cardElevation="0dp"
+    android:layout_height="@dimen/size32"
+    android:layout_marginHorizontal="@dimen/size4"
+    app:cardBackgroundColor="@color/col_4D008CFF"
+    app:cardCornerRadius="@dimen/size30">
+
+    <TextView
+        android:id="@+id/tvCateName"
+        style="@style/TextView_4"
+        android:layout_width="wrap_content"
+        android:includeFontPadding="false"
+        android:layout_height="match_parent"
+        android:gravity="center_vertical"
+        android:paddingHorizontal="@dimen/size10"
+        android:text="ALL"
+        android:textColor="@color/sl_cate"
+        android:textSize="@dimen/size14" />
+</com.google.android.material.card.MaterialCardView>

@@ -52,7 +52,6 @@ abstract class BaseActivity<VB : ViewBinding>(
 //        setBaseDefault()
         setBaseStatusBar(isVisible = true, isLightIcons = true)
         setBaseHideNavigation()
-        window.statusBarColor = ContextCompat.getColor(this, R.color.white)
 
         initView()
         initData()

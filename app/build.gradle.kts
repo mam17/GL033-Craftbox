@@ -4,7 +4,7 @@ plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.hilt.android)
     alias(libs.plugins.ksp)
-    id("kotlin-parcelize")
+    alias(libs.plugins.kotlin.parcelize)
     id("com.google.gms.google-services")
     id("com.google.firebase.crashlytics")
 }
@@ -75,6 +75,7 @@ dependencies {
     // Dagger Hilt
     implementation(libs.hilt.android)
     ksp(libs.hilt.compiler)
+    ksp(libs.hilt.metadata.helper)
 
     // Room
     implementation(libs.room.runtime)
@@ -124,7 +125,9 @@ dependencies {
     implementation(libs.lottie)
 
     // Rating
-    implementation(libs.andratingbar)
+    implementation(libs.andratingbar) {
+        exclude(group = "org.jetbrains.kotlin", module = "kotlin-android-extensions-runtime")
+    }
 
     // Retrofit + OkHttp
     implementation(libs.retrofit)

@@ -75,7 +75,7 @@ class MessengerChatAdapter(
         return when (item) {
             is MessageItem.DateHeader -> VIEW_TYPE_DATE
             is MessageItem.MessageContent -> {
-                if (item.message.type == Telephony.Sms.MESSAGE_TYPE_SENT) {
+                if (item.message.isOutgoing()) {
                     VIEW_TYPE_RIGHT
                 } else {
                     VIEW_TYPE_LEFT
@@ -170,6 +170,12 @@ class MessengerChatAdapter(
 
     private fun String.hasLetters(): Boolean {
         return any { it.isLetter() }
+    }
+
+    private fun SmsMessage.isOutgoing(): Boolean {
+        return type == Telephony.Sms.MESSAGE_TYPE_SENT ||
+            type == Telephony.Sms.MESSAGE_TYPE_OUTBOX ||
+            type == Telephony.Sms.MESSAGE_TYPE_QUEUED
     }
 
     private fun Long.formatMessageTime(): String {

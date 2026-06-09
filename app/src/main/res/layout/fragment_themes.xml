@@ -42,90 +42,25 @@
         android:background="@color/col_14000000"
         app:layout_constraintTop_toBottomOf="@+id/clTopBar" />
 
-    <HorizontalScrollView
-        android:id="@+id/hsvCategories"
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rcvCategoryTheme"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:paddingVertical="@dimen/size12"
-        android:scrollbars="none"
-        app:layout_constraintTop_toBottomOf="@+id/vLine">
-
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:paddingHorizontal="@dimen/size16">
-
-            <TextView
-                android:id="@+id/tvAll"
-                style="@style/TextView_5"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:background="@drawable/bg_category_selected"
-                android:paddingHorizontal="@dimen/size16"
-                android:paddingVertical="@dimen/size8"
-                android:text="@string/txt_all"
-                android:textColor="@color/white" />
-
-            <TextView
-                android:id="@+id/tvBasic"
-                style="@style/TextView_5"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/size8"
-                android:background="@drawable/bg_category_unselected"
-                android:paddingHorizontal="@dimen/size16"
-                android:paddingVertical="@dimen/size8"
-                android:text="@string/txt_basic"
-                android:textColor="@color/col_main" />
-
-            <TextView
-                android:id="@+id/tvRomantic"
-                style="@style/TextView_5"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/size8"
-                android:background="@drawable/bg_category_unselected"
-                android:paddingHorizontal="@dimen/size16"
-                android:paddingVertical="@dimen/size8"
-                android:text="@string/txt_romantic"
-                android:textColor="@color/col_main" />
-
-            <TextView
-                android:id="@+id/tvAnimal"
-                style="@style/TextView_5"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/size8"
-                android:background="@drawable/bg_category_unselected"
-                android:paddingHorizontal="@dimen/size16"
-                android:paddingVertical="@dimen/size8"
-                android:text="@string/txt_animal"
-                android:textColor="@color/col_main" />
-
-            <TextView
-                android:id="@+id/tvNature"
-                style="@style/TextView_5"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/size8"
-                android:background="@drawable/bg_category_unselected"
-                android:paddingHorizontal="@dimen/size16"
-                android:paddingVertical="@dimen/size8"
-                android:text="@string/txt_nature"
-                android:textColor="@color/col_main" />
-
-        </LinearLayout>
-    </HorizontalScrollView>
+        android:layout_marginStart="@dimen/size12"
+        android:orientation="horizontal"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        app:layout_constraintTop_toBottomOf="@+id/vLine"
+        tools:listitem="@layout/item_theme_category" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rvThemes"
         android:layout_width="match_parent"
         android:layout_height="0dp"
+        android:layout_marginTop="@dimen/size16"
         android:paddingHorizontal="@dimen/size8"
         app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/hsvCategories"
+        app:layout_constraintTop_toBottomOf="@+id/rcvCategoryTheme"
         app:spanCount="2"
         tools:listitem="@layout/item_theme" />
 

@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
+    android:paddingTop="@dimen/size40"
     android:layout_height="match_parent"
     android:background="@color/white">
 
@@ -27,46 +27,67 @@
         android:id="@+id/llTabs"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginHorizontal="@dimen/size16"
+        android:layout_marginTop="@dimen/size16"
         android:orientation="horizontal"
-        android:paddingHorizontal="@dimen/size16"
-        android:paddingVertical="@dimen/size12"
         app:layout_constraintTop_toBottomOf="@+id/clTopBar">
 
-        <TextView
-            android:id="@+id/tvAll"
-            style="@style/TextView_7"
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/btnAll"
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
+            android:layout_height="@dimen/size44"
             android:layout_weight="1"
-            android:background="@drawable/bg_category_selected"
-            android:gravity="center"
-            android:paddingVertical="@dimen/size12"
-            android:text="@string/txt_all"
-            android:textColor="@color/white" />
+            android:clickable="true"
+            android:focusable="true"
+            android:foreground="?attr/selectableItemBackground"
+            app:cardBackgroundColor="@color/col_main"
+            app:cardCornerRadius="@dimen/size30"
+            app:strokeColor="@color/col_main"
+            app:strokeWidth="@dimen/size1">
 
-        <TextView
-            android:id="@+id/tvYourStickers"
-            style="@style/TextView_7"
+            <TextView
+                android:id="@+id/tvAll"
+                style="@style/TextView_5"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:includeFontPadding="false"
+                android:text="@string/txt_all"
+                android:textAllCaps="false" />
+        </com.google.android.material.card.MaterialCardView>
+
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/btnYourSticker"
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
+            android:layout_height="@dimen/size44"
             android:layout_marginStart="@dimen/size16"
             android:layout_weight="1"
-            android:background="@drawable/bg_tab_unselected"
-            android:gravity="center"
-            android:paddingVertical="@dimen/size12"
-            android:text="@string/txt_your_stickers"
-            android:textColor="@color/col_main" />
+            android:clickable="true"
+            android:focusable="true"
+            android:foreground="?attr/selectableItemBackground"
+            app:cardBackgroundColor="@color/white"
+            app:cardCornerRadius="@dimen/size30"
+            app:strokeColor="@color/col_main"
+            app:strokeWidth="@dimen/size1">
+
+            <TextView
+                android:id="@+id/tvYourSticker"
+                style="@style/TextView_5"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:includeFontPadding="false"
+                android:text="@string/txt_your_stickers"
+                android:textAllCaps="false" />
+        </com.google.android.material.card.MaterialCardView>
     </LinearLayout>
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rvStickers"
+    <androidx.viewpager2.widget.ViewPager2
+        android:id="@+id/vpSticker"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:paddingHorizontal="@dimen/size8"
-        app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+        android:layout_marginTop="@dimen/size16"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/llTabs"
-        app:spanCount="2"
-        tools:listitem="@layout/item_sticker_pack" />
+        app:layout_constraintTop_toBottomOf="@+id/llTabs" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

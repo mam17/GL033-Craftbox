@@ -30,6 +30,7 @@ import com.example.myapplication.databinding.ActivityNewMessengerBinding
 import com.example.myapplication.domain.layer.DirectoryModel
 import com.example.myapplication.ui.components.mess.MessengerViewModel
 import com.example.myapplication.ui.components.mess.adapter.MessengerChatAdapter
+import com.example.myapplication.ui.components.mess.fragment.ChooseStickerFragment
 import com.example.myapplication.ui.components.preview.activity.MediaPreviewActivity
 import com.example.myapplication.utils.ContactUtils
 import com.example.myapplication.utils.ImageUtils
@@ -161,6 +162,9 @@ class NewMessengerActivity :
         binding.llAttachPhoto.setOnClickListener {
             toggleAddMenu()
             openImagePicker()
+        }
+        binding.btnSticker.setOnClickListener {
+            showChooseStickerFragment()
         }
         binding.btnRemovePreview.setOnClickListener {
             clearMediaPreview()
@@ -322,6 +326,52 @@ class NewMessengerActivity :
                 radius = resources.getDimensionPixelSize(R.dimen.size8)
             )
         }
+    }
+
+    private fun showChooseStickerFragment() {
+        if (isAddMenuOpen) toggleAddMenu()
+        hideKeyboard()
+        binding.frAddSticker.visibility = View.VISIBLE
+
+        val fragment = supportFragmentManager.findFragmentByTag(CHOOSE_STICKER_TAG)
+            as? ChooseStickerFragment ?: ChooseStickerFragment().also {
+            addFragment(
+                binding.frAddSticker.id,
+                it,
+                tag = CHOOSE_STICKER_TAG
+            )
+        }
+        fragment.onStickerClick = { stickerPath ->
+            sendSelectedSticker(stickerPath)
+        }
+    }
+
+    private fun sendSelectedSticker(stickerPath: String) {
+        val recipients = selectedUsers.map { it.strPhone }.filter { it.isNotBlank() }
+        if (recipients.isEmpty()) {
+            Toast.makeText(this, getString(R.string.txt_no_contact_found), Toast.LENGTH_SHORT)
+                .show()
+            return
+        }
+        if (!hasReadySim()) {
+            Toast.makeText(this, getString(R.string.txt_no_sim_available), Toast.LENGTH_SHORT)
+                .show()
+            return
+        }
+        if (!ensureDefaultSmsApp()) return
+
+        val stickerUri = ImageUtils.copyAssetToInternal(this, stickerPath) ?: run {
+            Toast.makeText(this, getString(R.string.txt_failed_to_process_image), Toast.LENGTH_SHORT)
+                .show()
+            return
+        }
+
+        viewModel.sendMms(this, stickerUri, "", selectedSubscriptionId())
+        hideChooseStickerFragment()
+    }
+
+    private fun hideChooseStickerFragment() {
+        binding.frAddSticker.visibility = View.GONE
     }
 
     private fun createCameraImageUri(): Uri {
@@ -536,6 +586,10 @@ class NewMessengerActivity :
     }
 
     override fun onBack() {
+        if (binding.frAddSticker.isVisible) {
+            hideChooseStickerFragment()
+            return
+        }
         if (isAddMenuOpen) {
             toggleAddMenu()
             return
@@ -546,5 +600,6 @@ class NewMessengerActivity :
     companion object {
         const val EXTRA_ADDRESS = "extra_address"
         const val EXTRA_CONTACT_NAME = "extra_contact_name"
+        private const val CHOOSE_STICKER_TAG = "ChooseStickerFragment"
     }
 }
