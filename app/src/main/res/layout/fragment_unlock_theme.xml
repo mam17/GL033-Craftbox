@@ -1,0 +1,352 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:paddingTop="@dimen/size16"
+    tools:context=".ui.components.themes.fragment.UnlockThemeFragment">
+
+    <LinearLayout
+        android:id="@+id/llBackground"
+        android:layout_width="@dimen/size158"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/size16"
+        android:orientation="vertical"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/bg_apply_theme_rw">
+
+            <com.example.myapplication.views.RoundImageView
+                android:id="@+id/ivBGTheme"
+                android:layout_width="0dp"
+                android:layout_height="@dimen/size200"
+                android:layout_margin="@dimen/size20"
+                android:clickable="false"
+                android:focusable="false"
+                android:scaleType="centerCrop"
+                android:src="@mipmap/ic_launcher"
+                app:cornerRadius="@dimen/size10"
+                app:enableScaleAnim="false"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintDimensionRatio="1:2"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/tvApplyBG"
+                style="@style/TextView_4"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/bg_border_apply_rw"
+                android:ellipsize="end"
+                android:gravity="center"
+                android:maxLines="1"
+                android:paddingVertical="@dimen/size6"
+                android:text="@string/txt_apply"
+                android:textColor="@color/white"
+                android:textSize="@dimen/size12"
+                app:layout_constraintBottom_toBottomOf="parent" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <TextView
+            style="@style/TextView_4"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/size5"
+            android:ellipsize="end"
+            android:gravity="center"
+            android:includeFontPadding="false"
+            android:maxLines="1"
+            android:text="@string/txt_background"
+            android:textColor="@color/black"
+            android:textSize="@dimen/size14" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="@dimen/size12"
+        android:layout_marginEnd="@dimen/size16"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="@+id/llBackground"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/llBackground"
+        app:layout_constraintTop_toTopOf="@+id/llBackground">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/bg_apply_theme_rw">
+
+            <com.example.myapplication.views.RoundImageView
+                android:id="@+id/ivMessReceived"
+                android:layout_width="@dimen/size100"
+                android:layout_height="@dimen/size40"
+                android:layout_margin="@dimen/size20"
+                android:clickable="false"
+                android:focusable="false"
+                android:scaleType="fitCenter"
+                android:src="@mipmap/ic_launcher"
+                app:cornerRadius="@dimen/size10"
+                app:enableScaleAnim="false"
+                app:layout_constraintBottom_toTopOf="@+id/tvStyle1"
+                app:layout_constraintDimensionRatio="1:2"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/tvStyle1"
+                style="@style/TextView_4"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/bg_border_apply_rw"
+                android:ellipsize="end"
+                android:gravity="center"
+                android:maxLines="1"
+                android:paddingVertical="@dimen/size6"
+                android:text="@string/txt_apply"
+                android:textColor="@color/white"
+                android:textSize="@dimen/size12"
+                app:layout_constraintBottom_toBottomOf="parent" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <TextView
+            style="@style/TextView_4"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/size5"
+            android:ellipsize="end"
+            android:gravity="center"
+            android:includeFontPadding="false"
+            android:maxLines="1"
+            android:text="@string/txt_receive"
+            android:textColor="@color/black"
+            android:textSize="@dimen/size14" />
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/bg_apply_theme_rw">
+
+            <com.example.myapplication.views.RoundImageView
+                android:id="@+id/ivMessSent"
+                android:layout_width="@dimen/size100"
+                android:layout_height="@dimen/size40"
+                android:layout_margin="@dimen/size20"
+                android:clickable="false"
+                android:focusable="false"
+                android:scaleType="fitCenter"
+                android:src="@mipmap/ic_launcher"
+                app:cornerRadius="@dimen/size10"
+                app:enableScaleAnim="false"
+                app:layout_constraintBottom_toTopOf="@+id/tvStyle2"
+                app:layout_constraintDimensionRatio="1:2"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/tvStyle2"
+                style="@style/TextView_4"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/bg_border_apply_rw"
+                android:ellipsize="end"
+                android:gravity="center"
+                android:maxLines="1"
+                android:paddingVertical="@dimen/size6"
+                android:text="@string/txt_apply"
+                android:textColor="@color/white"
+                android:textSize="@dimen/size12"
+                app:layout_constraintBottom_toBottomOf="parent" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <TextView
+            style="@style/TextView_4"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/size5"
+            android:ellipsize="end"
+            android:gravity="center"
+            android:includeFontPadding="false"
+            android:maxLines="1"
+            android:text="@string/txt_send"
+            android:textColor="@color/black"
+            android:textSize="@dimen/size14" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/llUnlock"
+        android:layout_width="@dimen/size100"
+        android:layout_height="@dimen/size134"
+        android:layout_marginStart="@dimen/size16"
+        android:layout_marginTop="@dimen/size16"
+        android:orientation="vertical"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/llBackground">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:background="@drawable/bg_apply_theme_rw">
+
+            <com.example.myapplication.views.RoundImageView
+                android:id="@+id/ivUnlock"
+                android:layout_width="@dimen/size54"
+                android:layout_height="@dimen/size54"
+                android:clickable="false"
+                android:focusable="false"
+                android:scaleType="fitCenter"
+                android:src="@mipmap/ic_launcher"
+                app:cornerRadius="@dimen/size10"
+                app:enableScaleAnim="false"
+                app:isOval="true"
+                app:layout_constraintBottom_toTopOf="@+id/tvApplyAvatar"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/tvApplyAvatar"
+                style="@style/TextView_4"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/bg_border_apply_rw"
+                android:ellipsize="end"
+                android:gravity="center"
+                android:maxLines="1"
+                android:paddingVertical="@dimen/size6"
+                android:text="@string/txt_apply"
+                android:textColor="@color/white"
+                android:textSize="@dimen/size12"
+                app:layout_constraintBottom_toBottomOf="parent" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <TextView
+            style="@style/TextView_4"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/size5"
+            android:ellipsize="end"
+            android:gravity="center"
+            android:includeFontPadding="false"
+            android:maxLines="1"
+            android:text="@string/txt_avatar"
+            android:textColor="@color/black"
+            android:textSize="@dimen/size14" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/llMessageComposer"
+        android:layout_width="0dp"
+        android:layout_height="@dimen/size134"
+        android:layout_margin="@dimen/size16"
+        android:orientation="vertical"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/llUnlock"
+        app:layout_constraintTop_toBottomOf="@+id/llBackground">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:background="@drawable/bg_apply_theme_rw">
+
+            <com.example.myapplication.views.RoundImageView
+                android:id="@+id/ivMessComposer"
+                android:layout_width="0dp"
+                android:layout_height="@dimen/size44"
+                android:layout_marginHorizontal="@dimen/size20"
+                android:clickable="false"
+                android:focusable="false"
+                android:scaleType="fitCenter"
+                android:src="@mipmap/ic_launcher"
+                app:cornerRadius="@dimen/size10"
+                app:enableScaleAnim="false"
+                app:layout_constraintBottom_toTopOf="@+id/tvApplyMessComposer"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/tvApplyMessComposer"
+                style="@style/TextView_4"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/bg_border_apply_rw"
+                android:ellipsize="end"
+                android:gravity="center"
+                android:maxLines="1"
+                android:paddingVertical="@dimen/size6"
+                android:text="@string/txt_apply"
+                android:textColor="@color/white"
+                android:textSize="@dimen/size12"
+                app:layout_constraintBottom_toBottomOf="parent" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <TextView
+            style="@style/TextView_4"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/size5"
+            android:ellipsize="end"
+            android:gravity="center"
+            android:includeFontPadding="false"
+            android:maxLines="1"
+            android:text="@string/txt_mess_composer"
+            android:textColor="@color/black"
+            android:textSize="@dimen/size14" />
+    </LinearLayout>
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btnContinue"
+        style="@style/TextView_7"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="@dimen/size16"
+        android:layout_marginBottom="@dimen/size16"
+        android:background="?android:selectableItemBackground"
+        android:text="@string/txt_continue"
+        android:visibility="gone"
+        app:layout_constraintBottom_toTopOf="@+id/btnUnlockAll" />
+
+    <LinearLayout
+        android:id="@+id/btnUnlockAll"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/size44"
+        android:layout_margin="@dimen/size16"
+        android:background="@drawable/bg_btn_ok"
+        android:gravity="center"
+        android:orientation="horizontal"
+        app:layout_constraintBottom_toBottomOf="parent">
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/ivPlay"
+            android:layout_width="wrap_content"
+            android:visibility="gone"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/size8"
+            android:src="@drawable/ic_play"
+            app:tint="@color/white" />
+
+        <TextView
+            android:id="@+id/tvUnlockAll"
+            style="@style/TextView_7"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:includeFontPadding="false"
+            android:text="@string/txt_apply_all"
+            android:textColor="@color/white" />
+    </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -234,6 +234,27 @@ class SpManager @Inject constructor(@ApplicationContext context: Context) {
         return getObject<ThemeMessModel>(Constant.KEY_SP_CURRENT_THEME)
     }
 
+    fun getDownloadedThemeKeys(): ArrayList<String> {
+        return getArrayList<String>(Constant.KEY_SP_DOWNLOADED_THEMES) ?: arrayListOf()
+    }
+
+    fun isThemeDownloaded(theme: ThemeMessModel): Boolean {
+        return getDownloadedThemeKeys().contains(theme.downloadKey())
+    }
+
+    fun setThemeDownloaded(theme: ThemeMessModel, isDownloaded: Boolean) {
+        val themeKeys = getDownloadedThemeKeys()
+        val key = theme.downloadKey()
+        if (isDownloaded) {
+            if (!themeKeys.contains(key)) {
+                themeKeys.add(key)
+            }
+        } else {
+            themeKeys.remove(key)
+        }
+        putArrayList(Constant.KEY_SP_DOWNLOADED_THEMES, themeKeys)
+    }
+
     fun getAddedStickerNames(): ArrayList<String> {
         return getArrayList<String>(Constant.KEY_SP_ADDED_STICKERS) ?: arrayListOf()
     }
@@ -258,6 +279,10 @@ class SpManager @Inject constructor(@ApplicationContext context: Context) {
         prefs.edit {
             putString(key, Gson().toJson(value))
         }
+    }
+
+    private fun ThemeMessModel.downloadKey(): String {
+        return "${pathThemePreview}_$id"
     }
 
 }

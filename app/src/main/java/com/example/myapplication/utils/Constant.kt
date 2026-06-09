@@ -11,7 +11,12 @@ object Constant {
     const val ACTION_SMS_SENT = "com.example.myapplication.SMS_SENT"
     const val EXTRA_MESSAGE_ID = "EXTRA_MESSAGE_ID"
     const val KEY_SP_CURRENT_THEME = "KEY_SP_CURRENT_THEME"
+    const val KEY_SP_DOWNLOADED_THEMES = "KEY_SP_DOWNLOADED_THEMES"
     const val KEY_SP_ADDED_STICKERS = "KEY_SP_ADDED_STICKERS"
     const val EXTRA_STICKER = "EXTRA_STICKER"
+    const val EXTRA_THEME = "EXTRA_THEME"
+    const val EXTRA_THEME_CATEGORY_NAME = "EXTRA_THEME_CATEGORY_NAME"
+    const val EXTRA_THEME_LIST = "EXTRA_THEME_LIST"
+    const val EXTRA_THEME_SELECTED_POSITION = "EXTRA_THEME_SELECTED_POSITION"
     const val EMAIL_ADDRESS = "support@example.com"
 }

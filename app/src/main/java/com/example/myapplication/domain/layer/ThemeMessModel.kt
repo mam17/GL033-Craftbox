@@ -1,5 +1,9 @@
 package com.example.myapplication.domain.layer
 
+import android.os.Parcelable
+import kotlinx.parcelize.Parcelize
+
+@Parcelize
 data class ThemeMessModel(
     val id: Int,
 
@@ -41,6 +45,6 @@ data class ThemeMessModel(
 
     val colBGEnterChat: String,
     val colTextEnterChat: String,
-)
+) : Parcelable
 
 

@@ -1,18 +1,27 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_margin="@dimen/size8"
-    app:cardCornerRadius="@dimen/size16"
-    app:cardElevation="@dimen/size0">
+    android:layout_margin="@dimen/size8">
 
-    <ImageView
-        android:id="@+id/ivThemePreview"
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/size250"
-        android:background="#E0E0E0"
-        android:contentDescription="@null"
-        android:scaleType="centerCrop" />
+    <androidx.cardview.widget.CardView
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:cardCornerRadius="@dimen/size16"
+        app:cardElevation="@dimen/size0"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintDimensionRatio="9:20"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
-</androidx.cardview.widget.CardView>
+        <ImageView
+            android:id="@+id/ivThemePreview"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="#E0E0E0"
+            android:contentDescription="@null" />
+
+    </androidx.cardview.widget.CardView>
+</androidx.constraintlayout.widget.ConstraintLayout>
