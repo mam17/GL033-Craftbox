@@ -3,12 +3,14 @@ package com.example.myapplication.base.activity
 import android.app.Activity
 import android.content.Context
 import android.content.Intent
+import android.graphics.Color
 import android.os.Build
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
 import android.view.LayoutInflater
 import android.view.View
+import android.view.ViewGroup
 import android.widget.Toast
 import androidx.activity.OnBackPressedCallback
 import androidx.activity.enableEdgeToEdge
@@ -21,8 +23,11 @@ import androidx.fragment.app.Fragment
 import androidx.viewbinding.ViewBinding
 import com.example.myapplication.R
 import com.example.myapplication.ui.dialog.DialogLoading
+import com.example.myapplication.utils.ThemeUiHelper
+import com.example.myapplication.utils.ViewEx.applyThemeFont
 import com.example.myapplication.utils.SpManager
 import com.example.myapplication.utils.SystemUtil
+import com.example.myapplication.views.CustomBackgroundView
 import androidx.core.content.ContextCompat
 import javax.inject.Inject
 
@@ -47,8 +52,14 @@ abstract class BaseActivity<VB : ViewBinding>(
         enableEdgeToEdge()
         _binding = bindingInflater(layoutInflater)
         setContentView(binding.root)
+        window.statusBarColor = Color.TRANSPARENT
+        window.navigationBarColor = Color.TRANSPARENT
 
-        applySystemBarInsets()
+        if (shouldApplySystemBarInsetsToRoot()) {
+            applySystemBarInsets()
+        }
+        applyBaseThemeBackground()
+        applyBaseThemeFont()
 //        setBaseDefault()
         setBaseStatusBar(isVisible = true, isLightIcons = true)
         setBaseHideNavigation()
@@ -132,6 +143,13 @@ abstract class BaseActivity<VB : ViewBinding>(
     abstract fun initView()
     abstract fun initData()
     open fun initObserver() {}
+    open fun shouldApplySystemBarInsetsToRoot(): Boolean = true
+
+    override fun onResume() {
+        super.onResume()
+        applyBaseThemeBackground()
+        applyBaseThemeFont()
+    }
 
     fun <T : Activity> startActivityNewTask(clazz: Class<T>) {
         val intent = Intent(this, clazz)
@@ -259,6 +277,26 @@ abstract class BaseActivity<VB : ViewBinding>(
 
     fun showToast(message: String, duration: Int = Toast.LENGTH_SHORT) {
         Toast.makeText(this, message, duration).show()
+    }
+
+    private fun applyBaseThemeBackground() {
+        val backgroundView = binding.root.findCustomBackgroundView() ?: return
+        ThemeUiHelper.bindBackground(backgroundView, spManager.getCurrentTheme())
+    }
+
+    private fun applyBaseThemeFont() {
+        binding.root.applyThemeFont(spManager.getCurrentTheme()?.font)
+    }
+
+    private fun View.findCustomBackgroundView(): CustomBackgroundView? {
+        if (id == R.id.backgroundTheme && this is CustomBackgroundView) {
+            return this
+        }
+        if (this !is ViewGroup) return null
+        repeat(childCount) { index ->
+            getChildAt(index).findCustomBackgroundView()?.let { return it }
+        }
+        return null
     }
 
     override fun onDestroy() {

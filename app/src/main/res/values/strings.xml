@@ -24,12 +24,12 @@
     <string name="txt_try_again">Try Again</string>
     <string name="txt_loading">Loading…</string>
     <string name="txt_this_action_contain_ads">This action contain ads</string>
-    <string name="txt_title_onb1">Welcome to Home AI</string>
-    <string name="txt_desc_onb1">Instantly redesign your home with AI</string>
-    <string name="txt_title_onb2">Redesign Your Dream\nSpace Instantly</string>
-    <string name="txt_title_onb3">Endless trendy design inspiration options</string>
-    <string name="txt_desc_onb2">Capture or upload an image. Let AI turn your room into a designer masterpiece</string>
-    <string name="txt_desc_onb3">Discover many design ideas crafted to match your taste, budget, and space</string>
+    <string name="txt_title_onb1">Welcome to</string>
+    <string name="txt_desc_onb1">Messenger Color SMS</string>
+    <string name="txt_title_onb2">Customize Easy</string>
+    <string name="txt_desc_onb2"></string>
+    <string name="txt_title_onb3">Fast &amp; Easy</string>
+    <string name="txt_desc_onb3">Send Messages to Everyone</string>
     <string name="txt_confirm">Confirm</string>
     <string name="txt_no_alarm_permission_yet">No alarm permission yet</string>
     <string name="txt_permission_access">Permission access</string>
@@ -196,8 +196,6 @@
     <string name="txt_no_theme_data_available">No theme data available</string>
     <string name="txt_theme_already_downloaded">Theme already downloaded</string>
     <string name="txt_theme_applied">Theme applied</string>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="txt_apply">Apply</string>
     <string name="txt_mess_composer">Message Composer</string>
     <string name="txt_avatar">Avatar</string>
@@ -208,4 +206,16 @@
     <string name="txt_unlock">Unlock</string>
     <string name="txt_continue">Continue</string>
     <string name="txt_apply_all">Apply All</string>
+    <string name="txt_no_messages_received_yet">No messages received yet.</string>
+    <string name="txt_we_like_you_too">We like you too!</string>
+    <string name="txt_thanks_for_your_feedback">Thanks for your feedback</string>
+    <string name="txt_submit">Submit</string>
+    <string name="txt_not_now">Not now</string>
+    <string name="txt_tell_us">Tell Us</string>
+    <string name="txt_which_item_you_wan_to_customize">Which item you want to customize</string>
+    <string name="txt_font_size"><![CDATA[Font & size]]></string>
+    <string name="txt_bubble">Bubble</string>
+    <string name="txt_set_sms_color_as_your_default">Set SMS Color as Your Default</string>
+    <string name="txt_cont_permission_system">To make Color SMS work properly with cool features, it needs to be the default SMS app</string>
+    <string name="txt_ok">Ok</string>
 </resources>

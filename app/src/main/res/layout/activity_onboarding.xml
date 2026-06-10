@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/white"
     tools:context=".ui.onboarding.OnboardingActivity">
 
     <androidx.viewpager2.widget.ViewPager2
@@ -39,13 +40,13 @@
                 android:layout_alignParentStart="true"
                 android:layout_centerVertical="true"
                 android:layout_marginStart="@dimen/size16"
-                app:dotsColor="@color/gray"
+                app:dotsColor="@color/col_d9fdd3"
                 app:dotsCornerRadius="@dimen/size4"
                 app:dotsSize="@dimen/size10"
                 app:dotsSpacing="@dimen/size4"
                 app:dotsWidthFactor="2.5"
                 app:progressMode="false"
-                app:selectedDotColor="@color/black" />
+                app:selectedDotColor="@color/col_main" />
 
             <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/btnNext"
@@ -55,9 +56,11 @@
                 android:layout_alignParentEnd="true"
                 android:layout_centerVertical="true"
                 android:layout_marginEnd="@dimen/size6"
-                android:background="?android:selectableItemBackground"
+                android:background="@drawable/bg_btn_ok"
                 android:paddingHorizontal="@dimen/size10"
+                android:stateListAnimator="@null"
                 android:text="@string/txt_next"
+                android:textColor="@color/white"
                 android:textSize="@dimen/size16"
                 tools:ignore="RelativeOverlap,SpUsage" />
         </RelativeLayout>

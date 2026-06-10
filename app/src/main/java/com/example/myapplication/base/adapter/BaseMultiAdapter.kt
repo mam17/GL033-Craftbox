@@ -4,6 +4,7 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import androidx.viewbinding.ViewBinding
+import com.example.myapplication.utils.ViewEx.applyCurrentThemeFont
 
 abstract class BaseMultiAdapter<T> : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
@@ -20,6 +21,7 @@ abstract class BaseMultiAdapter<T> : RecyclerView.Adapter<RecyclerView.ViewHolde
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         val item = dataList[position]
         if (holder is MultiViewHolder) {
+            holder.binding.root.applyCurrentThemeFont()
             bind(holder.binding, item, position)
             holder.itemView.setOnClickListener {
                 onItemClick?.invoke(item, position)

@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="@dimen/size20"
+        android:background="@drawable/bg_dialog"
+        android:gravity="center"
+        android:orientation="vertical"
+        android:padding="@dimen/size20"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <ImageView
+            android:layout_width="@dimen/size200"
+            android:layout_height="@dimen/size200"
+            android:src="@drawable/img_rate" />
+
+        <TextView
+            style="@style/TextView_7"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/txt_we_like_you_too"
+            android:textSize="@dimen/size16" />
+
+        <TextView
+            style="@style/TextView_4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/size10"
+            android:text="@string/txt_thanks_for_your_feedback"
+            android:textSize="@dimen/size14" />
+
+        <per.wsj.library.AndRatingBar
+            android:id="@+id/ratingBar"
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/size32"
+            android:layout_marginTop="@dimen/size10"
+            android:isIndicator="false"
+            android:numStars="5"
+            android:rating="0"
+            android:stepSize="1"
+            app:bgColor="@color/gray"
+            app:bgDrawable="@drawable/ic_star_none"
+            app:starColor="@color/color_yellow"
+            app:starDrawable="@drawable/ic_star_rate"
+            app:starSpacing="@dimen/size20" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/size20"
+            android:gravity="end"
+            android:orientation="horizontal">
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/btnNotNow"
+                style="@style/TextView_6"
+                android:layout_width="0dp"
+                android:layout_height="@dimen/size44"
+                android:layout_weight="1"
+                android:background="@drawable/bg_btn_cancel"
+                android:ellipsize="end"
+                android:maxLines="1"
+                android:paddingHorizontal="@dimen/size20"
+                android:stateListAnimator="@null"
+                android:text="@string/txt_not_now"
+                android:textAllCaps="false"
+                android:textColor="@color/col_main"
+                android:textSize="@dimen/size14"
+                tools:ignore="SpUsage" />
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/btnSubmit"
+                style="@style/TextView_6"
+                android:layout_width="0dp"
+                android:layout_height="@dimen/size44"
+                android:layout_marginStart="@dimen/size16"
+                android:layout_weight="1"
+                android:background="@drawable/bg_btn_ok"
+                android:stateListAnimator="@null"
+                android:text="@string/txt_submit"
+                android:textAllCaps="false"
+                android:textColor="@color/white"
+                android:textSize="@dimen/size14" />
+        </LinearLayout>
+    </LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

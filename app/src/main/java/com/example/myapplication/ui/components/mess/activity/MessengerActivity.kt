@@ -22,11 +22,13 @@ import androidx.core.net.toUri
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.core.view.isVisible
+import androidx.core.graphics.toColorInt
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.myapplication.R
 import com.example.myapplication.base.activity.BaseActivity
 import com.example.myapplication.data.model.SmsMessage
 import com.example.myapplication.databinding.ActivityMessengerBinding
+import com.example.myapplication.domain.layer.ThemeMessModel
 import com.example.myapplication.ui.components.mess.adapter.MessengerChatAdapter
 import com.example.myapplication.ui.components.mess.fragment.ChooseStickerFragment
 import com.example.myapplication.ui.components.mess.fragment.MessengerDetailFragment
@@ -36,8 +38,11 @@ import com.example.myapplication.ui.main.MainActivity
 import com.example.myapplication.utils.Constant
 import com.example.myapplication.utils.ImageUtils
 import com.example.myapplication.utils.PermissionUtils
+import com.example.myapplication.utils.ThemeUiHelper
 import com.example.myapplication.data.model.ScheduledMessage
 import com.example.myapplication.utils.ScheduledMessageScheduler
+import com.example.myapplication.utils.ViewEx.applyThemeFont
+import com.example.myapplication.utils.ViewEx.tintColor
 import com.google.android.material.datepicker.MaterialDatePicker
 import com.google.android.material.timepicker.MaterialTimePicker
 import com.google.android.material.timepicker.TimeFormat
@@ -112,6 +117,8 @@ class MessengerActivity :
     private var selectedSimIndex = 0
     private var scheduledTimestamp: Long? = null
 
+    override fun shouldApplySystemBarInsetsToRoot(): Boolean = false
+
     override fun initView() {
         window.setSoftInputMode(
             WindowManager.LayoutParams.SOFT_INPUT_STATE_HIDDEN or
@@ -165,7 +172,11 @@ class MessengerActivity :
             openImagePicker()
         }
         binding.btnSticker.setOnClickListener {
-            showChooseStickerFragment()
+            if (binding.frChooseSticker.isVisible) {
+                hideChooseStickerFragment()
+            } else {
+                showChooseStickerFragment()
+            }
         }
         binding.btnRemovePreview.setOnClickListener {
             clearMediaPreview()
@@ -295,12 +306,15 @@ class MessengerActivity :
         ViewCompat.setOnApplyWindowInsetsListener(binding.root) { view, insets ->
             val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
             val ime = insets.getInsets(WindowInsetsCompat.Type.ime())
-            view.setPadding(
-                systemBars.left,
-                systemBars.top,
-                systemBars.right,
-                max(systemBars.bottom, ime.bottom)
+            binding.clTopBar.setPadding(
+                binding.clTopBar.paddingLeft,
+                systemBars.top + resources.getDimensionPixelSize(R.dimen.size16),
+                binding.clTopBar.paddingRight,
+                binding.clTopBar.paddingBottom
             )
+            view.setPadding(systemBars.left, 0, systemBars.right, 0)
+            binding.clBottomBar.translationY = -max(systemBars.bottom, ime.bottom).toFloat()
+            binding.frChooseSticker.translationY = -max(systemBars.bottom, ime.bottom).toFloat()
             insets
         }
     }
@@ -525,6 +539,7 @@ class MessengerActivity :
             finish()
             return
         }
+        applyCurrentTheme()
         viewModel.init(this, address, groupAddresses, threadId)
     }
 
@@ -544,12 +559,18 @@ class MessengerActivity :
         }
     }
 
+    override fun onResume() {
+        super.onResume()
+        applyCurrentTheme()
+    }
+
     private fun updateNoDataState(isLoading: Boolean) {
         val isEmpty = chatAdapter.itemCount == 0
         binding.layoutNoData.root.isVisible = isLoading || isEmpty
         binding.layoutNoData.prLoading.isVisible = isLoading
         binding.layoutNoData.llNoData.isVisible = !isLoading && isEmpty
         binding.rvChat.isVisible = !isLoading && !isEmpty
+        binding.layoutNoData.tvBodyNoData.text = getString(R.string.txt_no_messages_received_yet)
     }
 
     companion object {
@@ -588,5 +609,50 @@ class MessengerActivity :
         }
 
         super.onBack()
+    }
+
+    private fun applyCurrentTheme() {
+        val theme = spManager.getCurrentTheme() ?: return
+        binding.root.applyThemeFont(theme.font)
+        chatAdapter.setTheme(theme)
+        ThemeUiHelper.bindBackground(binding.backgroundTheme, theme)
+        binding.ivBack.tintColor(theme.colMain.toColorInt())
+        binding.ivMore.tintColor(theme.colMain.toColorInt())
+        binding.ivCall.tintColor(theme.colMain.toColorInt())
+        binding.tvSenderName.setTextColor(theme.colMain.toColorInt())
+        binding.btnSticker.tintColor(theme.colMain.toColorInt())
+        binding.ivSend.tintColor(theme.colMain.toColorInt())
+        binding.ivSim.tintColor(theme.colMain.toColorInt())
+        binding.ivCamera.tintColor(theme.colMain.toColorInt())
+        binding.ivSchedule.tintColor(theme.colMain.toColorInt())
+        binding.ivImage.tintColor(theme.colMain.toColorInt())
+        binding.layoutNoData.tvBodyNoData.setTextColor(theme.colMain.toColorInt())
+        binding.tvNumberSim.setTextColor(theme.colMain.toColorInt())
+        binding.ivAdd.backgroundTintList = ThemeUiHelper.colorState(theme.colMain.toColorInt())
+        binding.btnRemovePreview.backgroundTintList =
+            ThemeUiHelper.colorState(theme.colMain.toColorInt())
+        binding.btnRemoveSchedule.backgroundTintList =
+            ThemeUiHelper.colorState(theme.colMain.toColorInt())
+        binding.llInput.backgroundTintList =
+            ThemeUiHelper.colorState(theme.colBGEnterChat.toColorInt())
+        binding.edtMessage.setTextColor(theme.colTextEnterChat.toColorInt())
+        binding.edtMessage.setHintTextColor(theme.colTextEnterChat.toColorInt())
+        updateMenuTheme(theme)
+    }
+
+    private fun updateMenuTheme(theme: ThemeMessModel) {
+        val mainColor = theme.colMain.toColorInt()
+        binding.llAddMenu.applyThemeFont(theme.font)
+        listOf(
+            binding.llSchedule,
+            binding.llTakeCamera,
+            binding.llAttachPhoto
+        ).forEach { row ->
+            row.getChildAt(1)?.let { label ->
+                if (label is android.widget.TextView) {
+                    label.setTextColor(mainColor)
+                }
+            }
+        }
     }
 }

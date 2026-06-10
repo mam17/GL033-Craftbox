@@ -29,6 +29,6 @@ class UninstallActivity :
     }
 
     fun nextAction() {
-        startNextActivity(MainActivity::class.java, isFinish = true)
+        startActivityNewTask(MainActivity::class.java)
     }
 }

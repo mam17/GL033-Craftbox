@@ -8,7 +8,7 @@
     <color name="gray">#9B9B9B</color>
     <color name="grey">#B4B4B4</color>
     <color name="transparent">#00000000</color>
-    <color name="col_main">#25D366</color>
+    <color name="col_main">#1DAA61</color>
     <color name="col_f6f6f6">#F6F6F6</color>
     <color name="col_14000000">#14000000</color>
     <color name="col_category_unselected">#E0F7F0</color>
@@ -16,5 +16,8 @@
     <color name="col_efefef">#EFEFEF</color>
     <color name="col_4D008CFF">#4D008CFF</color>
     <color name="col_d9d9d9">#D9D9D9</color>
+    <color name="col_838383">#838383</color>
+    <color name="color_yellow">#FFCD29</color>
+    <color name="col_d9fdd3">#D9FDD3</color>
 
 </resources>

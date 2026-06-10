@@ -13,6 +13,7 @@ import com.example.myapplication.base.fragment.BaseFragment
 import com.example.myapplication.databinding.FragmentDirectoryBinding
 import com.example.myapplication.domain.layer.DirectoryModel
 import com.example.myapplication.ui.components.addnew.NewMessengerActivity
+import com.example.myapplication.ui.main.MainActivity
 import com.example.myapplication.utils.SpManager
 import com.example.myapplication.utils.ViewEx.applyThemeFont
 import com.example.myapplication.utils.ViewEx.tintColor
@@ -30,8 +31,8 @@ class DirectoryFragment :
     override fun initView() {
         binding.rcvDirectory.adapter = mAdapter
         binding.btnBack.setOnClickListener {
-//            (activity as? MainActivity)?.showBottomNav(true)
-            removeFragment(this)
+            (activity as? MainActivity)?.closeDrawerFeatureFragment(this)
+                ?: removeFragment(this)
         }
 
         binding.edtSearch.addTextChangedListener(object : TextWatcher {

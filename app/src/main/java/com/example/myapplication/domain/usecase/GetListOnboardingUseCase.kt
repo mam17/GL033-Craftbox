@@ -10,8 +10,8 @@ class GetListOnboardingUseCase @Inject constructor() :
     open class Param() : UseCase.Param()
 
     override suspend fun execute(param: Param): List<OnboardingModel> = listOf(
-        OnboardingModel(R.mipmap.ic_launcher, R.string.txt_title_onb1,R.string.txt_desc_onb1),
-        OnboardingModel(R.mipmap.ic_launcher, R.string.txt_title_onb2,R.string.txt_desc_onb2),
-        OnboardingModel(R.mipmap.ic_launcher, R.string.txt_title_onb3,R.string.txt_desc_onb3),
+        OnboardingModel(R.drawable.img_onb1, R.string.txt_title_onb1,R.string.txt_desc_onb1),
+        OnboardingModel(R.drawable.img_onb2, R.string.txt_title_onb2,R.string.txt_desc_onb2),
+        OnboardingModel(R.drawable.img_onb3, R.string.txt_title_onb3,R.string.txt_desc_onb3),
     )
 }

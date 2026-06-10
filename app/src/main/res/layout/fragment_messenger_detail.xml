@@ -13,6 +13,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:padding="@dimen/size16"
+        android:layout_marginTop="@dimen/size20"
         app:layout_constraintTop_toTopOf="parent">
 
         <ImageView
@@ -88,6 +89,7 @@
                 android:paddingVertical="@dimen/size16">
 
                 <ImageView
+                    android:id="@+id/ivBackground"
                     android:layout_width="@dimen/size24"
                     android:layout_height="@dimen/size24"
                     android:contentDescription="@null"
@@ -217,6 +219,7 @@
                 android:paddingVertical="@dimen/size16">
 
                 <ImageView
+                    android:id="@+id/ivDelete"
                     android:layout_width="@dimen/size24"
                     android:layout_height="@dimen/size24"
                     android:contentDescription="@null"

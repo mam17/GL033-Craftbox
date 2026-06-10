@@ -3,7 +3,9 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/white">
+    android:background="@android:color/transparent"
+    android:clickable="true"
+    android:focusable="true">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/clTopBar"
@@ -21,7 +23,6 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <View
@@ -34,7 +35,7 @@
     <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_marginTop="@dimen/size12"
+        android:layout_marginVertical="@dimen/size12"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/vLine">
 
@@ -47,13 +48,14 @@
                 style="@style/TextView_7"
                 android:layout_marginStart="@dimen/size16"
                 android:text="@string/txt_general"
-                android:textColor="@color/col_main" />
+                android:textColor="@color/col_main"
+                android:visibility="gone" />
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="@dimen/size16"
-                android:background="@drawable/bg_border_r12_fef"
+                android:background="@drawable/bg_mess"
                 android:orientation="vertical">
 
                 <LinearLayout
@@ -67,9 +69,10 @@
                     android:paddingVertical="@dimen/size12">
 
                     <ImageView
+                        android:id="@+id/ivNotifications"
                         android:layout_width="@dimen/size24"
                         android:layout_height="@dimen/size24"
-                        android:src="@drawable/ic_setting_notification"
+                        android:src="@drawable/sl_notification"
                         app:tint="@color/col_main" />
 
                     <TextView
@@ -108,44 +111,11 @@
                             android:textColor="@color/col_main" />
 
                         <TextView
+                            android:id="@+id/tvLangSelected"
                             style="@style/TextView_4"
                             android:text="@string/txt_english"
-                            android:textColor="@color/col_main" />
-                    </LinearLayout>
-                </LinearLayout>
-
-                <LinearLayout
-                    android:id="@+id/llDelayedSending"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:background="?attr/selectableItemBackground"
-                    android:gravity="center_vertical"
-                    android:orientation="horizontal"
-                    android:paddingHorizontal="@dimen/size10"
-                    android:paddingVertical="@dimen/size12">
-
-                    <ImageView
-                        android:layout_width="@dimen/size24"
-                        android:layout_height="@dimen/size24"
-                        android:src="@drawable/ic_setting_delay"
-                        app:tint="@color/col_main" />
-
-                    <LinearLayout
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="@dimen/size16"
-                        android:layout_weight="1"
-                        android:orientation="vertical">
-
-                        <TextView
-                            style="@style/TextView_6"
-                            android:text="@string/txt_delayed_sending"
-                            android:textColor="@color/col_main" />
-
-                        <TextView
-                            style="@style/TextView_4"
-                            android:text="@string/txt_no_delay"
-                            android:textColor="@color/col_main" />
+                            android:textColor="@color/col_main"
+                            android:textSize="@dimen/size12" />
                     </LinearLayout>
                 </LinearLayout>
 
@@ -200,8 +170,44 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="@dimen/size16"
-                android:background="@drawable/bg_border_r12_fef"
-                android:orientation="vertical">
+                android:background="@drawable/bg_mess"
+                android:orientation="vertical"
+                android:visibility="gone">
+
+                <LinearLayout
+                    android:id="@+id/llDelayedSending"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="?attr/selectableItemBackground"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal"
+                    android:paddingHorizontal="@dimen/size10"
+                    android:paddingVertical="@dimen/size12">
+
+                    <ImageView
+                        android:layout_width="@dimen/size24"
+                        android:layout_height="@dimen/size24"
+                        android:src="@drawable/ic_setting_delay"
+                        app:tint="@color/col_main" />
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/size16"
+                        android:layout_weight="1"
+                        android:orientation="vertical">
+
+                        <TextView
+                            style="@style/TextView_6"
+                            android:text="@string/txt_delayed_sending"
+                            android:textColor="@color/col_main" />
+
+                        <TextView
+                            style="@style/TextView_4"
+                            android:text="@string/txt_no_delay"
+                            android:textColor="@color/col_main" />
+                    </LinearLayout>
+                </LinearLayout>
                 <!-- Swipe actions -->
                 <LinearLayout
                     android:id="@+id/llSwipeActions"

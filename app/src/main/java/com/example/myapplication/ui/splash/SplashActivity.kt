@@ -9,6 +9,7 @@ import androidx.lifecycle.lifecycleScope
 import com.example.myapplication.R
 import com.example.myapplication.base.activity.BaseActivity
 import com.example.myapplication.databinding.ActivitySplashBinding
+import com.example.myapplication.ui.permission.PermissionActivity
 import com.example.myapplication.ui.language.LanguageActivity
 import com.example.myapplication.ui.main.MainActivity
 import com.example.myapplication.ui.components.mess.activity.MessengerActivity
@@ -110,7 +111,11 @@ class SplashActivity : BaseActivity<ActivitySplashBinding>(ActivitySplashBinding
             startNextActivity(UninstallActivity::class.java, isFinish = true)
         } else {
             if (spManager.isCompletedOnboarding) {
-                startActivityNewTask(MainActivity::class.java)
+                if (PermissionUtils.isDefaultSmsApp(this)) {
+                    startActivityNewTask(MainActivity::class.java)
+                } else {
+                    startActivityNewTask(PermissionActivity::class.java)
+                }
             } else {
                 val bundle = Bundle().apply { putBoolean(Constant.KEY_FROM_SPLASH, true) }
                 startNextActivity(LanguageActivity::class.java, bundle, isFinish = true)

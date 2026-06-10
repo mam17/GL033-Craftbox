@@ -8,6 +8,9 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.viewbinding.ViewBinding
 import com.example.myapplication.base.activity.BaseActivity
+import com.example.myapplication.utils.SpManager
+import com.example.myapplication.utils.ViewEx.applyThemeFont
+import com.example.myapplication.utils.ViewEx.applyThemeTextColor
 import com.google.android.material.R
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.bottomsheet.BottomSheetDialog
@@ -36,9 +39,17 @@ abstract class BaseBottomFragment<VB : ViewBinding> : BottomSheetDialogFragment(
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding.root.isClickable = true
+        applyBaseThemeFont()
+        applyBaseThemeTextColor()
         initView()
         initData()
         initObserver()
+    }
+
+    override fun onResume() {
+        super.onResume()
+        applyBaseThemeFont()
+        applyBaseThemeTextColor()
     }
 
     override fun onDestroyView() {
@@ -123,6 +134,16 @@ abstract class BaseBottomFragment<VB : ViewBinding> : BottomSheetDialogFragment(
         isFinish: Boolean = false
     ) {
         (activity as? BaseActivity<*>)?.startNextActivity(clazz, bundle, isFinish)
+    }
+
+    private fun applyBaseThemeFont() {
+        val context = context ?: return
+        binding.root.applyThemeFont(SpManager.get(context).getCurrentTheme()?.font)
+    }
+
+    private fun applyBaseThemeTextColor() {
+        val context = context ?: return
+        binding.root.applyThemeTextColor(SpManager.get(context).getCurrentTheme()?.colMain)
     }
 
     /** ========== Abstract / override ========== */

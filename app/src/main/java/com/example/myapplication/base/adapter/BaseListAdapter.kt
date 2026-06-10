@@ -6,6 +6,7 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import androidx.viewbinding.ViewBinding
+import com.example.myapplication.utils.ViewEx.applyCurrentThemeFont
 
 abstract class BaseListAdapter<T, VB : ViewBinding>(
     diffCallback: DiffUtil.ItemCallback<T>,
@@ -23,6 +24,7 @@ abstract class BaseListAdapter<T, VB : ViewBinding>(
 
     override fun onBindViewHolder(holder: BaseViewHolder<VB>, position: Int) {
         val item = getItem(position)
+        holder.binding.root.applyCurrentThemeFont()
         bind(holder.binding, item, position)
         holder.itemView.setOnClickListener {
             onItemClick?.invoke(item, position)

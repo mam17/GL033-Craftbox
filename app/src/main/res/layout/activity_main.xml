@@ -5,18 +5,23 @@
     android:id="@+id/drawerLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/white"
+    android:background="@android:color/transparent"
     tools:context=".ui.main.MainActivity">
+
+    <com.example.myapplication.views.CustomBackgroundView
+        android:id="@+id/backgroundTheme"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/white">
+        android:background="@android:color/transparent">
 
         <FrameLayout
             android:id="@+id/frMainContent"
             android:layout_width="match_parent"
-            android:layout_height="@dimen/size0"
+            android:layout_height="0dp"
             app:layout_constraintBottom_toTopOf="@id/vLineMain"
             app:layout_constraintTop_toTopOf="parent" />
 
@@ -48,7 +53,8 @@
         android:id="@+id/nvMain"
         android:layout_width="300dp"
         android:layout_height="match_parent"
-        android:layout_gravity="start">
+        android:layout_gravity="start"
+        android:background="@android:color/transparent">
 
         <include
             android:id="@+id/layoutDrawer"

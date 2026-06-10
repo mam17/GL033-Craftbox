@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.feature.FeatureActivity">
+
+    <RelativeLayout
+        android:id="@+id/rlToolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <TextView
+            style="@style/TextView_7"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_centerVertical="true"
+            android:layout_marginStart="@dimen/size16"
+            android:text="@string/txt_tell_us"
+            android:textColor="@color/black" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btnNext"
+            style="@style/TextView_7"
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/size24"
+            android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true"
+            android:layout_margin="@dimen/size16"
+            android:background="@drawable/bg_btn_next"
+            android:stateListAnimator="@null"
+            android:text="@string/txt_next"
+            android:textColor="@color/white"
+            android:textSize="@dimen/size14"
+            tools:ignore="RelativeOverlap" />
+    </RelativeLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintTop_toBottomOf="@+id/rlToolbar">
+
+        <TextView
+            style="@style/TextView_7"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingHorizontal="@dimen/size16"
+            android:text="@string/txt_which_item_you_wan_to_customize"
+            android:textColor="@color/col_main"
+            android:textSize="@dimen/size14" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rcvFeature"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/size16"
+            android:paddingHorizontal="@dimen/size8"
+            app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+            app:spanCount="2"
+            tools:listitem="@layout/item_sticker_detail" />
+    </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.ImageView
 import androidx.core.content.ContextCompat
+import androidx.core.graphics.toColorInt
 import androidx.core.view.isVisible
 import androidx.recyclerview.widget.DiffUtil
 import androidx.viewbinding.ViewBinding
@@ -15,9 +16,11 @@ import com.example.myapplication.data.model.SmsMessage
 import com.example.myapplication.databinding.ItemChatDateBinding
 import com.example.myapplication.databinding.ItemChatLeftBinding
 import com.example.myapplication.databinding.ItemChatRightBinding
+import com.example.myapplication.domain.layer.ThemeMessModel
 import com.example.myapplication.ui.components.mess.MessageItem
 import com.example.myapplication.utils.AppEx.formatToOrdinalDate
 import com.example.myapplication.utils.ImageUtils
+import com.example.myapplication.utils.ViewEx.applyThemeFont
 import java.text.SimpleDateFormat
 import java.util.Date
 import java.util.Locale
@@ -28,6 +31,7 @@ class MessengerChatAdapter(
 ) : BaseMultiListAdapter<MessageItem>(DIFF_CALLBACK) {
 
     private var onMediaClick: ((SmsMessage) -> Unit)? = null
+    private var theme: ThemeMessModel? = null
 
     override fun getBinding(
         inflater: LayoutInflater,
@@ -46,10 +50,12 @@ class MessengerChatAdapter(
             is ItemChatDateBinding -> {
                 if (item is MessageItem.DateHeader) {
                     binding.tvDate.text = item.date.formatToOrdinalDate()
+                    applyThemeDate(binding)
                 }
             }
             is ItemChatRightBinding -> {
                 if (item is MessageItem.MessageContent) {
+                    applyTheme(binding)
                     binding.tvBody.text = item.message.body
                     binding.tvTime.text = item.message.date.formatMessageTime()
                     val isFailed = item.message.type == Telephony.Sms.MESSAGE_TYPE_FAILED
@@ -60,10 +66,8 @@ class MessengerChatAdapter(
             }
             is ItemChatLeftBinding -> {
                 if (item is MessageItem.MessageContent) {
+                    applyTheme(binding)
                     binding.tvBody.text = item.message.body
-                    binding.tvBody.setTextColor(
-                        ContextCompat.getColor(binding.root.context, R.color.black)
-                    )
                     bindSenderAvatar(binding)
                     bindMedia(binding, item.message)
                 }
@@ -109,6 +113,10 @@ class MessengerChatAdapter(
 
         binding.ivAvatar.scaleType = ImageView.ScaleType.FIT_CENTER
         binding.ivAvatar.setImageResource(R.drawable.ic_person)
+        theme?.let {
+            binding.ivAvatar.setBgColor(it.colMain.toColorInt())
+            binding.ivAvatar.setColorFilter(it.colTextBBSent.toColorInt())
+        }
         binding.tvFirstName.text = firstNameLetter
         binding.tvFirstName.isVisible = firstNameLetter.isNotEmpty()
     }
@@ -184,6 +192,32 @@ class MessengerChatAdapter(
 
     fun setOnMediaClick(callback: (SmsMessage) -> Unit) {
         onMediaClick = callback
+    }
+
+    fun setTheme(theme: ThemeMessModel?) {
+        this.theme = theme
+        notifyDataSetChanged()
+    }
+    private fun applyThemeDate(binding: ItemChatDateBinding) {
+        val currentTheme = theme ?: return
+        binding.tvDate.applyThemeFont(currentTheme.font)
+        binding.tvDate.setTextColor(currentTheme.colTextBBSent.toColorInt())
+    }
+    private fun applyTheme(binding: ItemChatLeftBinding) {
+        val currentTheme = theme ?: return
+        binding.root.applyThemeFont(currentTheme.font)
+        binding.bubbleView.setBubbleColor(currentTheme.colBGBBReceived.toColorInt())
+        binding.tvBody.setTextColor(currentTheme.colTextBBReceived.toColorInt())
+    }
+
+    private fun applyTheme(binding: ItemChatRightBinding) {
+        val currentTheme = theme ?: return
+        binding.root.applyThemeFont(currentTheme.font)
+        binding.bubbleView.setBubbleColor(currentTheme.colBGBBSent.toColorInt())
+        binding.tvBody.setTextColor(currentTheme.colTextBBSent.toColorInt())
+        binding.tvTime.setTextColor(currentTheme.colMain.toColorInt())
+        binding.tvStatus.setTextColor(ContextCompat.getColor(binding.root.context, R.color.red))
+        binding.ivDone.setColorFilter(currentTheme.colMain.toColorInt())
     }
 
     companion object {

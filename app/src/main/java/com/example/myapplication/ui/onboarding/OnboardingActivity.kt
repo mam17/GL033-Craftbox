@@ -5,7 +5,7 @@ import androidx.viewpager2.widget.ViewPager2
 import com.example.myapplication.R
 import com.example.myapplication.base.activity.BaseActivity
 import com.example.myapplication.databinding.ActivityOnboardingBinding
-import com.example.myapplication.ui.main.MainActivity
+import com.example.myapplication.ui.components.themes.activity.ThemeStartActivity
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -16,6 +16,7 @@ class OnboardingActivity :
     private var currentPosition = 0
 
     override fun initView() {
+        setBaseFullScreen()
         binding.apply {
             vpOnBoarding.adapter = mAdapter
             dotIndicator.attachTo(vpOnBoarding)
@@ -36,7 +37,7 @@ class OnboardingActivity :
                 if (currentPosition < mAdapter.itemCount - 1) {
                     vpOnBoarding.currentItem = currentPosition + 1
                 } else {
-                    startActivityNewTask(MainActivity::class.java)
+                    startNextActivity(ThemeStartActivity::class.java, isFinish = true)
                 }
             }
         }
@@ -51,5 +52,4 @@ class OnboardingActivity :
             mAdapter.setData(ArrayList(list))
         }
     }
-
 }

@@ -1,10 +1,12 @@
 package com.example.myapplication.ui.main
 
 import android.Manifest
+import android.content.res.ColorStateList
 import android.content.pm.PackageManager
 import android.view.View
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.content.ContextCompat
+import androidx.core.graphics.toColorInt
 import androidx.core.view.GravityCompat
 import androidx.fragment.app.Fragment
 import com.example.myapplication.R
@@ -13,6 +15,7 @@ import com.example.myapplication.databinding.ActivityMainBinding
 import com.example.myapplication.ui.alertfull.NotificationFSUtil
 import com.example.myapplication.ui.alertfull.NotificationFSUtil.scheduleFullScreenNotificationDiary
 import com.example.myapplication.ui.alertfull.PermissionFragment
+import com.example.myapplication.ui.components.directory.DirectoryFragment
 import com.example.myapplication.ui.main.draws.archived.ArchivedFragment
 import com.example.myapplication.ui.main.draws.blocked.BlockedFragment
 import com.example.myapplication.ui.main.draws.password.SetPasswordFragment
@@ -45,11 +48,14 @@ class MainActivity : BaseActivity<ActivityMainBinding>(ActivityMainBinding::infl
             }
         }
 
+    override fun shouldApplySystemBarInsetsToRoot(): Boolean = false
+
     override fun initView() {
 
         NotificationFSUtil.createNotificationChannel(this)
         NotificationUtils.cancelOnboardingReminder(this)
         spManager.isCompletedOnboarding = true
+        applyCurrentTheme()
 
         binding.bnvMain.setOnItemSelectedListener { item ->
             showMainFragment(item.itemId)
@@ -74,6 +80,7 @@ class MainActivity : BaseActivity<ActivityMainBinding>(ActivityMainBinding::infl
     }
 
     override fun initData() {
+        applyCurrentTheme()
     }
 
     private fun initDrawer() {
@@ -110,6 +117,18 @@ class MainActivity : BaseActivity<ActivityMainBinding>(ActivityMainBinding::infl
         )
     }
 
+    fun showOverlayFeatureFragment(fragment: Fragment) {
+        removeCurrentDrawerFragment()
+        currentNavItemId = 0
+        closeDrawer()
+        setBottomNavigationVisible(false)
+        addFragment(
+            containerId = R.id.frMainContent,
+            fragment = fragment,
+            tag = fragment.fragmentTag()
+        )
+    }
+
     fun closeDrawerFeatureFragment(fragment: Fragment? = null) {
         val targetFragment = fragment ?: findCurrentDrawerFragment() ?: return
         removeFragment(targetFragment)
@@ -121,6 +140,11 @@ class MainActivity : BaseActivity<ActivityMainBinding>(ActivityMainBinding::infl
     fun refreshHomeMessages() {
         shouldRefreshHomeMessages = true
         refreshHomeMessagesIfNeeded()
+    }
+
+    fun refreshCurrentMainFragmentForTheme() {
+        val currentItemId = currentNavItemId.takeIf { it != 0 } ?: binding.bnvMain.selectedItemId
+        showMainFragment(currentItemId, forceReload = true)
     }
 
     override fun onBack() {
@@ -147,6 +171,7 @@ class MainActivity : BaseActivity<ActivityMainBinding>(ActivityMainBinding::infl
 
     override fun onResume() {
         super.onResume()
+        applyCurrentTheme()
         ensureFeaturePermissions()
         if (PermissionUtils.isDefaultSmsApp(this)) {
             hasRequestedDefaultSmsRole = false
@@ -176,6 +201,7 @@ class MainActivity : BaseActivity<ActivityMainBinding>(ActivityMainBinding::infl
         private const val PERMISSION_FRAGMENT_TAG = "PermissionFragment"
         private const val BOTTOM_NAV_ANIMATION_DURATION = 180L
         private val DRAWER_FRAGMENT_TAGS = setOf(
+            DirectoryFragment::class.java.simpleName,
             ArchivedFragment::class.java.simpleName,
             BlockedFragment::class.java.simpleName,
             SetPasswordFragment::class.java.simpleName,
@@ -313,6 +339,26 @@ class MainActivity : BaseActivity<ActivityMainBinding>(ActivityMainBinding::infl
         } else {
             showToast(getString(R.string.txt_set_as_default_sms_required))
         }
+    }
+
+    private fun applyCurrentTheme() {
+        val theme = spManager.getCurrentTheme() ?: return
+        val selectedColor = theme.colMain.toColorInt()
+        val defaultColor = ContextCompat.getColor(this, R.color.grey)
+        val navColors = ColorStateList(
+            arrayOf(
+                intArrayOf(android.R.attr.state_checked),
+                intArrayOf()
+            ),
+            intArrayOf(
+                selectedColor,
+                defaultColor
+            )
+        )
+
+        binding.bnvMain.itemIconTintList = navColors
+        binding.bnvMain.itemTextColor = navColors
+        binding.vLineMain.setBackgroundColor(selectedColor)
     }
 
     private fun Fragment.fragmentTag(): String = this::class.java.simpleName

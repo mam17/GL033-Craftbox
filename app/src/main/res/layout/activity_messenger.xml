@@ -6,11 +6,10 @@
     android:layout_height="match_parent"
     android:background="@color/white">
 
-    <ImageView
-        android:id="@+id/ivBackground"
+    <com.example.myapplication.views.CustomBackgroundView
+        android:id="@+id/backgroundTheme"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:scaleType="centerCrop" />
+        android:layout_height="match_parent" />
     <!-- Top Bar -->
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/clTopBar"
@@ -122,6 +121,7 @@
             android:orientation="horizontal">
 
             <com.example.myapplication.views.RoundImageView
+                android:id="@+id/ivSchedule"
                 android:layout_width="@dimen/size40"
                 android:layout_height="@dimen/size40"
                 android:background="?selectableItemBackgroundBorderless"
@@ -152,6 +152,7 @@
             android:orientation="horizontal">
 
             <com.example.myapplication.views.RoundImageView
+                android:id="@+id/ivCamera"
                 android:layout_width="@dimen/size40"
                 android:layout_height="@dimen/size40"
                 android:background="?selectableItemBackgroundBorderless"
@@ -182,6 +183,7 @@
             android:orientation="horizontal">
 
             <com.example.myapplication.views.RoundImageView
+                android:id="@+id/ivImage"
                 android:layout_width="@dimen/size40"
                 android:layout_height="@dimen/size40"
                 android:background="?selectableItemBackgroundBorderless"

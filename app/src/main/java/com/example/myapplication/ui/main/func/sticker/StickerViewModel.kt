@@ -28,7 +28,7 @@ class StickerViewModel @Inject constructor(
             sticker.copy(isAdded = addedStickerNames.contains(sticker.name))
         }
         _allStickers.value = stickers
-        _yourStickers.value = stickers
+        _yourStickers.value = stickers.filter { it.isAdded }
     }
 
     fun setStickerAdded(sticker: StickerModel, isAdded: Boolean) {

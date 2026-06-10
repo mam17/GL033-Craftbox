@@ -1,6 +1,5 @@
 package com.example.myapplication.ui.main.func.sticker.adapter
 
-import android.view.View
 import androidx.core.graphics.toColorInt
 import com.example.myapplication.R
 import com.example.myapplication.base.adapter.BaseAdapter
@@ -13,9 +12,8 @@ import com.example.myapplication.utils.ViewEx.visible
 class YourStickerAdapter :
     BaseAdapter<StickerModel, ItemStickerStoreBinding>(ItemStickerStoreBinding::inflate) {
 
+    var onRemoveSticker: ((StickerModel) -> Unit)? = null
 
-    var onToggleSticker: ((StickerModel) -> Unit)? = null
-    var isEditMode: Boolean = false
     override fun bind(
         binding: ItemStickerStoreBinding,
         item: StickerModel,
@@ -31,20 +29,11 @@ class YourStickerAdapter :
             ivSticker.loadFromPathAction("file:///android_asset/${item.firstImagePath}")
 
             ivRemoveAdd.visible()
-//            ivRemoveAdd.setColorFilter(mainColor)
-
-            if (item.isAdded) {
-                if (isEditMode) {
-                    ivRemoveAdd.setImageResource(R.drawable.ic_remove)
-                } else {
-                    ivRemoveAdd.setImageResource(R.drawable.ic_check)
-                }
-            } else {
-                ivRemoveAdd.setImageResource(R.drawable.ic_add_sticker)
-            }
+            ivRemoveAdd.setImageResource(R.drawable.ic_remove)
+            ivRemoveAdd.setColorFilter(mainColor)
 
             ivRemoveAdd.setOnClickListener {
-                onToggleSticker?.invoke(item)
+                onRemoveSticker?.invoke(item)
             }
         }
     }

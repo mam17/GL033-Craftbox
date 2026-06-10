@@ -6,6 +6,7 @@ import com.example.myapplication.base.adapter.BaseAdapter
 import com.example.myapplication.databinding.ItemChooseThemeBinding
 import com.example.myapplication.domain.layer.ThemeMessModel
 import com.example.myapplication.utils.ImageUtils.loadFromPathAction
+import com.example.myapplication.views.RoundImageView
 
 class ChooseThemePagerAdapter :
     BaseAdapter<ThemeMessModel, ItemChooseThemeBinding>(ItemChooseThemeBinding::inflate) {
@@ -14,6 +15,7 @@ class ChooseThemePagerAdapter :
 
     private var downloadedThemeKeys: Set<String> = emptySet()
     private var loadingPosition: Int? = null
+    private var mainColor: Int? = null
 
     override fun bind(
         binding: ItemChooseThemeBinding,
@@ -31,6 +33,8 @@ class ChooseThemePagerAdapter :
         binding.prLoading.visibility = if (isLoading) View.VISIBLE else View.GONE
         binding.ivDownload.visibility = if (isLoading) View.GONE else View.VISIBLE
         binding.ivDownload.setImageResource(if (isDownloaded) R.drawable.ic_check else R.drawable.ic_download)
+        binding.ivDownload.applyThemeStyle(mainColor)
+        binding.prLoading.indeterminateTintList = mainColor?.let { android.content.res.ColorStateList.valueOf(it) }
         binding.ivDownload.setOnClickListener {
             onDownloadClick?.invoke(item, position)
         }
@@ -58,6 +62,18 @@ class ChooseThemePagerAdapter :
     fun hideLoading(position: Int) {
         loadingPosition = null
         notifyItemChanged(position)
+    }
+
+    fun setMainColor(color: Int?) {
+        if (mainColor == color) return
+        mainColor = color
+        notifyDataSetChanged()
+    }
+
+    private fun RoundImageView.applyThemeStyle(color: Int?) {
+        if (color == null) return
+        setStroke(true, color, resources.getDimension(R.dimen.size1))
+        setIconTint(color)
     }
 
     private fun ThemeMessModel.downloadKey(): String {

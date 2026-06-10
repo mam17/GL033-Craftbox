@@ -102,6 +102,8 @@ okhttp-logging = { group = "com.squareup.okhttp3", name = "logging-interceptor",
 firebase-bom = { group = "com.google.firebase", name = "firebase-bom", version.ref = "firebaseBom" }
 firebase-config = { group = "com.google.firebase", name = "firebase-config-ktx" }
 firebase-analytics = { group = "com.google.firebase", name = "firebase-analytics" }
+firebase-crashlytics = { group = "com.google.firebase", name = "firebase-crashlytics" }
+
 
 # Lib sms
 android-smsmms = { module = "com.github.tibbi:android-smsmms", version.ref = "android-smsmms" }

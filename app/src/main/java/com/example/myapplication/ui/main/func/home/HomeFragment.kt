@@ -1,31 +1,37 @@
 package com.example.myapplication.ui.main.func.home
 
-import android.view.View
 import android.content.Intent
 import android.text.Editable
 import android.text.TextWatcher
+import android.view.View
 import android.view.inputmethod.EditorInfo
 import android.view.inputmethod.InputMethodManager
 import androidx.core.content.ContextCompat
+import androidx.core.graphics.toColorInt
 import androidx.core.view.ViewCompat
-import androidx.core.view.isVisible
 import androidx.core.view.WindowInsetsCompat
+import androidx.core.view.isVisible
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import com.example.myapplication.R
 import com.example.myapplication.base.fragment.BaseFragment
 import com.example.myapplication.databinding.FragmentHomeBinding
+import com.example.myapplication.sms_helper.SmsMessageModel
 import com.example.myapplication.sms_helper.SmsRepository
 import com.example.myapplication.ui.components.directory.DirectoryFragment
 import com.example.myapplication.ui.components.mess.activity.MessengerActivity
+import com.example.myapplication.ui.components.themes.activity.CustomThemeActivity
 import com.example.myapplication.ui.main.MainActivity
+import com.example.myapplication.utils.SpManager
+import com.example.myapplication.utils.ViewEx.tintColor
 import kotlinx.coroutines.launch
 
 class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::inflate) {
     private val smsAdapter = HomeSmsMessageAdapter()
     private val smsRepository by lazy { SmsRepository(requireContext()) }
-    private var allMessages: List<com.example.myapplication.sms_helper.SmsMessageModel> = emptyList()
+    private var allMessages: List<SmsMessageModel> = emptyList()
+    private val spManager by lazy { SpManager.get(requireContext()) }
 
     override fun initView() {
         applySystemBarInsets(binding.clTopBar)
@@ -42,20 +48,22 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::infl
             )
         }
         binding.edtSearchHome.setTextColor(ContextCompat.getColor(requireContext(), R.color.white))
-        binding.edtSearchHome.setHintTextColor(ContextCompat.getColor(requireContext(), R.color.grey))
+        binding.edtSearchHome.setHintTextColor(
+            ContextCompat.getColor(
+                requireContext(),
+                R.color.grey
+            )
+        )
 
         binding.ivMenu.setOnClickListener {
             (activity as? MainActivity)?.openDrawer()
         }
         binding.fabNewChat.setOnClickListener {
-            addFragment(
-                containerId = R.id.frMainContent,
-                fragment = DirectoryFragment(),
-                tag = DirectoryFragment::class.java.simpleName
-            )
+            (activity as? MainActivity)?.showOverlayFeatureFragment(DirectoryFragment())
         }
         binding.edtSearchHome.addTextChangedListener(object : TextWatcher {
-            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) = Unit
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) =
+                Unit
 
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
                 submitFilteredMessages(s?.toString().orEmpty())
@@ -71,6 +79,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::infl
                 false
             }
         }
+        binding.ivVip.setOnClickListener { startNextActivity(CustomThemeActivity::class.java) }
     }
 
     private fun applySystemBarInsets(view: View) {
@@ -82,11 +91,13 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::infl
     }
 
     override fun initData() {
+        applyCurrentTheme()
     }
 
     override fun onResume() {
         super.onResume()
         refreshMessages()
+        applyCurrentTheme()
     }
 
     override fun initObserver() {
@@ -121,8 +132,9 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::infl
         } else {
             allMessages.filter { message ->
                 message.address.contains(normalizedQuery, ignoreCase = true) ||
-                    message.contactName.orEmpty().contains(normalizedQuery, ignoreCase = true) ||
-                    message.body.contains(normalizedQuery, ignoreCase = true)
+                        message.contactName.orEmpty()
+                            .contains(normalizedQuery, ignoreCase = true) ||
+                        message.body.contains(normalizedQuery, ignoreCase = true)
             }
         }
 
@@ -146,5 +158,15 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::infl
         binding.layoutNoData.llNoData.isVisible = !isLoading && isEmpty
         binding.rvMessages.isVisible = !isLoading && !isEmpty
         binding.layoutNoData.tvBodyNoData.text = getString(R.string.txt_no_search_results_found)
+    }
+
+    private fun applyCurrentTheme() {
+        val theme = spManager.getCurrentTheme() ?: return
+        smsAdapter.setTheme(theme)
+        binding.bgSearchHome.setImageResource(0)
+        binding.bgSearchHome.setBgColor(theme.colBGEnterChat.toColorInt())
+        binding.edtSearchHome.setTextColor(theme.colTextEnterChat.toColorInt())
+        binding.ivMenu.tintColor(theme.colMain.toColorInt())
+        binding.fabNewChat.setBgColor(theme.colMain.toColorInt())
     }
 }

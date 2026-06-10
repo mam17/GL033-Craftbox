@@ -70,4 +70,84 @@
     <attr name="caretHeight" format="dimension|enum">
         <enum name="view_height" value="-1" />
     </attr>
+
+    <declare-styleable name="CustomBackgroundView">
+
+        <!-- ══════════════════════════════════════════════
+             CORNER RADIUS
+             Dùng cbv_cornerRadius để bo đều 4 góc.
+             Hoặc set từng góc riêng bằng code (cornerRadii).
+        ══════════════════════════════════════════════ -->
+        <attr name="cbv_cornerRadius" format="dimension" />
+
+        <!-- ══════════════════════════════════════════════
+             SOLID COLOR BACKGROUND
+        ══════════════════════════════════════════════ -->
+        <attr name="cbv_solidColor" format="color" />
+
+        <!-- ══════════════════════════════════════════════
+             GRADIENT BACKGROUND
+             Dùng 2 màu (start + end) hoặc 3 màu (+ center).
+             Khi set gradient, solidColor bị bỏ qua.
+        ══════════════════════════════════════════════ -->
+        <attr name="cbv_gradientStartColor"  format="color" />
+        <attr name="cbv_gradientCenterColor" format="color" />
+        <attr name="cbv_gradientEndColor"    format="color" />
+
+        <!-- Hướng gradient:
+             0 = LEFT_RIGHT (mặc định)
+             1 = TOP_BOTTOM
+             2 = TL_BR  (chéo trái-trên → phải-dưới)
+             3 = TR_BL  (chéo phải-trên → trái-dưới)
+        -->
+        <attr name="cbv_gradientOrientation" format="enum">
+            <enum name="leftToRight"    value="0" />
+            <enum name="topToBottom"    value="1" />
+            <enum name="tlToBr"         value="2" />
+            <enum name="trToBl"         value="3" />
+        </attr>
+
+        <!-- ══════════════════════════════════════════════
+             BITMAP BACKGROUND
+             Nhận drawable từ XML; khi set, gradient/solid bị bỏ qua.
+        ══════════════════════════════════════════════ -->
+        <attr name="cbv_backgroundBitmap" format="reference" />
+
+        <!-- Scale type cho bitmap:
+             0 = CROP  – lấp đầy view, crop phần thừa (mặc định)
+             1 = FIT   – vừa khít, giữ tỉ lệ, có thể có khoảng trống
+        -->
+<!--        <attr name="cbv_bitmapScaleType" format="enum">-->
+<!--            <enum name="crop" value="0" />-->
+<!--            <enum name="fit"  value="1" />-->
+<!--        </attr>-->
+        <attr name="cbv_bitmapScaleType" format="enum">
+            <enum name="center"        value="0" />
+            <enum name="centerCrop"    value="1" />
+            <enum name="centerInside"  value="2" />
+            <enum name="fitCenter"     value="3" />
+            <enum name="fitStart"      value="4" />
+            <enum name="fitEnd"        value="5" />
+            <enum name="fitXY"         value="6" />
+        </attr>
+
+        <!-- ══════════════════════════════════════════════
+             BLUR  (mặc định disabled)
+        ══════════════════════════════════════════════ -->
+        <!-- Bật / tắt blur -->
+        <attr name="cbv_blurEnabled" format="boolean" />
+        <!-- Độ blur: 1.0 – 25.0 -->
+        <attr name="cbv_blurRadius"  format="float"   />
+
+        <!-- ══════════════════════════════════════════════
+             STROKE  (mặc định disabled)
+        ══════════════════════════════════════════════ -->
+        <!-- Bật / tắt viền -->
+        <attr name="cbv_strokeEnabled" format="boolean"   />
+        <!-- Màu viền -->
+        <attr name="cbv_strokeColor"   format="color"     />
+        <!-- Độ dày viền (px / dp) -->
+        <attr name="cbv_strokeWidth"   format="dimension" />
+
+    </declare-styleable>
 </resources>

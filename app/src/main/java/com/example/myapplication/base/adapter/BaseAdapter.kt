@@ -4,6 +4,7 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import androidx.viewbinding.ViewBinding
+import com.example.myapplication.utils.ViewEx.applyCurrentThemeFont
 
 abstract class BaseAdapter<T, VB : ViewBinding>(
     private val bindingInflater: (LayoutInflater, ViewGroup, Boolean) -> VB
@@ -21,6 +22,7 @@ abstract class BaseAdapter<T, VB : ViewBinding>(
 
     override fun onBindViewHolder(holder: BaseViewHolder<VB>, position: Int) {
         val item = dataList[position]
+        holder.binding.root.applyCurrentThemeFont()
         bind(holder.binding, item, position)
         holder.itemView.setOnClickListener {
             onItemClick?.invoke(item, position)

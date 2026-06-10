@@ -6,6 +6,7 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import androidx.viewbinding.ViewBinding
+import com.example.myapplication.utils.ViewEx.applyCurrentThemeFont
 
 abstract class BaseMultiListAdapter<T>(
     diffCallback: DiffUtil.ItemCallback<T>
@@ -23,6 +24,7 @@ abstract class BaseMultiListAdapter<T>(
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         val item = getItem(position)
         if (holder is MultiViewHolder) {
+            holder.binding.root.applyCurrentThemeFont()
             bind(holder.binding, item, position)
             holder.itemView.setOnClickListener {
                 onItemClick?.invoke(item, position)

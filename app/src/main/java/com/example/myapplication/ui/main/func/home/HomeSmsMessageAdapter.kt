@@ -2,13 +2,15 @@ package com.example.myapplication.ui.main.func.home
 
 import android.text.format.DateFormat
 import android.widget.ImageView
-import androidx.core.content.ContextCompat
+import androidx.core.graphics.toColorInt
 import androidx.core.view.isVisible
 import androidx.recyclerview.widget.DiffUtil
 import com.bumptech.glide.Glide
 import com.example.myapplication.R
 import com.example.myapplication.base.adapter.BaseListAdapter
 import com.example.myapplication.databinding.ItemMessageBinding
+import com.example.myapplication.domain.layer.ThemeMessModel
+import com.example.myapplication.utils.ThemeUiHelper
 import com.example.myapplication.sms_helper.SmsMessageModel
 import java.util.Date
 
@@ -16,19 +18,37 @@ class HomeSmsMessageAdapter : BaseListAdapter<SmsMessageModel, ItemMessageBindin
     DIFF_CALLBACK,
     ItemMessageBinding::inflate
 ) {
+    private var theme: ThemeMessModel? = null
+
+    fun setTheme(theme: ThemeMessModel?) {
+        this.theme = theme
+        notifyDataSetChanged()
+    }
+
     override fun bind(binding: ItemMessageBinding, item: SmsMessageModel, position: Int) {
         val context = binding.root.context
         val sender = item.contactName
             ?: item.address.ifBlank { context.getString(R.string.txt_unknown_sender) }
+        val currentTheme = theme
+        val secondaryColor = if (!item.isRead) {
+            currentTheme?.colMain?.toColorInt() ?: context.getColor(R.color.col_main)
+        } else {
+            context.getColor(R.color.col_838383)
+        }
 
         bindAvatar(binding, item)
         binding.tvSender.text = sender
-        binding.tvSender.setTextColor(ContextCompat.getColor(context, R.color.col_main))
+        binding.tvSender.setTextColor(
+            currentTheme?.colMain?.toColorInt() ?: context.getColor(R.color.col_main)
+        )
         binding.tvMessage.text = item.body
-        binding.tvMessage.setTextColor(ContextCompat.getColor(context, R.color.gray))
+        binding.tvMessage.setTextColor(secondaryColor)
         binding.tvDate.text = DateFormat.format(DATE_FORMAT, Date(item.dateMillis))
-        binding.tvDate.setTextColor(ContextCompat.getColor(context, R.color.gray))
+        binding.tvDate.setTextColor(secondaryColor)
         binding.ivUnread.isVisible = !item.isRead
+        binding.ivUnread.backgroundTintList = ThemeUiHelper.colorState(
+            currentTheme?.colMain?.toColorInt() ?: context.getColor(R.color.col_main)
+        )
     }
 
     private fun bindAvatar(binding: ItemMessageBinding, item: SmsMessageModel) {
@@ -56,6 +76,10 @@ class HomeSmsMessageAdapter : BaseListAdapter<SmsMessageModel, ItemMessageBindin
 
         binding.ivAvatar.scaleType = ImageView.ScaleType.FIT_CENTER
         binding.ivAvatar.setImageResource(R.drawable.ic_person)
+        theme?.let { currentTheme ->
+            binding.ivAvatar.setBgColor(currentTheme.colMain.toColorInt())
+            binding.tvFirstName.setTextColor(currentTheme.colTextBBSent.toColorInt())
+        }
         binding.tvFirstName.text = firstNameLetter
         binding.tvFirstName.isVisible = firstNameLetter.isNotEmpty()
     }

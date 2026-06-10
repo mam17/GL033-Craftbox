@@ -9,6 +9,7 @@ import com.example.myapplication.domain.layer.ThemeMessModel
 import com.example.myapplication.utils.AppEx.dpToPx
 import com.example.myapplication.utils.ImageUtils.setImageFromAsset
 import com.example.myapplication.utils.ViewEx.applyThemeFont
+import com.example.myapplication.utils.ViewEx.tintColor
 
 class AddUserAdapter :
     BaseAdapter<DirectoryModel, ItemAddUserBinding>(ItemAddUserBinding::inflate) {
@@ -37,7 +38,7 @@ class AddUserAdapter :
                     val padding = context.dpToPx(4)
                     ivAvatar.setPadding(padding, padding, padding, padding)
                     ivAvatar.setImageResource(R.drawable.ic_person)
-                    ivAvatar.setColorFilter(theme.colTextBBSent.toColorInt())
+                    ivAvatar.setBgColor(theme.colMain.toColorInt())
                     setImageFromAsset(
                         context,
                         theme.pathAvt,

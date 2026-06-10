@@ -18,8 +18,8 @@
             android:id="@+id/ivAvatar"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:src="@drawable/ic_person"
             android:padding="@dimen/size6"
+            android:src="@drawable/ic_person"
             app:bgColor="@color/col_main"
             app:isOval="true" />
 
@@ -36,8 +36,12 @@
     <TextView
         android:id="@+id/tvSender"
         style="@style/TextView_7"
+        android:layout_width="0dp"
         android:layout_marginStart="@dimen/size16"
         android:text="@string/txt_viettel_5g"
+        android:textColor="@color/col_main"
+        android:textSize="@dimen/size14"
+        app:layout_constraintEnd_toStartOf="@+id/tvDate"
         app:layout_constraintStart_toEndOf="@+id/rlAvatar"
         app:layout_constraintTop_toTopOf="@+id/rlAvatar" />
 
@@ -49,6 +53,8 @@
         android:ellipsize="end"
         android:maxLines="2"
         android:text="@string/txt_message_placeholder"
+        android:textColor="@color/grey"
+        android:textSize="@dimen/size12"
         app:layout_constraintEnd_toStartOf="@+id/ivUnread"
         app:layout_constraintHorizontal_bias="0"
         app:layout_constraintStart_toStartOf="@+id/tvSender"
@@ -58,6 +64,8 @@
         android:id="@+id/tvDate"
         style="@style/TextView_4"
         android:text="@string/txt_date_placeholder"
+        android:textColor="@color/grey"
+        android:textSize="@dimen/size12"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="@+id/tvSender" />
 

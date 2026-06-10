@@ -5,12 +5,18 @@ import android.graphics.PorterDuff
 import android.graphics.Typeface
 import android.view.View
 import android.view.ViewGroup
+import android.widget.EditText
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.core.content.ContextCompat
+import androidx.core.graphics.toColorInt
 import androidx.core.widget.TextViewCompat
+import com.example.myapplication.utils.SpManager
+import java.util.concurrent.ConcurrentHashMap
 
 object ViewEx {
+    private val typefaceCache = ConcurrentHashMap<String, Typeface>()
+
     fun ImageView.tintColor(color: Int) {
         this.setColorFilter(color, PorterDuff.Mode.SRC_IN)
     }
@@ -43,10 +49,14 @@ object ViewEx {
         )
     }
 
-    fun View.applyThemeFont(fontPath: String) {
+    fun View.applyThemeFont(fontPath: String?) {
+        if (fontPath.isNullOrBlank()) return
+
         if (this is TextView) {
             try {
-                val typeface = Typeface.createFromAsset(this.context.assets, fontPath)
+                val typeface = typefaceCache.getOrPut(fontPath) {
+                    Typeface.createFromAsset(this.context.assets, fontPath)
+                }
                 this.typeface = typeface
             } catch (e: Exception) {
                 e.printStackTrace()
@@ -55,6 +65,33 @@ object ViewEx {
         if (this is ViewGroup) {
             for (i in 0 until childCount) {
                 getChildAt(i).applyThemeFont(fontPath)
+            }
+        }
+    }
+
+    fun View.applyCurrentThemeFont() {
+        applyThemeFont(SpManager.get(context).getCurrentTheme()?.font)
+    }
+
+    fun View.applyThemeTextColor(colorHex: String?) {
+        if (colorHex.isNullOrBlank()) return
+
+        val colorInt = try {
+            colorHex.toColorInt()
+        } catch (_: IllegalArgumentException) {
+            return
+        }
+
+        applyThemeTextColor(colorInt)
+    }
+
+    fun View.applyThemeTextColor(colorInt: Int) {
+        if (this is TextView && this !is EditText) {
+            setTextColor(colorInt)
+        }
+        if (this is ViewGroup) {
+            for (i in 0 until childCount) {
+                getChildAt(i).applyThemeTextColor(colorInt)
             }
         }
     }

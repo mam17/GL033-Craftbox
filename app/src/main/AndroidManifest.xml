@@ -39,6 +39,10 @@
             android:exported="false"
             android:screenOrientation="portrait" />
         <activity
+            android:name=".ui.permission.PermissionActivity"
+            android:exported="false"
+            android:screenOrientation="portrait" />
+        <activity
             android:name=".ui.components.detail_sticker.DetailStickerActivity"
             android:exported="false" />
         <activity
@@ -174,6 +178,19 @@
                 <data android:scheme="mmsto" />
             </intent-filter>
         </service>
+
+        <activity
+            android:name=".ui.components.themes.activity.CustomThemeActivity"
+            android:exported="false"
+            android:windowSoftInputMode="adjustResize" />
+        <activity
+            android:name=".ui.feature.FeatureActivity"
+            android:exported="false"
+            android:windowSoftInputMode="adjustResize" />
+        <activity
+            android:name=".ui.components.themes.activity.ThemeStartActivity"
+            android:exported="false"
+            android:windowSoftInputMode="adjustResize" />
     </application>
 
 </manifest>

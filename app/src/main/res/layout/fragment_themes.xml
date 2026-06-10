@@ -4,7 +4,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/white">
+    android:clickable="true"
+    android:focusable="true"
+    android:background="@android:color/transparent">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/clTopBar"
@@ -64,5 +66,10 @@
         app:layout_constraintTop_toBottomOf="@+id/rcvCategoryTheme"
         app:spanCount="2"
         tools:listitem="@layout/item_theme" />
-
+    <include
+        android:id="@+id/llNoData"
+        layout="@layout/layout_no_data"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_gravity="center" />
 </androidx.constraintlayout.widget.ConstraintLayout>

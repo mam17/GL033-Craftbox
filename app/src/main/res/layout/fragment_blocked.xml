@@ -5,13 +5,14 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:paddingTop="@dimen/size40"
-    android:background="@color/white">
+    android:clickable="true"
+    android:focusable="true"
+    android:background="@android:color/white">
 
-    <ImageView
-        android:id="@+id/ivBackground"
+    <com.example.myapplication.views.CustomBackgroundView
+        android:id="@+id/backgroundTheme"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:scaleType="centerCrop" />
+        android:layout_height="match_parent" />
 
     <include
         android:id="@+id/toolbarBlocked"

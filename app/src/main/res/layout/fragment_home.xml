@@ -4,7 +4,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/white">
+    android:background="@android:color/transparent"
+    android:clickable="true"
+    android:focusable="true">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/clTopBar"
@@ -23,26 +25,26 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <LinearLayout
+        <RelativeLayout
             android:id="@+id/llSearch"
             android:layout_width="0dp"
             android:layout_height="@dimen/size40"
             android:layout_margin="@dimen/size16"
-            android:background="@drawable/bg_search_gradient"
             android:elevation="@dimen/size4"
             android:gravity="center_vertical"
             android:orientation="horizontal"
-            android:paddingHorizontal="@dimen/size16"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@+id/ivVip"
             app:layout_constraintStart_toEndOf="@+id/ivMenu"
             app:layout_constraintTop_toTopOf="parent">
 
-            <ImageView
-                android:layout_width="@dimen/size20"
-                android:layout_height="@dimen/size20"
-                android:contentDescription="@null"
-                android:src="@drawable/ic_search" />
+            <com.example.myapplication.views.RoundImageView
+                android:id="@+id/bgSearchHome"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_centerInParent="true"
+                android:src="@drawable/bg_search_gradient"
+                app:cornerRadius="@dimen/size40" />
 
             <EditText
                 android:id="@+id/edtSearchHome"
@@ -60,7 +62,7 @@
                 android:textColor="@color/white"
                 android:textColorHint="@color/grey"
                 android:textSize="@dimen/size14" />
-        </LinearLayout>
+        </RelativeLayout>
 
         <ImageView
             android:id="@+id/ivVip"
@@ -68,6 +70,7 @@
             android:layout_height="wrap_content"
             android:contentDescription="@null"
             android:src="@drawable/ic_iap"
+            android:visibility="gone"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -85,6 +88,8 @@
         android:id="@+id/rvMessages"
         android:layout_width="match_parent"
         android:layout_height="0dp"
+        android:layout_margin="@dimen/size16"
+        android:background="@drawable/bg_mess"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/vLineHome"
@@ -103,17 +108,19 @@
             layout="@layout/layout_no_data" />
     </FrameLayout>
 
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
+    <com.example.myapplication.views.RoundImageView
         android:id="@+id/fabNewChat"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_margin="@dimen/size24"
-        android:backgroundTint="@color/col_main"
+        android:layout_width="@dimen/size40"
+        android:layout_height="@dimen/size40"
+        android:layout_marginEnd="@dimen/size24"
+        android:layout_marginBottom="@dimen/size40"
         android:contentDescription="@null"
+        android:padding="@dimen/size10"
         android:src="@drawable/ic_chat"
+        app:bgColor="@color/col_main"
+        app:isOval="true"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:shapeAppearanceOverlay="@style/ShapeAppearance.Circle"
-        app:tint="@color/white" />
+        app:shapeAppearanceOverlay="@style/ShapeAppearance.Circle" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

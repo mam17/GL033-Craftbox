@@ -2,9 +2,11 @@ package com.example.myapplication.ui.components.mess.fragment
 
 import android.os.Bundle
 import android.content.Intent
+import android.provider.Telephony
 import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.core.graphics.toColorInt
 import androidx.core.view.isVisible
 import androidx.fragment.app.activityViewModels
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -18,7 +20,8 @@ import com.example.myapplication.ui.components.mess.adapter.MessengerMediaAdapte
 import com.example.myapplication.ui.components.mess.adapter.MessengerMediaItem
 import com.example.myapplication.ui.components.preview.activity.MediaPreviewActivity
 import com.example.myapplication.utils.DialogEx.showDialogAlert
-import android.provider.Telephony
+import com.example.myapplication.utils.SpManager
+import com.example.myapplication.utils.ViewEx.tintColor
 
 class MessengerDetailFragment :
     BaseFragment<FragmentMessengerDetailBinding>(FragmentMessengerDetailBinding::inflate) {
@@ -172,6 +175,12 @@ class MessengerDetailFragment :
     }
 
     override fun initData() {
+        applyCurrentTheme()
+    }
+
+    override fun onResume() {
+        super.onResume()
+        applyCurrentTheme()
     }
 
     private fun readArguments() {
@@ -215,6 +224,19 @@ class MessengerDetailFragment :
                 }
             )
         }
+    }
+
+    private fun applyCurrentTheme() {
+        val theme = SpManager.get(requireContext()).getCurrentTheme() ?: return
+        val mainColor = theme.colMain.toColorInt()
+
+        binding.ivBack.tintColor(mainColor)
+        binding.ivBackground.tintColor(mainColor)
+        binding.ivPassword.tintColor(mainColor)
+        binding.ivNotifications.tintColor(mainColor)
+        binding.ivArchive.tintColor(mainColor)
+        binding.ivBlock.tintColor(mainColor)
+        binding.ivAvatar.setBgColor(mainColor)
     }
 
     private fun bindToggleRow(
