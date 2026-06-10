@@ -16,6 +16,7 @@ import com.example.myapplication.R
 import com.example.myapplication.base.fragment.BaseFragment
 import com.example.myapplication.databinding.FragmentThemesBinding
 import com.example.myapplication.ui.components.themes.activity.GetThemesActivity
+import com.example.myapplication.ui.components.themes.fragment.SettingThemeFragment
 import com.example.myapplication.ui.main.MainActivity
 import com.example.myapplication.ui.main.func.theme.adapter.CategoryThemeAdapter
 import com.example.myapplication.ui.main.func.theme.adapter.ThemeAdapter
@@ -44,7 +45,9 @@ class ThemesFragment : BaseFragment<FragmentThemesBinding>(FragmentThemesBinding
         applySystemBarInsets(binding.clTopBar)
         binding.rcvCategoryTheme.adapter = categoryAdapter
         binding.rvThemes.adapter = themeAdapter
-
+        binding.ivSetting.setOnClickListener {
+            (activity as? MainActivity)?.showOverlayFeatureFragment(SettingThemeFragment())
+        }
         categoryAdapter.setOnItemClick { _, position ->
             viewModel.selectCategory(position)
             categoryAdapter.setSelectedPosition(position)
@@ -107,7 +110,7 @@ class ThemesFragment : BaseFragment<FragmentThemesBinding>(FragmentThemesBinding
 
     }
 
-    private fun updateNoData(){
+    private fun updateNoData() {
         binding.llNoData.llNoData.isVisible = themeAdapter.getData().isEmpty()
         binding.llNoData.prLoading.gone()
         binding.llNoData.tvBodyNoData.text = getString(R.string.txt_no_theme_data_available)

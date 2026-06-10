@@ -180,7 +180,7 @@
         </service>
 
         <activity
-            android:name=".ui.components.themes.activity.CustomThemeActivity"
+            android:name=".ui.components.custom.activity.CustomBGThemeActivity"
             android:exported="false"
             android:windowSoftInputMode="adjustResize" />
         <activity

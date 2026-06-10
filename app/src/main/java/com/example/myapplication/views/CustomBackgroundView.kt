@@ -125,6 +125,12 @@ class CustomBackgroundView @JvmOverloads constructor(
     var strokeWidth: Float = 4f
         set(value) { field = value.coerceAtLeast(0f); invalidate() }
 
+    // ─── Overlay ──────────────────────────────────────────────────────────────
+
+    @ColorInt
+    var overlayColor: Int = Color.TRANSPARENT
+        set(value) { field = value; invalidate() }
+
     // ─── Init from XML ────────────────────────────────────────────────────────
 
     init {
@@ -228,6 +234,14 @@ class CustomBackgroundView @JvmOverloads constructor(
                 backgroundPaint.color  = customSolidColor
             }
             backgroundPaint.style = Paint.Style.FILL
+            canvas.drawRoundRect(drawRect, cornerRadius, cornerRadius, backgroundPaint)
+        }
+
+        // 5.5 Vẽ Overlay (nếu có)
+        if (Color.alpha(overlayColor) > 0) {
+            backgroundPaint.shader = null
+            backgroundPaint.color  = overlayColor
+            backgroundPaint.style  = Paint.Style.FILL
             canvas.drawRoundRect(drawRect, cornerRadius, cornerRadius, backgroundPaint)
         }
 

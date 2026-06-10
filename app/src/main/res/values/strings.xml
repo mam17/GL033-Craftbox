@@ -219,4 +219,5 @@
     <string name="txt_cont_permission_system">To make Color SMS work properly with cool features, it needs to be the default SMS app</string>
     <string name="txt_ok">Ok</string>
     <string name="txt_automatic_contact_colors">Automatic contact colors</string>
+    <string name="txt_default">Default</string>
 </resources>

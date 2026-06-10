@@ -21,7 +21,6 @@ import com.example.myapplication.sms_helper.SmsMessageModel
 import com.example.myapplication.sms_helper.SmsRepository
 import com.example.myapplication.ui.components.directory.DirectoryFragment
 import com.example.myapplication.ui.components.mess.activity.MessengerActivity
-import com.example.myapplication.ui.components.themes.activity.CustomThemeActivity
 import com.example.myapplication.ui.main.MainActivity
 import com.example.myapplication.utils.SpManager
 import com.example.myapplication.utils.ViewEx.tintColor
@@ -79,7 +78,6 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::infl
                 false
             }
         }
-        binding.ivVip.setOnClickListener { startNextActivity(CustomThemeActivity::class.java) }
     }
 
     private fun applySystemBarInsets(view: View) {

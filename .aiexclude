@@ -1,0 +1,4 @@
+# Loại bỏ thư mục build và thư viện để tiết kiệm context
+**/build/**
+**/.gradle/**
+**.idea/**
