@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "426139196720",
+    "project_id": "gl027---color-sms",
+    "storage_bucket": "gl027---color-sms.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:426139196720:android:ceb7ecbcb85a1f4710bcf5",
+        "android_client_info": {
+          "package_name": "com.grl.sms.color.messenger.wa"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBMxSvMN3Pok5K8fiHCBUvkAVCY4xAd3Kc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

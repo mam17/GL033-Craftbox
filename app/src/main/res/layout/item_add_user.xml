@@ -19,7 +19,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
-        <com.example.myapplication.views.RoundImageView
+        <com.grl.sms_wa.views.RoundImageView
             android:id="@+id/ivAvatar"
             android:layout_width="@dimen/size40"
             app:strokeColor="@color/grey"
@@ -40,7 +40,7 @@
             android:text="@string/app_name"
             android:textColor="@color/white" />
 
-        <com.example.myapplication.views.RoundImageView
+        <com.grl.sms_wa.views.RoundImageView
             android:id="@+id/btnRemove"
             android:layout_width="@dimen/size16"
             android:layout_height="@dimen/size16"

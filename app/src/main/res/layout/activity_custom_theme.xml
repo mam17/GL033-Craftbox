@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.components.themes.activity.CustomThemeActivity">
+
+    <com.grl.sms_wa.views.CustomBackgroundView
+        android:id="@+id/backgroundTheme"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+        <!-- ─────────────────────────────────────────
+        1. Solid color + bo góc đều
+   ───────────────────────────────────────── -->
+        <com.grl.sms_wa.views.CustomBackgroundView
+            android:id="@+id/viewSolid"
+            android:layout_width="match_parent"
+            android:layout_height="80dp"
+            android:layout_marginBottom="16dp"
+            app:cbv_solidColor="#4CAF50"
+            app:cbv_cornerRadius="16dp" />
+
+        <!-- ─────────────────────────────────────────
+             2. Gradient 2 màu LEFT→RIGHT + stroke
+        ───────────────────────────────────────── -->
+        <com.grl.sms_wa.views.CustomBackgroundView
+            android:id="@+id/viewGradient"
+            android:layout_width="match_parent"
+            android:layout_height="80dp"
+            android:layout_marginBottom="16dp"
+            app:cbv_gradientStartColor="#FF6B6B"
+            app:cbv_gradientEndColor="#4ECDC4"
+            app:cbv_gradientOrientation="leftToRight"
+            app:cbv_cornerRadius="24dp"
+            app:cbv_strokeEnabled="true"
+            app:cbv_strokeColor="#FFFFFF"
+            app:cbv_strokeWidth="3dp" />
+
+        <!-- ─────────────────────────────────────────
+             3. Gradient 3 màu TOP→BOTTOM + bo góc từng cạnh khác nhau
+                (bo góc từng cạnh phải set qua code, không hỗ trợ XML)
+        ───────────────────────────────────────── -->
+        <com.grl.sms_wa.views.CustomBackgroundView
+            android:id="@+id/viewGradient3"
+            android:layout_width="match_parent"
+            android:layout_height="80dp"
+            android:layout_marginBottom="16dp"
+            app:cbv_gradientStartColor="#667eea"
+            app:cbv_gradientCenterColor="#b06ab3"
+            app:cbv_gradientEndColor="#f64f59"
+            app:cbv_gradientOrientation="topToBottom"
+            app:cbv_cornerRadius="12dp" />
+
+        <!-- ─────────────────────────────────────────
+             4. Bitmap background + blur bật
+        ───────────────────────────────────────── -->
+        <com.grl.sms_wa.views.CustomBackgroundView
+            android:id="@+id/viewBitmapBlur"
+            android:layout_width="match_parent"
+            android:layout_height="120dp"
+            android:layout_marginBottom="16dp"
+            app:cbv_backgroundBitmap="@drawable/theme_anime_1"
+            app:cbv_bitmapScaleType="centerCrop"
+            app:cbv_blurEnabled="true"
+            app:cbv_blurRadius="15"
+            app:cbv_cornerRadius="20dp"
+            app:cbv_strokeEnabled="true"
+            app:cbv_strokeColor="#80FFFFFF"
+            app:cbv_strokeWidth="2dp" />
+
+        <!-- ─────────────────────────────────────────
+             5. Bitmap background KHÔNG blur + bo góc
+        ───────────────────────────────────────── -->
+        <com.grl.sms_wa.views.CustomBackgroundView
+            android:id="@+id/viewBitmapNoBlur"
+            android:layout_width="match_parent"
+            android:layout_height="120dp"
+            android:layout_marginBottom="16dp"
+            app:cbv_backgroundBitmap="@drawable/theme_anime_1"
+            app:cbv_bitmapScaleType="centerCrop"
+            app:cbv_blurEnabled="false"
+            app:cbv_cornerRadius="20dp" />
+
+        <!-- ─────────────────────────────────────────
+             6. Chỉ stroke, không background
+        ───────────────────────────────────────── -->
+        <com.grl.sms_wa.views.CustomBackgroundView
+            android:id="@+id/viewStrokeOnly"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            app:cbv_solidColor="@android:color/transparent"
+            app:cbv_cornerRadius="30dp"
+            app:cbv_strokeEnabled="true"
+            app:cbv_strokeColor="#9C27B0"
+            app:cbv_strokeWidth="4dp" />
+    </LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -10,7 +10,7 @@ plugins {
 }
 
 android {
-    namespace = "com.example.myapplication"
+    namespace = "com.grl.sms_wa"
     compileSdk {
         version = release(36) {
             minorApiLevel = 1
@@ -18,7 +18,7 @@ android {
     }
 
     defaultConfig {
-        applicationId = "com.example.myapplication"
+        applicationId = "com.grl.sms.color.messenger.wa"
         minSdk = 24
         //noinspection OldTargetApi
         targetSdk = 36

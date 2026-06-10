@@ -14,7 +14,7 @@
         android:orientation="vertical"
         app:layout_constraintTop_toTopOf="parent">
 
-        <com.example.myapplication.views.RoundImageView
+        <com.grl.sms_wa.views.RoundImageView
             android:layout_width="@dimen/size111"
             android:layout_height="@dimen/size111"
             android:src="@mipmap/ic_launcher"

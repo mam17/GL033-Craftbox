@@ -59,7 +59,7 @@
             android:orientation="vertical"
             android:paddingBottom="@dimen/size24">
 
-            <com.example.myapplication.views.RoundImageView
+            <com.grl.sms_wa.views.RoundImageView
                 android:id="@+id/ivAvatar"
                 android:layout_width="@dimen/size50"
                 android:layout_height="@dimen/size50"

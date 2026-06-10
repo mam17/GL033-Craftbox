@@ -38,7 +38,7 @@
             app:layout_constraintStart_toEndOf="@+id/ivMenu"
             app:layout_constraintTop_toTopOf="parent">
 
-            <com.example.myapplication.views.RoundImageView
+            <com.grl.sms_wa.views.RoundImageView
                 android:id="@+id/bgSearchHome"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
@@ -108,7 +108,7 @@
             layout="@layout/layout_no_data" />
     </FrameLayout>
 
-    <com.example.myapplication.views.RoundImageView
+    <com.grl.sms_wa.views.RoundImageView
         android:id="@+id/fabNewChat"
         android:layout_width="@dimen/size40"
         android:layout_height="@dimen/size40"

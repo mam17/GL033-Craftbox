@@ -7,7 +7,7 @@
     android:background="?android:selectableItemBackground"
     android:paddingVertical="@dimen/size8">
 
-    <com.example.myapplication.views.RoundImageView
+    <com.grl.sms_wa.views.RoundImageView
         android:id="@+id/ivAvatar"
         android:layout_width="@dimen/size40"
         android:layout_height="@dimen/size40"

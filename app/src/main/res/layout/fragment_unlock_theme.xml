@@ -8,7 +8,7 @@
     android:focusable="true"
     tools:context=".ui.components.themes.fragment.UnlockThemeFragment">
 
-    <com.example.myapplication.views.CustomBackgroundView
+    <com.grl.sms_wa.views.CustomBackgroundView
         android:id="@+id/backgroundTheme"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
@@ -27,7 +27,7 @@
             android:layout_height="wrap_content"
             android:background="@drawable/bg_apply_theme_rw">
 
-            <com.example.myapplication.views.RoundImageView
+            <com.grl.sms_wa.views.RoundImageView
                 android:id="@+id/ivBGTheme"
                 android:layout_width="0dp"
                 android:layout_height="@dimen/size200"
@@ -90,7 +90,7 @@
             android:layout_height="wrap_content"
             android:background="@drawable/bg_apply_theme_rw">
 
-            <com.example.myapplication.views.RoundImageView
+            <com.grl.sms_wa.views.RoundImageView
                 android:id="@+id/ivMessReceived"
                 android:layout_width="@dimen/size100"
                 android:layout_height="@dimen/size40"
@@ -141,7 +141,7 @@
             android:layout_height="wrap_content"
             android:background="@drawable/bg_apply_theme_rw">
 
-            <com.example.myapplication.views.RoundImageView
+            <com.grl.sms_wa.views.RoundImageView
                 android:id="@+id/ivMessSent"
                 android:layout_width="@dimen/size100"
                 android:layout_height="@dimen/size40"
@@ -205,7 +205,7 @@
             android:layout_weight="1"
             android:background="@drawable/bg_apply_theme_rw">
 
-            <com.example.myapplication.views.RoundImageView
+            <com.grl.sms_wa.views.RoundImageView
                 android:id="@+id/ivUnlock"
                 android:layout_width="@dimen/size54"
                 android:layout_height="@dimen/size54"
@@ -267,7 +267,7 @@
             android:layout_weight="1"
             android:background="@drawable/bg_apply_theme_rw">
 
-            <com.example.myapplication.views.RoundImageView
+            <com.grl.sms_wa.views.RoundImageView
                 android:id="@+id/ivMessComposer"
                 android:layout_width="0dp"
                 android:layout_height="@dimen/size44"

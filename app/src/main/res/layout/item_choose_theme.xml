@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <com.example.myapplication.views.RoundImageView
+    <com.grl.sms_wa.views.RoundImageView
         android:id="@+id/ivChooseTheme"
         android:layout_width="match_parent"
         android:layout_height="0dp"
@@ -18,7 +18,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <com.example.myapplication.views.RoundImageView
+    <com.grl.sms_wa.views.RoundImageView
         android:id="@+id/ivDownload"
         android:layout_width="@dimen/size40"
         android:layout_height="@dimen/size40"

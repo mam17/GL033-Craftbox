@@ -7,7 +7,7 @@
     android:layout_height="match_parent"
     tools:context=".ui.components.custom.activity.CustomBGThemeActivity">
 
-    <com.example.myapplication.views.CustomBackgroundView
+    <com.grl.sms_wa.views.CustomBackgroundView
         android:id="@+id/backgroundTheme"
         android:layout_width="match_parent"
         android:layout_height="match_parent"

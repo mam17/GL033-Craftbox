@@ -7,7 +7,7 @@
     android:background="?attr/selectableItemBackground"
     android:orientation="vertical">
 
-    <com.example.myapplication.views.RoundImageView
+    <com.grl.sms_wa.views.RoundImageView
         android:id="@+id/ivStickerLogo"
         app:enableScaleAnim="false"
         android:layout_width="match_parent"

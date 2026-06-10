@@ -9,7 +9,7 @@
     android:focusable="true"
     tools:context=".ui.components.themes.activity.ThemeStartActivity">
 
-    <com.example.myapplication.views.CustomBackgroundView
+    <com.grl.sms_wa.views.CustomBackgroundView
         android:id="@+id/backgroundTheme"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />

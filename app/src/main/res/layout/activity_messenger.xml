@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:background="@color/white">
 
-    <com.example.myapplication.views.CustomBackgroundView
+    <com.grl.sms_wa.views.CustomBackgroundView
         android:id="@+id/backgroundTheme"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
@@ -120,7 +120,7 @@
             android:gravity="center_vertical"
             android:orientation="horizontal">
 
-            <com.example.myapplication.views.RoundImageView
+            <com.grl.sms_wa.views.RoundImageView
                 android:id="@+id/ivSchedule"
                 android:layout_width="@dimen/size40"
                 android:layout_height="@dimen/size40"
@@ -151,7 +151,7 @@
             android:gravity="center_vertical"
             android:orientation="horizontal">
 
-            <com.example.myapplication.views.RoundImageView
+            <com.grl.sms_wa.views.RoundImageView
                 android:id="@+id/ivCamera"
                 android:layout_width="@dimen/size40"
                 android:layout_height="@dimen/size40"
@@ -182,7 +182,7 @@
             android:gravity="center_vertical"
             android:orientation="horizontal">
 
-            <com.example.myapplication.views.RoundImageView
+            <com.grl.sms_wa.views.RoundImageView
                 android:id="@+id/ivImage"
                 android:layout_width="@dimen/size40"
                 android:layout_height="@dimen/size40"
@@ -215,7 +215,7 @@
         android:visibility="gone"
         app:layout_constraintBottom_toTopOf="@+id/clBottomBar">
 
-        <com.example.myapplication.views.RoundImageView
+        <com.grl.sms_wa.views.RoundImageView
             android:id="@+id/ivPreview"
             android:layout_width="@dimen/size70"
             android:layout_height="@dimen/size70"

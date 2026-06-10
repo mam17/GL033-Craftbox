@@ -13,7 +13,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
-        <com.example.myapplication.views.RoundImageView
+        <com.grl.sms_wa.views.RoundImageView
             android:id="@+id/ivAvatar"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -44,7 +44,7 @@
         app:layout_constraintStart_toEndOf="@+id/rlAvatar"
         app:layout_constraintTop_toTopOf="parent">
 
-        <com.example.myapplication.views.MessageBubbleView
+        <com.grl.sms_wa.views.MessageBubbleView
             android:id="@+id/bubbleView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -67,7 +67,7 @@
                     android:layout_margin="@dimen/size4"
                     android:visibility="gone">
 
-                    <com.example.myapplication.views.RoundImageView
+                    <com.grl.sms_wa.views.RoundImageView
                         android:id="@+id/ivImage"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -75,7 +75,7 @@
                         android:scaleType="fitCenter"
                         app:cornerRadius="@dimen/size8" />
 
-                    <com.example.myapplication.views.RoundImageView
+                    <com.grl.sms_wa.views.RoundImageView
                         android:id="@+id/ivPlayVideo"
                         android:layout_width="@dimen/size40"
                         android:layout_height="@dimen/size40"
@@ -95,6 +95,6 @@
                     android:text="@string/txt_empty" />
 
             </LinearLayout>
-        </com.example.myapplication.views.MessageBubbleView>
+        </com.grl.sms_wa.views.MessageBubbleView>
     </FrameLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
