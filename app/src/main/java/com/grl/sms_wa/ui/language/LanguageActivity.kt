@@ -1,10 +1,13 @@
 package com.grl.sms_wa.ui.language
 
+import android.util.Log
 import androidx.activity.viewModels
+import androidx.core.view.isVisible
 import com.grl.sms_wa.base.activity.BaseActivity
 import com.grl.sms_wa.databinding.ActivityLanguageBinding
 import com.grl.sms_wa.ui.main.MainActivity
 import com.grl.sms_wa.ui.onboarding.OnboardingActivity
+import com.grl.sms_wa.utils.Constant
 import com.grl.sms_wa.utils.SystemUtil
 import com.grl.sms_wa.utils.ViewEx.gone
 import com.grl.sms_wa.utils.ViewEx.visible
@@ -14,8 +17,12 @@ import dagger.hilt.android.AndroidEntryPoint
 class LanguageActivity : BaseActivity<ActivityLanguageBinding>(ActivityLanguageBinding::inflate) {
     private val viewModel: LanguageViewModel by viewModels()
     private var mLanguageAdapter = LanguageAdapter()
+    private var fromSplash = false
 
     override fun initView() {
+        fromSplash = intent.getBooleanExtra(Constant.KEY_FROM_SPLASH, false)
+        Log.i("TAG_LANGUAGE", "initUI: fromSplash $fromSplash")
+
         initUI()
         initListener()
     }
@@ -25,10 +32,10 @@ class LanguageActivity : BaseActivity<ActivityLanguageBinding>(ActivityLanguageB
             toolBarLanguage.btnSelect.setOnClickListener {
                 mLanguageAdapter.getSelectedModel()?.let { model ->
                     SystemUtil.saveLanguage(this@LanguageActivity, model)
-                    if (spManager.isCompletedOnboarding) {
-                        startActivityNewTask(MainActivity::class.java)
-                    } else {
+                    if (fromSplash) {
                         startNextActivity(OnboardingActivity::class.java, isFinish = true)
+                    } else {
+                        startActivityNewTask(MainActivity::class.java)
                     }
                 }
             }
@@ -37,6 +44,7 @@ class LanguageActivity : BaseActivity<ActivityLanguageBinding>(ActivityLanguageB
 
     private fun initUI() {
         binding.apply {
+            toolBarLanguage.btnBack.isVisible = !fromSplash
             toolBarLanguage.btnBack.setOnClickListener { onBack() }
             toolBarLanguage.btnSelect.visible()
             toolBarLanguage.btnAction.gone()
