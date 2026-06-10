@@ -5,12 +5,12 @@
     android:layout_height="match_parent"
     android:background="@color/transparent">
 
-    <com.example.myapplication.views.CustomBackgroundView
+    <com.grl.sms_wa.views.CustomBackgroundView
         android:id="@+id/backgroundTheme"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
 
-    <com.example.myapplication.views.RoundImageView
+    <com.grl.sms_wa.views.RoundImageView
         android:id="@+id/btnCloseNoti"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -32,7 +32,7 @@
         android:paddingVertical="@dimen/size16"
         app:layout_constraintBottom_toBottomOf="parent">
 
-        <com.example.myapplication.views.RoundImageView
+        <com.grl.sms_wa.views.RoundImageView
             app:cornerRadius="@dimen/size12"
             android:layout_width="match_parent"
             android:layout_height="@dimen/size200"
@@ -46,7 +46,7 @@
             android:layout_marginHorizontal="@dimen/size16"
             android:layout_marginTop="@dimen/size16">
 
-            <com.example.myapplication.views.RoundImageView
+            <com.grl.sms_wa.views.RoundImageView
                 android:id="@+id/ivLogoNoti"
                 android:layout_width="@dimen/size48"
                 android:layout_height="@dimen/size48"

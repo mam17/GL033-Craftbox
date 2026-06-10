@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name" translatable="false">My Application</string>
+    <string name="app_name" translatable="false">Color WA</string>
 
     <string name="txt_english" translatable="false">English</string>
     <string name="txt_arabic" translatable="false">Arabic</string>

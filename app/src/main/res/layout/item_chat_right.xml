@@ -6,7 +6,7 @@
     android:paddingHorizontal="@dimen/size16"
     android:paddingVertical="@dimen/size4">
 
-    <com.example.myapplication.views.MessageBubbleView
+    <com.grl.sms_wa.views.MessageBubbleView
         android:id="@+id/bubbleView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -28,7 +28,7 @@
                 android:layout_margin="@dimen/size4"
                 android:visibility="gone">
 
-                <com.example.myapplication.views.RoundImageView
+                <com.grl.sms_wa.views.RoundImageView
                     android:id="@+id/ivImage"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -56,7 +56,7 @@
                 android:text="@string/txt_empty" />
 
         </LinearLayout>
-    </com.example.myapplication.views.MessageBubbleView>
+    </com.grl.sms_wa.views.MessageBubbleView>
 
     <TextView
         android:id="@+id/tvTime"

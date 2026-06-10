@@ -7,7 +7,7 @@
     android:layout_height="match_parent"
     tools:context=".ui.components.themes.activity.CustomThemeActivity">
 
-    <com.example.myapplication.views.CustomBackgroundView
+    <com.grl.sms_wa.views.CustomBackgroundView
         android:id="@+id/backgroundTheme"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
@@ -19,7 +19,7 @@
         <!-- ─────────────────────────────────────────
         1. Solid color + bo góc đều
    ───────────────────────────────────────── -->
-        <com.example.myapplication.views.CustomBackgroundView
+        <com.grl.sms_wa.views.CustomBackgroundView
             android:id="@+id/viewSolid"
             android:layout_width="match_parent"
             android:layout_height="80dp"
@@ -30,7 +30,7 @@
         <!-- ─────────────────────────────────────────
              2. Gradient 2 màu LEFT→RIGHT + stroke
         ───────────────────────────────────────── -->
-        <com.example.myapplication.views.CustomBackgroundView
+        <com.grl.sms_wa.views.CustomBackgroundView
             android:id="@+id/viewGradient"
             android:layout_width="match_parent"
             android:layout_height="80dp"
@@ -47,7 +47,7 @@
              3. Gradient 3 màu TOP→BOTTOM + bo góc từng cạnh khác nhau
                 (bo góc từng cạnh phải set qua code, không hỗ trợ XML)
         ───────────────────────────────────────── -->
-        <com.example.myapplication.views.CustomBackgroundView
+        <com.grl.sms_wa.views.CustomBackgroundView
             android:id="@+id/viewGradient3"
             android:layout_width="match_parent"
             android:layout_height="80dp"
@@ -61,7 +61,7 @@
         <!-- ─────────────────────────────────────────
              4. Bitmap background + blur bật
         ───────────────────────────────────────── -->
-        <com.example.myapplication.views.CustomBackgroundView
+        <com.grl.sms_wa.views.CustomBackgroundView
             android:id="@+id/viewBitmapBlur"
             android:layout_width="match_parent"
             android:layout_height="120dp"
@@ -78,7 +78,7 @@
         <!-- ─────────────────────────────────────────
              5. Bitmap background KHÔNG blur + bo góc
         ───────────────────────────────────────── -->
-        <com.example.myapplication.views.CustomBackgroundView
+        <com.grl.sms_wa.views.CustomBackgroundView
             android:id="@+id/viewBitmapNoBlur"
             android:layout_width="match_parent"
             android:layout_height="120dp"
@@ -91,7 +91,7 @@
         <!-- ─────────────────────────────────────────
              6. Chỉ stroke, không background
         ───────────────────────────────────────── -->
-        <com.example.myapplication.views.CustomBackgroundView
+        <com.grl.sms_wa.views.CustomBackgroundView
             android:id="@+id/viewStrokeOnly"
             android:layout_width="match_parent"
             android:layout_height="60dp"
