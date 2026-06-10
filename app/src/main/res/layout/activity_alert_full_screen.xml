@@ -38,7 +38,7 @@
             android:layout_height="@dimen/size200"
             android:layout_marginHorizontal="@dimen/size16"
             android:scaleType="fitXY"
-            android:src="@drawable/ic_rating_star_border" />
+            android:src="@drawable/img_alert" />
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
@@ -62,7 +62,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/size8"
                 android:text="@string/txt_title_noti_full"
-                android:textColor="@color/black"
+                android:textColor="@color/col_main"
                 android:textSize="14sp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/ivLogoNoti"
@@ -72,6 +72,7 @@
                 android:id="@+id/tvContNoti"
                 style="@style/TextView_4"
                 android:layout_width="0dp"
+                android:layout_marginTop="@dimen/size4"
                 android:layout_height="wrap_content"
                 android:textColor="@color/gray"
                 android:layout_marginStart="@dimen/size8"

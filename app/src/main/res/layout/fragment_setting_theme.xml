@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <include
+            android:id="@+id/toolbarSettingTheme"
+            layout="@layout/layout_toolbar" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btnBackground"
+            style="@style/TextView_7"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/size16"
+            android:background="?selectableItemBackground"
+            android:drawableStart="@drawable/ic_image"
+            android:drawablePadding="@dimen/size10"
+            android:gravity="center_vertical"
+            android:paddingHorizontal="@dimen/size16"
+            android:text="@string/txt_background"
+            android:textColor="@color/col_main" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btnBubble"
+            style="@style/TextView_7"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginVertical="@dimen/size16"
+            android:background="?selectableItemBackground"
+            android:drawableStart="@drawable/ic_bubble"
+            android:drawablePadding="@dimen/size10"
+            android:gravity="center_vertical"
+            android:paddingHorizontal="@dimen/size16"
+            android:text="@string/txt_bubble"
+            android:textColor="@color/col_main" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btnFont"
+            style="@style/TextView_7"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="?selectableItemBackground"
+            android:drawableStart="@drawable/ic_font"
+            android:drawablePadding="@dimen/size10"
+            android:gravity="center_vertical"
+            android:paddingHorizontal="@dimen/size16"
+            android:text="@string/txt_background"
+            android:textColor="@color/col_main" />
+
+        <LinearLayout
+            android:id="@+id/btnAutomationContact"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/size16"
+            android:background="?selectableItemBackground"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:paddingHorizontal="@dimen/size16">
+
+            <androidx.appcompat.widget.AppCompatButton
+                style="@style/TextView_7"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="@color/transparent"
+                android:drawableStart="@drawable/ic_person2"
+                android:drawablePadding="@dimen/size10"
+                android:gravity="center_vertical"
+                android:text="@string/txt_automatic_contact_colors"
+                android:textColor="@color/col_main" />
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/sl_switch" />
+        </LinearLayout>
+
+    </LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

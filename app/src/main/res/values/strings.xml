@@ -53,8 +53,8 @@
     <string name="txt_ask_5">Others</string>
     <string name="txt_uninstall">Uninstall</string>
     <string name="txt_want_uninstall">You want to uninstall this app?</string>
-    <string name="txt_title_noti_full">🔥 Your Roblox Outfit Could Go Viral</string>
-    <string name="txt_body_noti_full">Create eye-catching Roblox clothes with AI and make your style stand out from millions of players.</string>
+    <string name="txt_title_noti_full">📩 You just missed an interesting message...</string>
+    <string name="txt_body_noti_full">Someone messaged you. Open it now before the conversation cools down!</string>
     <string name="txt_network_error">Network error</string>
     <string name="txt_network_error_message">No network connection, please try again!</string>
     <string name="txt_notifiction_granted">The right to notify has been granted.</string>
@@ -218,4 +218,5 @@
     <string name="txt_set_sms_color_as_your_default">Set SMS Color as Your Default</string>
     <string name="txt_cont_permission_system">To make Color SMS work properly with cool features, it needs to be the default SMS app</string>
     <string name="txt_ok">Ok</string>
+    <string name="txt_automatic_contact_colors">Automatic contact colors</string>
 </resources>

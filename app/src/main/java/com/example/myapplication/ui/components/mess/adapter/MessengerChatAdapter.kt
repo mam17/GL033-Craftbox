@@ -1,6 +1,7 @@
 package com.example.myapplication.ui.components.mess.adapter
-
 import android.provider.Telephony
+import android.util.Log
+import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.ImageView
@@ -19,8 +20,10 @@ import com.example.myapplication.databinding.ItemChatRightBinding
 import com.example.myapplication.domain.layer.ThemeMessModel
 import com.example.myapplication.ui.components.mess.MessageItem
 import com.example.myapplication.utils.AppEx.formatToOrdinalDate
+import com.example.myapplication.utils.AppEx.dpToPx
 import com.example.myapplication.utils.ImageUtils
 import com.example.myapplication.utils.ViewEx.applyThemeFont
+import com.example.myapplication.views.MessageBubbleView
 import java.text.SimpleDateFormat
 import java.util.Date
 import java.util.Locale
@@ -196,6 +199,7 @@ class MessengerChatAdapter(
 
     fun setTheme(theme: ThemeMessModel?) {
         this.theme = theme
+        Log.i("TAG_okman", "applyBubbleType: $theme")
         notifyDataSetChanged()
     }
     private fun applyThemeDate(binding: ItemChatDateBinding) {
@@ -207,6 +211,13 @@ class MessengerChatAdapter(
         val currentTheme = theme ?: return
         binding.root.applyThemeFont(currentTheme.font)
         binding.bubbleView.setBubbleColor(currentTheme.colBGBBReceived.toColorInt())
+        applyBubbleType(
+            bubbleView = binding.bubbleView,
+            theme = currentTheme,
+            strokeColorHex = currentTheme.colStrokeBBReceived,
+            typeOneCaretPosition = 0x0080000b,
+            typeTwoCaretPosition = 0x00800053
+        )
         binding.tvBody.setTextColor(currentTheme.colTextBBReceived.toColorInt())
     }
 
@@ -214,10 +225,74 @@ class MessengerChatAdapter(
         val currentTheme = theme ?: return
         binding.root.applyThemeFont(currentTheme.font)
         binding.bubbleView.setBubbleColor(currentTheme.colBGBBSent.toColorInt())
+        applyBubbleType(
+            bubbleView = binding.bubbleView,
+            theme = currentTheme,
+            strokeColorHex = currentTheme.colStrokeBBSent,
+            typeOneCaretPosition = 0x0080000d,
+            typeTwoCaretPosition = 0x00800055
+        )
         binding.tvBody.setTextColor(currentTheme.colTextBBSent.toColorInt())
         binding.tvTime.setTextColor(currentTheme.colMain.toColorInt())
         binding.tvStatus.setTextColor(ContextCompat.getColor(binding.root.context, R.color.red))
         binding.ivDone.setColorFilter(currentTheme.colMain.toColorInt())
+    }
+
+    private fun applyBubbleType(
+        bubbleView: MessageBubbleView,
+        theme: ThemeMessModel,
+        strokeColorHex: String,
+        typeOneCaretPosition: Int,
+        typeTwoCaretPosition: Int
+    ) {
+        val context = bubbleView.context
+        val cornerRadius = context.dpToPx(16).toFloat()
+        val strokeWidth = if (theme.enableStroke && theme.widthStroke > 0) {
+            theme.widthStroke.toFloat()
+        } else {
+            0f
+        }
+        val strokeColor = strokeColorHex
+            .takeIf { it.isNotBlank() }
+            ?.let {
+                runCatching { "#${it.trimStart('#')}".toColorInt() }.getOrNull()
+            }
+            ?: theme.colorStroke
+                .takeIf { it.isNotBlank() }
+                ?.let { runCatching { "#${it.trimStart('#')}".toColorInt() }.getOrNull() }
+            ?: theme.colMain.toColorInt()
+
+        bubbleView.setStroke(
+            theme.enableStroke && strokeWidth > 0f,
+            strokeColor,
+            strokeWidth
+        )
+
+        when (theme.typeBubble) {
+            0 -> {
+                bubbleView.setCaretPosition(0)
+                bubbleView.setCaretSize(0, 0)
+                bubbleView.setCornerRadius(cornerRadius)
+            }
+
+            1 -> {
+                bubbleView.setCaretPosition(typeOneCaretPosition)
+                bubbleView.setCaretSize(
+                    context.dpToPx(12),
+                    context.dpToPx(9)
+                )
+                bubbleView.setCornerRadius(cornerRadius)
+            }
+
+            2 -> {
+                bubbleView.setCaretPosition(typeTwoCaretPosition)
+                bubbleView.setCaretSize(
+                    context.dpToPx(12),
+                    context.dpToPx(9)
+                )
+                bubbleView.setCornerRadius(cornerRadius)
+            }
+        }
     }
 
     companion object {
