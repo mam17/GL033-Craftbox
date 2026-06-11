@@ -23,9 +23,12 @@ object ThemeUiHelper {
             target.setBackgroundColor(backgroundValue.toColorInt())
         } else {
             target.setBackgroundColor(Color.TRANSPARENT)
+            val isUrl = backgroundValue.startsWith("http")
+            val isAsset = !isUrl && !backgroundValue.startsWith("content://") && !backgroundValue.startsWith("file://")
+            val finalUrl = if (isAsset) "file:///android_asset/$backgroundValue" else backgroundValue
             with(ImageUtils) {
                 target.loadFromPathAction(
-                    path = "file:///android_asset/$backgroundValue",
+                    path = finalUrl,
                     isCenterCrop = true
                 )
             }
@@ -66,14 +69,15 @@ object ThemeUiHelper {
         }
 
         target.customSolidColor = Color.TRANSPARENT
-        val isAsset = !backgroundValue.startsWith("content://") && !backgroundValue.startsWith("file://")
+        val isUrl = backgroundValue.startsWith("http")
+        val isAsset = !isUrl && !backgroundValue.startsWith("content://") && !backgroundValue.startsWith("file://")
         val finalUrl = if (isAsset) "file:///android_asset/$backgroundValue" else backgroundValue
 
         with(ImageUtils) {
             target.context.let { ctx ->
                 com.bumptech.glide.Glide.with(ctx)
                     .asBitmap()
-                    .load(if (isAsset) finalUrl else android.net.Uri.parse(finalUrl))
+                    .load(if (isAsset || isUrl) finalUrl else android.net.Uri.parse(finalUrl))
                     .into(object : com.bumptech.glide.request.target.CustomTarget<android.graphics.Bitmap>() {
                         override fun onResourceReady(
                             resource: android.graphics.Bitmap,

@@ -11,6 +11,8 @@ import com.grl.sms_wa.utils.Constant
 import com.grl.sms_wa.utils.ImageUtils.loadFromPathAction
 import com.grl.sms_wa.utils.ViewEx.applyThemeFont
 
+import com.grl.sms_wa.utils.asImageSource
+
 class UnlockThemeFragment :
     BaseFragment<FragmentUnlockThemeBinding>(FragmentUnlockThemeBinding::inflate) {
     var onUnlockAllClick: ((ThemeMessModel) -> Unit)? = null
@@ -34,19 +36,19 @@ class UnlockThemeFragment :
         binding.root.applyThemeFont(theme.font)
         bindBackground(theme.pathBG)
         binding.ivMessReceived.loadFromPathAction(
-            "file:///android_asset/${theme.pathBubbleReceived}",
+            theme.pathBubbleReceived.asImageSource(),
             isCenterCrop = false
         )
         binding.ivMessSent.loadFromPathAction(
-            "file:///android_asset/${theme.pathBubbleSent}",
+            theme.pathBubbleSent.asImageSource(),
             isCenterCrop = false
         )
         binding.ivUnlock.loadFromPathAction(
-            "file:///android_asset/${theme.pathAvt}",
+            theme.pathAvt.asImageSource(),
             isCenterCrop = false
         )
         binding.ivMessComposer.loadFromPathAction(
-            "file:///android_asset/${theme.pathEnterChat}",
+            theme.pathEnterChat.asImageSource(),
             isCenterCrop = false
         )
     }
@@ -58,7 +60,7 @@ class UnlockThemeFragment :
         } else {
             binding.ivBGTheme.setBgColor(Color.TRANSPARENT)
             binding.ivBGTheme.loadFromPathAction(
-                "file:///android_asset/$backgroundValue",
+                backgroundValue.asImageSource(),
                 isCenterCrop = true
             )
         }

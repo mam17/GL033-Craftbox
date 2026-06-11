@@ -20,4 +20,9 @@ object Constant {
     const val EXTRA_THEME_SELECTED_POSITION = "EXTRA_THEME_SELECTED_POSITION"
     const val EXTRA_THEME_FROM_START = "EXTRA_THEME_FROM_START"
     const val EMAIL_ADDRESS = "support@example.com"
+
+    // Catalog cache keys (Firestore → SharedPreferences)
+    const val KEY_SP_STICKER_CATALOG = "KEY_SP_STICKER_CATALOG"
+    const val KEY_SP_THEME_CATALOG = "KEY_SP_THEME_CATALOG"
+    const val KEY_SP_CATALOG_FETCHED = "KEY_SP_CATALOG_FETCHED"
 }

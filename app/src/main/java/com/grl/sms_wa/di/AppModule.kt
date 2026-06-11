@@ -5,6 +5,7 @@ import androidx.room.Room
 import com.grl.sms_wa.data.local.AppDatabase
 import com.grl.sms_wa.data.local.dao.UserDao
 import com.grl.sms_wa.utils.SpManager
+import com.google.firebase.firestore.FirebaseFirestore
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -37,5 +38,11 @@ object AppModule {
     @Singleton
     fun provideSpManager(@ApplicationContext context: Context): SpManager {
         return SpManager(context)
+    }
+
+    @Provides
+    @Singleton
+    fun provideFirestore(): FirebaseFirestore {
+        return FirebaseFirestore.getInstance()
     }
 }

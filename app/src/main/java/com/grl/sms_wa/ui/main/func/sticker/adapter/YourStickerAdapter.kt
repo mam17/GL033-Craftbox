@@ -8,6 +8,7 @@ import com.grl.sms_wa.domain.layer.StickerModel
 import com.grl.sms_wa.utils.ImageUtils.loadFromPathAction
 import com.grl.sms_wa.utils.SpManager
 import com.grl.sms_wa.utils.ViewEx.visible
+import com.grl.sms_wa.utils.asImageSource
 
 class YourStickerAdapter :
     BaseAdapter<StickerModel, ItemStickerStoreBinding>(ItemStickerStoreBinding::inflate) {
@@ -26,7 +27,7 @@ class YourStickerAdapter :
 
         binding.apply {
             tvNameSticker.text = item.name
-            ivSticker.loadFromPathAction("file:///android_asset/${item.firstImagePath}")
+            ivSticker.loadFromPathAction(item.firstImagePath.asImageSource())
 
             ivRemoveAdd.visible()
             ivRemoveAdd.setImageResource(R.drawable.ic_remove)

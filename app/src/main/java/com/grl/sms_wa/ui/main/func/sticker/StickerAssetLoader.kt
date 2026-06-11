@@ -8,6 +8,24 @@ object StickerAssetLoader {
     private const val STICKER_ROOT = "stickers"
     private const val CATEGORY_FOLDER = "category"
 
+    fun loadFromCache(json: String): List<StickerModel> {
+        return try {
+            val type = object : com.google.gson.reflect.TypeToken<List<com.grl.sms_wa.data.remote.model.StickerPackRemote>>() {}.type
+            val remotes: List<com.grl.sms_wa.data.remote.model.StickerPackRemote>? = com.google.gson.Gson().fromJson(json, type)
+            remotes?.map { remote ->
+                StickerModel(
+                    name = remote.name,
+                    previewPath = remote.thumbnail,
+                    firstImagePath = remote.images.firstOrNull().orEmpty(),
+                    detailPaths = remote.images
+                )
+            } ?: emptyList()
+        } catch (e: Exception) {
+            e.printStackTrace()
+            emptyList()
+        }
+    }
+
     fun loadStickerCategories(assetManager: AssetManager): List<StickerModel> {
         val categoryPreviews = assetManager.list("$STICKER_ROOT/$CATEGORY_FOLDER")
             .orEmpty()

@@ -8,6 +8,8 @@ import com.grl.sms_wa.domain.layer.ThemeMessModel
 import com.grl.sms_wa.utils.ImageUtils.loadFromPathAction
 import com.grl.sms_wa.views.RoundImageView
 
+import com.grl.sms_wa.utils.asImageSource
+
 class ChooseThemePagerAdapter :
     BaseAdapter<ThemeMessModel, ItemChooseThemeBinding>(ItemChooseThemeBinding::inflate) {
 
@@ -22,7 +24,7 @@ class ChooseThemePagerAdapter :
         item: ThemeMessModel,
         position: Int
     ) {
-        val pathImage = "file:///android_asset/${item.pathThemePreview}"
+        val pathImage = item.pathThemePreview.asImageSource()
         val isDownloaded = downloadedThemeKeys.contains(item.downloadKey())
         val isLoading = loadingPosition == position
 

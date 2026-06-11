@@ -275,6 +275,16 @@ class SpManager @Inject constructor(@ApplicationContext context: Context) {
         putArrayList(Constant.KEY_SP_ADDED_STICKERS, stickerNames)
     }
 
+    // ─── Catalog cache (Firestore → SP) ────────────────────────────────
+    fun saveStickerCatalog(json: String) = putString(Constant.KEY_SP_STICKER_CATALOG, json)
+    fun getStickerCatalog(): String? = getString(Constant.KEY_SP_STICKER_CATALOG)
+
+    fun saveThemeCatalog(json: String) = putString(Constant.KEY_SP_THEME_CATALOG, json)
+    fun getThemeCatalog(): String? = getString(Constant.KEY_SP_THEME_CATALOG)
+
+    fun isCatalogFetched(): Boolean = getBoolean(Constant.KEY_SP_CATALOG_FETCHED, false)
+    fun setCatalogFetched(fetched: Boolean) = putBoolean(Constant.KEY_SP_CATALOG_FETCHED, fetched)
+
     fun <T> saveObject(key: String, value: T) {
         prefs.edit {
             putString(key, Gson().toJson(value))

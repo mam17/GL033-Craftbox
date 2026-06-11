@@ -8,6 +8,7 @@ import androidx.activity.result.contract.ActivityResultContracts
 import androidx.lifecycle.lifecycleScope
 import com.grl.sms_wa.R
 import com.grl.sms_wa.base.activity.BaseActivity
+import com.grl.sms_wa.data.remote.AssetCatalogRepository
 import com.grl.sms_wa.databinding.ActivitySplashBinding
 import com.grl.sms_wa.ui.permission.PermissionActivity
 import com.grl.sms_wa.ui.language.LanguageActivity
@@ -20,12 +21,18 @@ import com.grl.sms_wa.utils.NetworkUtil
 import com.grl.sms_wa.utils.PermissionUtils
 import com.grl.sms_wa.utils.notification.NotificationUtils
 import dagger.hilt.android.AndroidEntryPoint
+import javax.inject.Inject
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withTimeoutOrNull
+import kotlin.time.Duration.Companion.milliseconds
 
 @SuppressLint("CustomSplashScreen")
 @AndroidEntryPoint
 class SplashActivity : BaseActivity<ActivitySplashBinding>(ActivitySplashBinding::inflate) {
+    @Inject
+    lateinit var assetCatalogRepository: AssetCatalogRepository
+
     private val notificationPermissionLauncher =
         registerForActivityResult(ActivityResultContracts.RequestPermission()) {
             goToNextAction()
@@ -95,8 +102,17 @@ class SplashActivity : BaseActivity<ActivitySplashBinding>(ActivitySplashBinding
         isStartingNextScreen = true
         lifecycleScope.launch {
             val startedAt = System.currentTimeMillis()
+            if (NetworkUtil.isNetworkAvailable(this@SplashActivity) && !assetCatalogRepository.isCatalogCached()) {
+                try {
+                    withTimeoutOrNull(REMOTE_CONFIG_TIMEOUT_MS.milliseconds) {
+                        assetCatalogRepository.fetchAndCacheIfNeeded()
+                    }
+                } catch (e: Exception) {
+                    Log.e(TAG, "Failed to fetch remote catalog", e)
+                }
+            }
             val remainingDelay = SPLASH_MIN_DURATION_MS - (System.currentTimeMillis() - startedAt)
-            if (remainingDelay > 0) delay(remainingDelay)
+            if (remainingDelay > 0) delay(remainingDelay.milliseconds)
             openNextScreen()
         }
     }

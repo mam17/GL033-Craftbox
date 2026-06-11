@@ -24,7 +24,23 @@ class StickerViewModel @Inject constructor(
 
     fun loadStickers() {
         val addedStickerNames = spManager.getAddedStickerNames().toSet()
-        val stickers = StickerAssetLoader.loadStickerCategories(context.assets).map { sticker ->
+        val cachedCatalogJson = spManager.getStickerCatalog()
+        android.util.Log.d("StickerViewModel", "cachedCatalogJson is null or empty: ${cachedCatalogJson.isNullOrEmpty()}")
+        val rawStickers = if (!cachedCatalogJson.isNullOrEmpty()) {
+            android.util.Log.d("StickerViewModel", "cachedCatalogJson: $cachedCatalogJson")
+            val cached = StickerAssetLoader.loadFromCache(cachedCatalogJson)
+            android.util.Log.d("StickerViewModel", "Loaded from cache: ${cached.size} stickers")
+            if (cached.isEmpty()) {
+                android.util.Log.d("StickerViewModel", "Cache was empty or invalid, fallback to local assets")
+                StickerAssetLoader.loadStickerCategories(context.assets)
+            } else {
+                cached
+            }
+        } else {
+            android.util.Log.d("StickerViewModel", "No cache, load from local assets")
+            StickerAssetLoader.loadStickerCategories(context.assets)
+        }
+        val stickers = rawStickers.map { sticker ->
             sticker.copy(isAdded = addedStickerNames.contains(sticker.name))
         }
         _allStickers.value = stickers

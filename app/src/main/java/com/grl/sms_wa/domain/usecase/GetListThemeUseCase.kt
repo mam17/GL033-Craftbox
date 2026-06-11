@@ -2,14 +2,75 @@ package com.grl.sms_wa.domain.usecase
 
 import com.grl.sms_wa.domain.layer.CategoryThemeModel
 import com.grl.sms_wa.domain.layer.ThemeMessModel
+import com.grl.sms_wa.utils.SpManager
 import javax.inject.Inject
 
-class GetListThemeUseCase @Inject constructor() :
-    UseCase<GetListThemeUseCase.Param, List<CategoryThemeModel>>() {
+class GetListThemeUseCase @Inject constructor(
+    private val spManager: SpManager
+) : UseCase<GetListThemeUseCase.Param, List<CategoryThemeModel>>() {
 
     open class Param() : UseCase.Param()
 
-    override suspend fun execute(param: Param): List<CategoryThemeModel> = listOf(
+    override suspend fun execute(param: Param): List<CategoryThemeModel> {
+        val localList = getLocalThemes()
+        val cachedCatalogJson = spManager.getThemeCatalog()
+        android.util.Log.d("GetListThemeUseCase", "cachedCatalogJson is null or empty: ${cachedCatalogJson.isNullOrEmpty()}")
+        return if (!cachedCatalogJson.isNullOrEmpty()) {
+            android.util.Log.d("GetListThemeUseCase", "cachedCatalogJson: $cachedCatalogJson")
+            val merged = mergeRemoteCatalog(localList, cachedCatalogJson)
+            android.util.Log.d("GetListThemeUseCase", "Returned merged list size: ${merged.size}")
+            merged
+        } else {
+            android.util.Log.d("GetListThemeUseCase", "Returned local list size: ${localList.size}")
+            localList
+        }
+    }
+
+    private fun mergeRemoteCatalog(localCategories: List<CategoryThemeModel>, json: String): List<CategoryThemeModel> {
+        try {
+            val type = object : com.google.gson.reflect.TypeToken<List<com.grl.sms_wa.data.remote.model.ThemeCategoryRemote>>() {}.type
+            val remotes: List<com.grl.sms_wa.data.remote.model.ThemeCategoryRemote> = com.google.gson.Gson().fromJson(json, type) ?: return localCategories
+            android.util.Log.d("GetListThemeUseCase", "Parsed remote categories count: ${remotes.size}")
+            if (remotes.isEmpty()) {
+                android.util.Log.d("GetListThemeUseCase", "Remote categories is empty, fallback to local")
+                return localCategories
+            }
+
+            return localCategories.map { localCategory ->
+                val remoteCategory = remotes.find { 
+                    it.name.equals(localCategory.nameCategory, ignoreCase = true) || 
+                    it.id.equals(localCategory.nameCategory.replace(" ", "_"), ignoreCase = true) ||
+                    (localCategory.nameCategory.equals("Basic", ignoreCase = true) && it.id.equals("base", ignoreCase = true))
+                }
+                if (remoteCategory == null) {
+                    localCategory
+                } else {
+                    val updatedListTheme = localCategory.listTheme.map { localTheme ->
+                        val variantId = (localTheme.id + 1).toString()
+                        val remoteVariant = remoteCategory.variants.find { it.id == variantId }
+                        if (remoteVariant == null) {
+                            localTheme
+                        } else {
+                            localTheme.copy(
+                                pathThemePreview = remoteVariant.thumbnail ?: localTheme.pathThemePreview,
+                                pathBG = remoteVariant.background ?: localTheme.pathBG,
+                                pathAvt = remoteVariant.avatar ?: localTheme.pathAvt,
+                                pathBubbleSent = remoteVariant.bubble_sent ?: localTheme.pathBubbleSent,
+                                pathBubbleReceived = remoteVariant.bubble_recv ?: localTheme.pathBubbleReceived,
+                                pathEnterChat = remoteVariant.enter_button ?: localTheme.pathEnterChat
+                            )
+                        }
+                    }
+                    localCategory.copy(listTheme = updatedListTheme)
+                }
+            }
+        } catch (e: Exception) {
+            e.printStackTrace()
+            return localCategories
+        }
+    }
+
+    private fun getLocalThemes(): List<CategoryThemeModel> = listOf(
         CategoryThemeModel(
             nameCategory = "Basic",
             listTheme = listOf(

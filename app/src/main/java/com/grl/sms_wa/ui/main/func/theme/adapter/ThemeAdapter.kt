@@ -4,6 +4,7 @@ import com.grl.sms_wa.base.adapter.BaseAdapter
 import com.grl.sms_wa.databinding.ItemThemeBinding
 import com.grl.sms_wa.domain.layer.ThemeMessModel
 import com.grl.sms_wa.utils.ImageUtils.loadFromPathAction
+import com.grl.sms_wa.utils.asImageSource
 
 class ThemeAdapter : BaseAdapter<ThemeMessModel, ItemThemeBinding>(ItemThemeBinding::inflate) {
 
@@ -13,7 +14,7 @@ class ThemeAdapter : BaseAdapter<ThemeMessModel, ItemThemeBinding>(ItemThemeBind
         position: Int
     ) {
         binding.apply {
-            val pathImage = "file:///android_asset/${item.pathThemePreview}"
+            val pathImage = item.pathThemePreview.asImageSource()
             ivThemePreview.loadFromPathAction(pathImage)
         }
     }

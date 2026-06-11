@@ -66,7 +66,7 @@ class PermissionActivity :
     }
 
     private fun goToMain() {
-        startActivityNewTask(MainActivity::class.java)
+        startActivityNewTask(MainActivity::class.java, )
     }
 
     private fun applyCurrentTheme() {
