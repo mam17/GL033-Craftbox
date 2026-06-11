@@ -312,12 +312,9 @@ class CustomBackgroundView @JvmOverloads constructor(
                 val scale = maxOf(vw / bw, vh / bh)
                 val dw = bw * scale
                 val dh = bh * scale
-                RectF(
-                    viewRect.left - (dw - vw) / 2f,
-                    viewRect.top  - (dh - vh) / 2f,
-                    viewRect.left + (dw + vw) / 2f - (dw - vw) / 2f,
-                    viewRect.top  + (dh + vh) / 2f - (dh - vh) / 2f
-                )
+                val left = viewRect.left - (dw - vw) / 2f
+                val top  = viewRect.top  - (dh - vh) / 2f
+                RectF(left, top, left + dw, top + dh)
             }
             BitmapScaleType.CENTER_INSIDE -> {
                 val scale = if (bw <= vw && bh <= vh) 1f else minOf(vw / bw, vh / bh)
