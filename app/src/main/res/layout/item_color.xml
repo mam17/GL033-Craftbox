@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.grl.sms_wa.views.RoundImageView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/ivColor"
+    android:layout_width="@dimen/size32"
+    android:layout_height="@dimen/size32"
+    app:cornerRadius="@dimen/size5"
+    app:enableScaleAnim="false"
+    android:layout_marginHorizontal="@dimen/size7"
+    app:strokeColor="@color/col_main"
+    app:strokeEnable="false"
+    app:strokeWidth="@dimen/size1" />

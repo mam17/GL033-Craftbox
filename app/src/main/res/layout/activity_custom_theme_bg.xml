@@ -2,7 +2,6 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".ui.components.custom.activity.CustomBGThemeActivity">
@@ -55,12 +54,19 @@
             app:tint="@color/col_main" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
+    <View
+        android:id="@+id/vLine"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/size1"
+        android:background="@color/grey"
+        app:layout_constraintTop_toBottomOf="@id/clHeader" />
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rcvChatPreview"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         app:layout_constraintBottom_toTopOf="@id/llBottomPanel"
-        app:layout_constraintTop_toBottomOf="@id/clHeader"
+        app:layout_constraintTop_toBottomOf="@id/vLine"
         tools:listitem="@layout/item_chat_left" />
 
 
@@ -73,89 +79,38 @@
         android:padding="@dimen/size16"
         app:layout_constraintBottom_toBottomOf="parent">
 
-        <LinearLayout
+        <FrameLayout
+            android:id="@+id/flBackgroundOptions"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@drawable/bg_white_r8"
-            android:orientation="vertical"
-            android:paddingHorizontal="@dimen/size12">
-            <!-- Blur Control -->
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="60dp"
-                android:gravity="center_vertical"
-                android:orientation="horizontal">
+            android:visibility="gone">
 
-                <TextView
-                    style="@style/TextView_5"
-                    android:layout_width="60dp"
-                    android:layout_height="wrap_content"
-                    android:text="Blur"
-                    android:textColor="@color/col_main" />
+            <include
+                android:id="@+id/layoutOverlay"
+                layout="@layout/layout_blur_overlay" />
 
-                <ImageView
-                    android:layout_width="@dimen/size24"
-                    android:layout_height="@dimen/size24"
-                    android:src="@drawable/ic_blur" />
+            <include
+                android:id="@+id/layoutColor"
+                layout="@layout/layout_select_color" />
 
-                <SeekBar
-                    android:id="@+id/sbBlur"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:max="25"
-                    android:progress="0"
-                    android:progressTint="@color/black"
-                    android:thumbTint="@color/black" />
-            </LinearLayout>
-
-            <!-- Overlay Control -->
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="60dp"
-                android:gravity="center_vertical"
-                android:orientation="horizontal">
-
-                <TextView
-                    style="@style/TextView_5"
-                    android:layout_width="60dp"
-                    android:layout_height="wrap_content"
-                    android:text="Overlay"
-                    android:textColor="@color/col_main" />
-
-                <ImageView
-                    android:layout_width="@dimen/size24"
-                    android:layout_height="@dimen/size24"
-                    android:src="@drawable/ic_overlay" />
-
-                <SeekBar
-                    android:id="@+id/sbOverlay"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:max="100"
-                    android:progress="0"
-                    android:progressTint="@color/black"
-                    android:thumbTint="@color/black" />
-            </LinearLayout>
-        </LinearLayout>
-
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/size16" />
+            <include
+                android:id="@+id/layoutColorGradient"
+                layout="@layout/layout_select_gradient" />
+        </FrameLayout>
 
         <!-- Tabs -->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/size16"
             android:orientation="horizontal">
 
             <LinearLayout
                 android:id="@+id/btnPicture"
                 android:layout_width="0dp"
-                android:layout_height="80dp"
+                android:layout_height="@dimen/size80"
                 android:layout_weight="1"
-                android:background="@drawable/bg_tab_selected"
+                android:background="@drawable/bg_white_r8"
                 android:gravity="center"
                 android:orientation="vertical">
 
@@ -168,7 +123,8 @@
                     style="@style/TextView_5"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Picture"
+                    android:layout_marginTop="@dimen/size10"
+                    android:text="@string/txt_picture"
                     android:textColor="@color/col_main" />
             </LinearLayout>
 
@@ -179,7 +135,7 @@
             <LinearLayout
                 android:id="@+id/btnColor"
                 android:layout_width="0dp"
-                android:layout_height="80dp"
+                android:layout_height="@dimen/size80"
                 android:layout_weight="1"
                 android:background="@drawable/bg_white_r8"
                 android:gravity="center"
@@ -194,7 +150,8 @@
                     style="@style/TextView_5"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Color"
+                    android:layout_marginTop="@dimen/size10"
+                    android:text="@string/txt_color"
                     android:textColor="@color/col_main" />
             </LinearLayout>
 
@@ -205,7 +162,7 @@
             <LinearLayout
                 android:id="@+id/btnGradient"
                 android:layout_width="0dp"
-                android:layout_height="80dp"
+                android:layout_height="@dimen/size80"
                 android:layout_weight="1"
                 android:background="@drawable/bg_white_r8"
                 android:gravity="center"
@@ -220,26 +177,30 @@
                     style="@style/TextView_5"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Gradient"
+                    android:layout_marginTop="@dimen/size10"
+                    android:text="@string/txt_gradient"
                     android:textColor="@color/col_main" />
             </LinearLayout>
         </LinearLayout>
 
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/size24" />
 
         <!-- Apply Button -->
-        <TextView
+        <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/btnApply"
             style="@style/TextView_7"
             android:layout_width="match_parent"
-            android:layout_height="50dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/size16"
             android:background="@drawable/bg_btn_r10_main"
             android:gravity="center"
-            android:text="Apply"
+            android:text="@string/txt_apply"
             android:textColor="@color/white" />
 
     </LinearLayout>
 
+    <androidx.fragment.app.FragmentContainerView
+        android:id="@+id/fcvPictureBackground"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="gone" />
 </androidx.constraintlayout.widget.ConstraintLayout>

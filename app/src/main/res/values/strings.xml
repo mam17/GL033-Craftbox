@@ -220,4 +220,11 @@
     <string name="txt_ok">Ok</string>
     <string name="txt_automatic_contact_colors">Automatic contact colors</string>
     <string name="txt_default">Default</string>
+    <string name="txt_gradient">Gradient</string>
+    <string name="txt_color">Color</string>
+    <string name="txt_picture">Picture</string>
+    <string name="txt_blur">Blur</string>
+    <string name="txt_library">Library</string>
+    <string name="txt_horizontal">Horizontal</string>
+    <string name="txt_vertical">Vertical</string>
 </resources>

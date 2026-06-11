@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/bg_white_r8"
+    android:gravity="center_vertical"
+    android:orientation="horizontal"
+    android:padding="@dimen/size8">
+
+    <ImageView
+        android:id="@+id/ivFilter"
+        android:layout_width="@dimen/size32"
+        android:layout_height="@dimen/size32"
+        android:src="@drawable/img_filter_color" />
+
+    <TextView
+        android:id="@+id/tvDirection"
+        style="@style/TextView_5"
+        android:layout_width="wrap_content"
+        android:layout_height="@dimen/size32"
+        android:layout_marginStart="@dimen/size8"
+        android:background="?attr/selectableItemBackground"
+        android:gravity="center"
+        android:paddingHorizontal="@dimen/size8"
+        android:text="@string/txt_horizontal"
+        android:textColor="@color/col_main" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rcvColor"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:orientation="horizontal"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        tools:listitem="@layout/item_color_gradient" />
+</LinearLayout>

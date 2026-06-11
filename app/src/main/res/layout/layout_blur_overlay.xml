@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/bg_white_r8"
+    android:orientation="vertical"
+    android:paddingHorizontal="@dimen/size12">
+    <!-- Blur Control -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
+
+        <TextView
+            style="@style/TextView_5"
+            android:layout_width="60dp"
+            android:layout_height="wrap_content"
+            android:text="@string/txt_blur"
+            android:textColor="@color/col_main" />
+
+        <ImageView
+            android:layout_width="@dimen/size24"
+            android:layout_height="@dimen/size24"
+            android:src="@drawable/ic_blur" />
+
+        <SeekBar
+            android:id="@+id/sbBlur"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:max="25"
+            android:progress="0"
+            android:progressTint="@color/black"
+            android:thumbTint="@color/black" />
+    </LinearLayout>
+
+    <!-- Overlay Control -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
+
+        <TextView
+            style="@style/TextView_5"
+            android:layout_width="60dp"
+            android:layout_height="wrap_content"
+            android:text="@string/txt_overlay"
+            android:textColor="@color/col_main" />
+
+        <ImageView
+            android:layout_width="@dimen/size24"
+            android:layout_height="@dimen/size24"
+            android:src="@drawable/ic_overlay" />
+
+        <SeekBar
+            android:id="@+id/sbOverlay"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:max="100"
+            android:progress="0"
+            android:progressTint="@color/black"
+            android:thumbTint="@color/black" />
+    </LinearLayout>
+</LinearLayout>

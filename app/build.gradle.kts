@@ -143,4 +143,7 @@ dependencies {
     implementation(libs.android.smsmms)
 
     implementation("it.xabaras.android:recyclerview-swipedecorator:1.4")
+
+    // picker color
+    implementation ("com.github.skydoves:colorpickerview:2.4.0")
 }

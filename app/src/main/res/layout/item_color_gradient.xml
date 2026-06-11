@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.grl.sms_wa.views.CustomBackgroundView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="@dimen/size32"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/itemColorGradient"
+    app:cbv_strokeColor="@color/col_main"
+    app:cbv_strokeEnabled="false"
+    android:layout_marginHorizontal="@dimen/size7"
+    app:cbv_strokeWidth="@dimen/size1"
+    app:cbv_cornerRadius="@dimen/size5"
+    android:layout_height="@dimen/size32" />
