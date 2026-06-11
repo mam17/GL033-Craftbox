@@ -5,6 +5,8 @@ import com.grl.sms_wa.R
 import com.grl.sms_wa.base.fragment.BaseFragment
 import com.grl.sms_wa.databinding.FragmentSettingThemeBinding
 import com.grl.sms_wa.ui.components.custom.activity.CustomBGThemeActivity
+import com.grl.sms_wa.ui.components.custom.activity.CustomBubbleActivity
+import com.grl.sms_wa.ui.main.MainActivity
 import com.grl.sms_wa.utils.SpManager
 import com.grl.sms_wa.utils.ViewEx.applyThemeFont
 import com.grl.sms_wa.utils.ViewEx.gone
@@ -18,7 +20,9 @@ class SettingThemeFragment :
     override fun initView() {
         binding.apply {
             toolbarSettingTheme.apply {
-                btnBack.setOnClickListener { removeFragment(this@SettingThemeFragment) }
+                btnBack.setOnClickListener {
+                    (activity as? MainActivity)?.closeDrawerFeatureFragment(this@SettingThemeFragment)
+                        ?: removeFragment(this@SettingThemeFragment) }
                 btnAction.gone()
                 btnSelect.gone()
                 tvTitle.text = getString(R.string.txt_themes)
@@ -27,9 +31,9 @@ class SettingThemeFragment :
                 startNextActivity(CustomBGThemeActivity::class.java)
             }
             btnBubble.setOnClickListener {
-                showToast("Bubble")
+                startNextActivity(CustomBubbleActivity::class.java)
             }
-            btnFont.setOnClickListener {
+                btnFont.setOnClickListener {
                 showToast("Font")
             }
         }

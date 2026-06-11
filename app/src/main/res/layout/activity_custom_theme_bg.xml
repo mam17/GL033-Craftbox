@@ -31,11 +31,12 @@
             app:tint="@color/col_main" />
 
         <TextView
+            android:id="@+id/tvTitle"
             style="@style/TextView_7"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/size16"
-            android:text="Background"
+            android:text="@string/txt_background"
             android:textColor="@color/col_main"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toEndOf="@id/ivBack"
@@ -69,7 +70,6 @@
         app:layout_constraintTop_toBottomOf="@id/vLine"
         tools:listitem="@layout/item_chat_left" />
 
-
     <LinearLayout
         android:id="@+id/llBottomPanel"
         android:layout_width="match_parent"
@@ -98,7 +98,6 @@
                 layout="@layout/layout_select_gradient" />
         </FrameLayout>
 
-        <!-- Tabs -->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -115,11 +114,13 @@
                 android:orientation="vertical">
 
                 <ImageView
+                    android:id="@+id/ivPicture"
                     android:layout_width="@dimen/size32"
                     android:layout_height="@dimen/size32"
                     android:src="@drawable/img_picture" />
 
                 <TextView
+                    android:id="@+id/tvPicture"
                     style="@style/TextView_5"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -142,11 +143,13 @@
                 android:orientation="vertical">
 
                 <ImageView
+                    android:id="@+id/ivColor"
                     android:layout_width="@dimen/size32"
                     android:layout_height="@dimen/size32"
                     android:src="@drawable/img_filter_color" />
 
                 <TextView
+                    android:id="@+id/tvColor"
                     style="@style/TextView_5"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -169,11 +172,13 @@
                 android:orientation="vertical">
 
                 <ImageView
+                    android:id="@+id/ivGradient"
                     android:layout_width="@dimen/size32"
                     android:layout_height="@dimen/size32"
                     android:src="@drawable/img_gradient_color" />
 
                 <TextView
+                    android:id="@+id/tvGradient"
                     style="@style/TextView_5"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -183,8 +188,6 @@
             </LinearLayout>
         </LinearLayout>
 
-
-        <!-- Apply Button -->
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/btnApply"
             style="@style/TextView_7"

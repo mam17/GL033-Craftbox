@@ -13,6 +13,7 @@
         android:orientation="horizontal">
 
         <TextView
+            android:id="@+id/tvBlur"
             style="@style/TextView_5"
             android:layout_width="60dp"
             android:layout_height="wrap_content"
@@ -43,6 +44,7 @@
         android:orientation="horizontal">
 
         <TextView
+            android:id="@+id/tvOverlay"
             style="@style/TextView_5"
             android:layout_width="60dp"
             android:layout_height="wrap_content"

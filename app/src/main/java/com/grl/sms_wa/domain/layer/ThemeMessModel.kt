@@ -10,6 +10,9 @@ data class ThemeMessModel(
     val pathThemePreview: String,
 
     val pathBG: String,
+    val isOrientationColorBG: Boolean = false,
+    val overlayAlpha: Int = 0,
+    val blurRadius: Int = 0,
     val isUnlockBG: Boolean = false,
 
     val pathAvt: String,

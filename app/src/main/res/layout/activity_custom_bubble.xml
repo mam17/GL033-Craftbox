@@ -1,0 +1,331 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.components.custom.activity.CustomBubbleActivity">
+
+    <com.grl.sms_wa.views.CustomBackgroundView
+        android:id="@+id/backgroundTheme"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:cbv_solidColor="@color/white" />
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/clHeader"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <ImageView
+            android:id="@+id/ivBack"
+            android:layout_width="@dimen/size40"
+            android:layout_height="@dimen/size40"
+            android:layout_marginStart="@dimen/size8"
+            android:padding="@dimen/size8"
+            android:src="@drawable/ic_back"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:tint="@color/col_main" />
+
+        <TextView
+            android:id="@+id/tvTitle"
+            style="@style/TextView_7"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/size16"
+            android:text="@string/txt_bubble"
+            android:textColor="@color/col_main"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toEndOf="@id/ivBack"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageView
+            android:id="@+id/ivReset"
+            android:layout_width="@dimen/size40"
+            android:layout_height="@dimen/size40"
+            android:layout_marginEnd="@dimen/size8"
+            android:padding="@dimen/size8"
+            android:src="@drawable/ic_history_2"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:tint="@color/col_main" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <View
+        android:id="@+id/vLine"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/size1"
+        android:background="@color/grey"
+        app:layout_constraintTop_toBottomOf="@id/clHeader" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rcvChatPreview"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toTopOf="@id/llBottomPanel"
+        app:layout_constraintTop_toBottomOf="@id/vLine"
+        tools:listitem="@layout/item_chat_left" />
+
+    <LinearLayout
+        android:id="@+id/llBottomPanel"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/bg_border_bb"
+        android:orientation="vertical"
+        android:padding="@dimen/size16"
+        app:layout_constraintBottom_toBottomOf="parent">
+
+        <LinearLayout
+            android:id="@+id/llTabs"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintTop_toBottomOf="@+id/clTopBar">
+
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/btnColor"
+                android:layout_width="0dp"
+                android:layout_height="@dimen/size44"
+                android:layout_weight="1"
+                android:clickable="true"
+                app:strokeWidth="0dp"
+                android:focusable="true"
+                android:foreground="?attr/selectableItemBackground"
+                app:cardBackgroundColor="@color/col_main"
+                app:cardCornerRadius="@dimen/size30"
+               >
+
+                <TextView
+                    android:id="@+id/tvAll"
+                    style="@style/TextView_5"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:includeFontPadding="false"
+                    android:text="@string/txt_color"
+                    android:textAllCaps="false"
+                    android:textColor="@color/white" />
+            </com.google.android.material.card.MaterialCardView>
+
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/btnStyle"
+                android:layout_width="0dp"
+                android:layout_height="@dimen/size44"
+                android:layout_marginStart="@dimen/size16"
+                android:layout_weight="1"
+                android:clickable="true"
+                android:focusable="true"
+                android:foreground="?attr/selectableItemBackground"
+                app:cardBackgroundColor="@color/transparent"
+                app:cardCornerRadius="@dimen/size30"
+                app:cardElevation="0dp"
+                app:strokeWidth="0dp">
+
+                <TextView
+                    android:id="@+id/tvYourSticker"
+                    style="@style/TextView_5"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:includeFontPadding="false"
+                    android:text="@string/txt_style"
+                    android:textAllCaps="false"
+                    android:textColor="@color/col_888888" />
+            </com.google.android.material.card.MaterialCardView>
+        </LinearLayout>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rcvBubble"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/size16"
+            android:visibility="gone"
+            app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+            app:spanCount="2"
+            tools:listitem="@layout/item_style" />
+
+        <LinearLayout
+            android:id="@+id/llTabColor"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/size16"
+            android:orientation="vertical"
+            android:visibility="visible">
+
+            <TextView
+                style="@style/TextView_7"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/txt_bubble_color"
+                android:textColor="@color/col_main"
+                android:textSize="@dimen/size14" />
+
+            <LinearLayout
+                android:id="@+id/llBBReceived"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/size6"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:paddingVertical="@dimen/size10">
+
+                <ImageView
+                    android:id="@+id/ivBBReceived"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/ic_chat"
+                    app:tint="@color/col_main" />
+
+                <TextView
+                    android:id="@+id/tvBBReceived"
+                    style="@style/TextView_5"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/size10"
+                    android:layout_weight="1"
+                    android:text="@string/txt_received"
+                    android:textSize="@dimen/size14" />
+
+                <com.grl.sms_wa.views.RoundImageView
+                    android:id="@+id/ivBBColorReceivedSL"
+                    android:layout_width="@dimen/size24"
+                    android:layout_height="@dimen/size24"
+                    app:bgColor="@color/col_main"
+                    app:isOval="true" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/llBBSent"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/size6"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:paddingVertical="@dimen/size10">
+
+                <ImageView
+                    android:id="@+id/ivBBSent"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/ic_chat_2"
+                    app:tint="@color/col_main" />
+
+                <TextView
+                    android:id="@+id/tvBBSent"
+                    style="@style/TextView_5"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/size10"
+                    android:layout_weight="1"
+                    android:text="@string/txt_sent"
+                    android:textSize="@dimen/size14" />
+
+                <com.grl.sms_wa.views.RoundImageView
+                    android:id="@+id/ivColorBBSent"
+                    android:layout_width="@dimen/size24"
+                    android:layout_height="@dimen/size24"
+                    app:bgColor="@color/col_d9fdd3"
+                    app:isOval="true" />
+            </LinearLayout>
+
+            <TextView
+                style="@style/TextView_7"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/size6"
+                android:text="@string/txt_text_color"
+                android:textColor="@color/col_main"
+                android:textSize="@dimen/size14" />
+
+            <LinearLayout
+                android:id="@+id/llTextColorReceived"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/size6"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:paddingVertical="@dimen/size10">
+
+                <ImageView
+                    android:id="@+id/ivTextColorReceived"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/ic_chat"
+                    app:tint="@color/col_main" />
+
+                <TextView
+                    android:id="@+id/tvTextColorReceived"
+                    style="@style/TextView_5"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/size10"
+                    android:layout_weight="1"
+                    android:text="@string/txt_received"
+                    android:textSize="@dimen/size14" />
+
+                <com.grl.sms_wa.views.RoundImageView
+                    android:id="@+id/ivTextColorReceivedSL"
+                    android:layout_width="@dimen/size24"
+                    android:layout_height="@dimen/size24"
+                    app:bgColor="@color/black"
+                    app:isOval="true" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/llTextColorSent"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/size6"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:paddingVertical="@dimen/size10">
+
+                <ImageView
+                    android:id="@+id/ivTextColorSent"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/ic_chat_2"
+                    app:tint="@color/col_main" />
+
+                <TextView
+                    android:id="@+id/tvTextColorSent"
+                    style="@style/TextView_5"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/size10"
+                    android:layout_weight="1"
+                    android:text="@string/txt_sent"
+                    android:textSize="@dimen/size14" />
+
+                <com.grl.sms_wa.views.RoundImageView
+                    android:id="@+id/ivTextColorSentSL"
+                    android:layout_width="@dimen/size24"
+                    android:layout_height="@dimen/size24"
+                    app:bgColor="@color/white"
+                    app:isOval="true" />
+            </LinearLayout>
+        </LinearLayout>
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btnApply"
+            style="@style/TextView_7"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/size16"
+            android:background="@drawable/bg_btn_r10_main"
+            android:gravity="center"
+            android:text="@string/txt_apply"
+            android:textColor="@color/white" />
+
+    </LinearLayout>
+
+    <FrameLayout
+        android:id="@+id/frCustomBB"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="gone" />
+</androidx.constraintlayout.widget.ConstraintLayout>

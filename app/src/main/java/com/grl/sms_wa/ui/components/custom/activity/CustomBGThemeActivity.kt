@@ -29,6 +29,7 @@ import com.skydoves.colorpickerview.ColorPickerDialog
 import com.skydoves.colorpickerview.listeners.ColorEnvelopeListener
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
+import androidx.core.graphics.toColorInt
 
 @AndroidEntryPoint
 class CustomBGThemeActivity :
@@ -38,7 +39,6 @@ class CustomBGThemeActivity :
     private val chatAdapter by lazy { ChatPreviewAdapter() }
     private val colorAdapter by lazy { BackgroundColorAdapter() }
     private val gradientAdapter by lazy { BackgroundGradientAdapter() }
-    private var currentOverlayAlpha = 0
 
     override fun initView() {
         applyStatusBarInsetToHeader()
@@ -203,6 +203,7 @@ class CustomBGThemeActivity :
                 } else {
                     binding.backgroundTheme.blurEnabled = false
                 }
+                viewModel.setBlurRadius(progress)
             }
 
             override fun onStartTrackingTouch(seekBar: SeekBar?) {}
@@ -212,8 +213,9 @@ class CustomBGThemeActivity :
         binding.layoutOverlay.sbOverlay.setOnSeekBarChangeListener(object :
             SeekBar.OnSeekBarChangeListener {
             override fun onProgressChanged(seekBar: SeekBar?, progress: Int, fromUser: Boolean) {
-                currentOverlayAlpha = (progress * 2.55).toInt() // 0-100 to 0-255
-                binding.backgroundTheme.overlayColor = Color.argb(currentOverlayAlpha, 0, 0, 0)
+                val alpha = (progress * 2.55).toInt() // 0-100 to 0-255
+                binding.backgroundTheme.overlayColor = Color.argb(alpha, 0, 0, 0)
+                viewModel.setOverlayAlpha(alpha)
             }
 
             override fun onStartTrackingTouch(seekBar: SeekBar?) {}
@@ -234,6 +236,7 @@ class CustomBGThemeActivity :
         }
 
         binding.btnApply.setOnClickListener {
+            viewModel.saveBackground()
             finish()
         }
     }
@@ -290,7 +293,34 @@ class CustomBGThemeActivity :
         super.onBack()
     }
 
-    override fun initData() = Unit
+    override fun initData() {
+        viewModel.loadCurrentTheme()
+        binding.layoutOverlay.sbBlur.progress = viewModel.blurRadius.value
+        binding.layoutOverlay.sbOverlay.progress = (viewModel.overlayAlpha.value / 2.55).toInt()
+        
+        spManager.getCurrentTheme()?.let { theme ->
+            val colMain = theme.colMain.toColorInt()
+            val colorStateList = android.content.res.ColorStateList.valueOf(colMain)
+
+            binding.tvTitle.setTextColor(colMain)
+            binding.ivBack.imageTintList = colorStateList
+            binding.ivReset.imageTintList = colorStateList
+            
+            binding.tvPicture.setTextColor(colMain)
+
+            binding.tvColor.setTextColor(colMain)
+
+            binding.tvGradient.setTextColor(colMain)
+
+            binding.btnApply.backgroundTintList = colorStateList
+
+            chatAdapter.theme = theme
+
+            binding.layoutOverlay.tvOverlay.setTextColor(colMain)
+            binding.layoutOverlay.tvBlur.setTextColor(colMain)
+            binding.layoutColorGradient.tvDirection.setTextColor(colMain)
+        }
+    }
 
     override fun initObserver() {
         lifecycleScope.launch {

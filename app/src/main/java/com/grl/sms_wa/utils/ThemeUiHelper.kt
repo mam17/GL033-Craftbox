@@ -36,8 +36,20 @@ object ThemeUiHelper {
         if (theme == null) {
             target.backgroundBitmap = null
             target.customSolidColor = Color.WHITE
+            target.overlayColor = Color.TRANSPARENT
+            target.blurEnabled = false
             return
         }
+
+        // Overlay (alpha 0–255)
+        val overlayAlpha = theme.overlayAlpha.coerceIn(0, 255)
+        target.overlayColor = if (overlayAlpha > 0) Color.argb(overlayAlpha, 0, 0, 0)
+                              else Color.TRANSPARENT
+
+        // Blur (radius 0–25)
+        val blur = theme.blurRadius.coerceIn(0, 25)
+        target.blurEnabled = blur > 0
+        if (blur > 0) target.blurRadius = blur.toFloat()
 
         val backgroundValue = theme.pathBG
         if (backgroundValue.startsWith("#")) {
@@ -46,12 +58,39 @@ object ThemeUiHelper {
             return
         }
 
-        val bitmap = runCatching {
-            target.context.assets.open(backgroundValue).use(BitmapFactory::decodeStream)
-        }.getOrNull()
+        // Gradient orientation
+        target.gradientOrientation = if (theme.isOrientationColorBG) {
+            CustomBackgroundView.GradientOrientation.LEFT_RIGHT
+        } else {
+            CustomBackgroundView.GradientOrientation.TOP_BOTTOM
+        }
 
         target.customSolidColor = Color.TRANSPARENT
-        target.backgroundBitmap = bitmap
+        val isAsset = !backgroundValue.startsWith("content://") && !backgroundValue.startsWith("file://")
+        val finalUrl = if (isAsset) "file:///android_asset/$backgroundValue" else backgroundValue
+
+        with(ImageUtils) {
+            target.context.let { ctx ->
+                com.bumptech.glide.Glide.with(ctx)
+                    .asBitmap()
+                    .load(if (isAsset) finalUrl else android.net.Uri.parse(finalUrl))
+                    .into(object : com.bumptech.glide.request.target.CustomTarget<android.graphics.Bitmap>() {
+                        override fun onResourceReady(
+                            resource: android.graphics.Bitmap,
+                            transition: com.bumptech.glide.request.transition.Transition<in android.graphics.Bitmap>?
+                        ) {
+                            target.backgroundBitmap = resource
+                        }
+
+                        override fun onLoadCleared(placeholder: android.graphics.drawable.Drawable?) {}
+                        
+                        override fun onLoadFailed(errorDrawable: android.graphics.drawable.Drawable?) {
+                            super.onLoadFailed(errorDrawable)
+                            target.backgroundBitmap = null
+                        }
+                    })
+            }
+        }
     }
 
     fun colorState(color: Int): ColorStateList = ColorStateList.valueOf(color)

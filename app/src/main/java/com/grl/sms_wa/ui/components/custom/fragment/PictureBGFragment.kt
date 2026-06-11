@@ -94,3 +94,4 @@ class PictureBGFragment :
         const val BACKGROUND_SPAN_COUNT = 2
     }
 }
+

@@ -3,10 +3,15 @@ package com.grl.sms_wa.ui.components.custom.adapter
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.viewbinding.ViewBinding
+import androidx.core.graphics.toColorInt
 import com.grl.sms_wa.base.adapter.BaseMultiAdapter
 import com.grl.sms_wa.databinding.ItemChatDateBinding
 import com.grl.sms_wa.databinding.ItemChatLeftBinding
 import com.grl.sms_wa.databinding.ItemChatRightBinding
+import com.grl.sms_wa.domain.layer.ThemeMessModel
+import com.grl.sms_wa.utils.AppEx.dpToPx
+import com.grl.sms_wa.utils.ViewEx.applyThemeFont
+import com.grl.sms_wa.views.MessageBubbleView
 
 data class PreviewMessage(
     val content: String,
@@ -15,6 +20,12 @@ data class PreviewMessage(
 )
 
 class ChatPreviewAdapter : BaseMultiAdapter<PreviewMessage>() {
+
+    var theme: ThemeMessModel? = null
+        set(value) {
+            field = value
+            notifyDataSetChanged()
+        }
 
     companion object {
         const val TYPE_DATE = 0
@@ -37,14 +48,94 @@ class ChatPreviewAdapter : BaseMultiAdapter<PreviewMessage>() {
         when (binding) {
             is ItemChatDateBinding -> {
                 binding.tvDate.text = item.content
+                theme?.let { currentTheme ->
+                    binding.tvDate.applyThemeFont(currentTheme.font)
+                    binding.tvDate.setTextColor(currentTheme.colTextBBSent.toColorInt())
+                }
             }
             is ItemChatLeftBinding -> {
                 binding.tvBody.text = item.content
-                // Hidden avatar text or something if needed
                 binding.tvFirstName.visibility = android.view.View.GONE
+                
+                theme?.let { currentTheme ->
+                    binding.root.applyThemeFont(currentTheme.font)
+                    binding.bubbleView.setBubbleColor(currentTheme.colBGBBReceived.toColorInt())
+                    applyBubbleType(
+                        bubbleView = binding.bubbleView,
+                        theme = currentTheme,
+                        strokeColorHex = currentTheme.colStrokeBBReceived,
+                        typeOneCaretPosition = 0x0080000b,
+                        typeTwoCaretPosition = 0x00800053
+                    )
+                    binding.tvBody.setTextColor(currentTheme.colTextBBReceived.toColorInt())
+                    binding.ivAvatar.setBgColor(currentTheme.colMain.toColorInt())
+                }
             }
             is ItemChatRightBinding -> {
                 binding.tvBody.text = item.content
+                binding.tvTime.visibility = android.view.View.GONE
+                binding.tvStatus.visibility = android.view.View.GONE
+                binding.ivDone.visibility = android.view.View.GONE
+                
+                theme?.let { currentTheme ->
+                    binding.root.applyThemeFont(currentTheme.font)
+                    binding.bubbleView.setBubbleColor(currentTheme.colBGBBSent.toColorInt())
+                    applyBubbleType(
+                        bubbleView = binding.bubbleView,
+                        theme = currentTheme,
+                        strokeColorHex = currentTheme.colStrokeBBSent,
+                        typeOneCaretPosition = 0x0080000d,
+                        typeTwoCaretPosition = 0x00800055
+                    )
+                    binding.tvBody.setTextColor(currentTheme.colTextBBSent.toColorInt())
+                }
+            }
+        }
+    }
+
+    private fun applyBubbleType(
+        bubbleView: MessageBubbleView,
+        theme: ThemeMessModel,
+        strokeColorHex: String,
+        typeOneCaretPosition: Int,
+        typeTwoCaretPosition: Int
+    ) {
+        val context = bubbleView.context
+        val cornerRadius = context.dpToPx(16).toFloat()
+        val strokeWidth = if (theme.enableStroke && theme.widthStroke > 0) {
+            theme.widthStroke.toFloat()
+        } else {
+            0f
+        }
+        val strokeColor = strokeColorHex
+            .takeIf { it.isNotBlank() }
+            ?.let { runCatching { "#${it.trimStart('#')}".toColorInt() }.getOrNull() }
+            ?: theme.colorStroke
+                .takeIf { it.isNotBlank() }
+                ?.let { runCatching { "#${it.trimStart('#')}".toColorInt() }.getOrNull() }
+            ?: theme.colMain.toColorInt()
+
+        bubbleView.setStroke(
+            theme.enableStroke && strokeWidth > 0f,
+            strokeColor,
+            strokeWidth
+        )
+
+        when (theme.typeBubble) {
+            0 -> {
+                bubbleView.setCaretPosition(0)
+                bubbleView.setCaretSize(0, 0)
+                bubbleView.setCornerRadius(cornerRadius)
+            }
+            1 -> {
+                bubbleView.setCaretPosition(typeOneCaretPosition)
+                bubbleView.setCaretSize(context.dpToPx(12), context.dpToPx(9))
+                bubbleView.setCornerRadius(cornerRadius)
+            }
+            2 -> {
+                bubbleView.setCaretPosition(typeTwoCaretPosition)
+                bubbleView.setCaretSize(context.dpToPx(12), context.dpToPx(9))
+                bubbleView.setCornerRadius(cornerRadius)
             }
         }
     }
