@@ -11,6 +11,7 @@ import com.grl.sms_wa.ui.onboarding.OnboardingActivity
 import com.grl.sms_wa.utils.Constant
 import com.grl.sms_wa.utils.SystemUtil
 import com.grl.sms_wa.utils.ViewEx.gone
+import com.grl.sms_wa.utils.ViewEx.textColorRes
 import com.grl.sms_wa.utils.ViewEx.visible
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -48,6 +49,7 @@ class LanguageActivity : BaseActivity<ActivityLanguageBinding>(ActivityLanguageB
             toolBarLanguage.btnBack.isVisible = !fromSplash
             toolBarLanguage.btnBack.setOnClickListener { onBack() }
             toolBarLanguage.btnSelect.visible()
+            toolBarLanguage.btnSelect.textColorRes(R.color.col_main)
             toolBarLanguage.btnAction.gone()
             toolBarLanguage.tvTitle.text = getString(R.string.txt_language)
             rclLanguage.adapter = mLanguageAdapter

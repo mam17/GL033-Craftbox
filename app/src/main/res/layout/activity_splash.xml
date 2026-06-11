@@ -38,6 +38,7 @@
         android:layout_marginBottom="@dimen/size8"
         android:text="@string/txt_this_action_contain_ads"
         android:textColor="@color/black"
+        android:visibility="gone"
         android:textSize="@dimen/size14"
         app:layout_constraintBottom_toTopOf="@id/progress_bar"
         app:layout_constraintEnd_toEndOf="parent"
@@ -57,8 +58,8 @@
         android:paddingStart="@dimen/size10"
         android:paddingEnd="@dimen/size10"
         android:progress="50"
-        app:indicatorColor="@color/red"
+        app:indicatorColor="@color/col_main"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:trackColor="@color/white"
+        app:trackColor="@color/grey"
         app:trackCornerRadius="@dimen/size12" />
 </androidx.constraintlayout.widget.ConstraintLayout>

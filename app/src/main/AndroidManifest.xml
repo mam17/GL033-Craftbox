@@ -44,7 +44,8 @@
             android:screenOrientation="portrait" />
         <activity
             android:name=".ui.components.detail_sticker.DetailStickerActivity"
-            android:exported="false" />
+            android:exported="false"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".ui.components.addnew.NewMessengerActivity"
             android:exported="false"
@@ -52,7 +53,8 @@
             android:windowSoftInputMode="stateHidden|adjustResize" />
         <activity
             android:name=".ui.components.preview.activity.MediaPreviewActivity"
-            android:exported="false" />
+            android:exported="false"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".ui.components.mess.activity.MessengerActivity"
             android:exported="false"

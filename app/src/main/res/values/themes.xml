@@ -12,6 +12,7 @@
         <item name="android:windowEnableSplitTouch">false</item>
         <item name="android:colorControlHighlight">@color/col_select</item>
         <item name="bottomSheetDialogTheme">@style/AppBottomSheetDialogTheme</item>
+        <item name="android:windowBackground">@color/white</item>
     </style>
 
     <style name="Theme.MyApplication" parent="Base.Theme.MyApplication" />

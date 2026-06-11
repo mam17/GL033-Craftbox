@@ -11,6 +11,7 @@ import com.grl.sms_wa.ui.main.func.sticker.adapter.StickerDetailAdapter
 import com.grl.sms_wa.utils.Constant
 import com.grl.sms_wa.utils.ImageUtils.loadFromPathAction
 import com.grl.sms_wa.utils.ViewEx.gone
+import com.grl.sms_wa.utils.asImageSource
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -49,7 +50,7 @@ class DetailStickerActivity :
 
         binding.toolbarDTSticker.tvTitle.text = selectedSticker.name
         binding.ivStickerLogo.loadFromPathAction(
-            "file:///android_asset/${selectedSticker.previewPath}",
+            selectedSticker.previewPath.asImageSource(),
             isCenterCrop = false
         )
         stickerDetailAdapter.setData(selectedSticker.detailPaths)

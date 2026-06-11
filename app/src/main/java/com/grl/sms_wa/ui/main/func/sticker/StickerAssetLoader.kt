@@ -11,18 +11,38 @@ object StickerAssetLoader {
     fun loadFromCache(json: String): List<StickerModel> {
         return try {
             val type = object : com.google.gson.reflect.TypeToken<List<com.grl.sms_wa.data.remote.model.StickerPackRemote>>() {}.type
-            val remotes: List<com.grl.sms_wa.data.remote.model.StickerPackRemote>? = com.google.gson.Gson().fromJson(json, type)
-            remotes?.map { remote ->
+            val remotes: List<com.grl.sms_wa.data.remote.model.StickerPackRemote> = com.google.gson.Gson().fromJson(json, type) ?: return emptyList()
+
+            // 1. Find the "category" pack that contains the preview URLs
+            val categoryPack = remotes.find { it.id.equals("category", ignoreCase = true) }
+            val categoryPreviews = categoryPack?.images ?: emptyList()
+
+            // 2. Filter out the "category" pack from the list of actual packs
+            val actualPacks = remotes.filterNot { it.id.equals("category", ignoreCase = true) }
+
+            actualPacks.map { remote ->
+                // 3. Find matching preview URL for this pack
+                val previewUrl = findCategoryPreviewUrl(remote.name, categoryPreviews) ?: remote.thumbnail
                 StickerModel(
-                    name = remote.name,
-                    previewPath = remote.thumbnail,
+                    name = remote.name.toDisplayName(),
+                    previewPath = previewUrl,
                     firstImagePath = remote.images.firstOrNull().orEmpty(),
                     detailPaths = remote.images
                 )
-            } ?: emptyList()
+            }
         } catch (e: Exception) {
             e.printStackTrace()
             emptyList()
+        }
+    }
+
+    private fun findCategoryPreviewUrl(folderName: String, categoryPreviews: List<String>): String? {
+        val aliases = previewAliases[folderName.lowercase(Locale.US)].orEmpty() + 
+                      folderName.lowercase(Locale.US).replace(" ", "_")
+
+        return categoryPreviews.firstOrNull { preview ->
+            val normalizedPreview = preview.lowercase(Locale.US)
+            aliases.any { alias -> normalizedPreview.contains(alias) }
         }
     }
 

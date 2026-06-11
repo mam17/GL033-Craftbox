@@ -35,13 +35,13 @@
             app:layout_constraintStart_toEndOf="@+id/imgLanguage"
             app:layout_constraintTop_toTopOf="@+id/imgLanguage" />
 
-        <androidx.appcompat.widget.AppCompatRadioButton
+        <ImageView
             android:id="@+id/swLanguage"
             android:layout_width="@dimen/size30"
             android:layout_height="@dimen/size30"
             android:checked="true"
             android:clickable="false"
-            android:theme="@style/SwitchTheme"
+            android:src="@drawable/sl_check_feature"
             app:layout_constraintBottom_toBottomOf="@+id/tvTitleLanguage"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="@+id/tvTitleLanguage" />

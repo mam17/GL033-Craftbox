@@ -35,7 +35,7 @@
         <com.google.android.material.bottomnavigation.BottomNavigationView
             android:id="@+id/bnvMain"
             android:layout_width="match_parent"
-            android:layout_height="@dimen/size70"
+            android:layout_height="wrap_content"
             android:background="@color/white"
             app:itemActiveIndicatorStyle="@null"
             app:itemIconTint="@color/bottom_nav_item_color"

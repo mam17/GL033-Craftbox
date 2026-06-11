@@ -10,7 +10,7 @@ class LanguageAdapter :
     override fun bind(binding: ItemLanguageBinding, item: LanguageModel, position: Int) {
         binding.imgLanguage.setImageResource(item.iconRes)
         binding.tvTitleLanguage.setText(item.nameRes)
-        binding.swLanguage.isChecked = item.selected
+        binding.swLanguage.isSelected = item.selected
 
         binding.root.isSelected = item.selected
     }

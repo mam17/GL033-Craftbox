@@ -17,8 +17,8 @@
             android:id="@+id/ivAvatar"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:padding="@dimen/size6"
             android:src="@drawable/ic_person"
+            android:scaleType="centerCrop"
             app:bgColor="@color/col_main"
             app:isOval="true" />
 
