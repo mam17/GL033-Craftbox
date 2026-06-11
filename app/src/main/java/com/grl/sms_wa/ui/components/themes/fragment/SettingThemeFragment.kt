@@ -6,6 +6,7 @@ import com.grl.sms_wa.base.fragment.BaseFragment
 import com.grl.sms_wa.databinding.FragmentSettingThemeBinding
 import com.grl.sms_wa.ui.components.custom.activity.CustomBGThemeActivity
 import com.grl.sms_wa.ui.components.custom.activity.CustomBubbleActivity
+import com.grl.sms_wa.ui.components.custom.activity.CustomFontActivity
 import com.grl.sms_wa.ui.main.MainActivity
 import com.grl.sms_wa.utils.SpManager
 import com.grl.sms_wa.utils.ViewEx.applyThemeFont
@@ -22,7 +23,8 @@ class SettingThemeFragment :
             toolbarSettingTheme.apply {
                 btnBack.setOnClickListener {
                     (activity as? MainActivity)?.closeDrawerFeatureFragment(this@SettingThemeFragment)
-                        ?: removeFragment(this@SettingThemeFragment) }
+                        ?: removeFragment(this@SettingThemeFragment)
+                }
                 btnAction.gone()
                 btnSelect.gone()
                 tvTitle.text = getString(R.string.txt_themes)
@@ -33,8 +35,8 @@ class SettingThemeFragment :
             btnBubble.setOnClickListener {
                 startNextActivity(CustomBubbleActivity::class.java)
             }
-                btnFont.setOnClickListener {
-                showToast("Font")
+            btnFont.setOnClickListener {
+                startNextActivity(CustomFontActivity::class.java)
             }
         }
     }

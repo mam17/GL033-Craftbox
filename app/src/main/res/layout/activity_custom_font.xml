@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.components.custom.activity.CustomFontActivity">
+
+    <com.grl.sms_wa.views.CustomBackgroundView
+        android:id="@+id/backgroundTheme"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:cbv_solidColor="@color/white" />
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/clHeader"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <ImageView
+            android:id="@+id/ivBack"
+            android:layout_width="@dimen/size40"
+            android:layout_height="@dimen/size40"
+            android:layout_marginStart="@dimen/size8"
+            android:padding="@dimen/size8"
+            android:src="@drawable/ic_back"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:tint="@color/col_main" />
+
+        <TextView
+            android:id="@+id/tvTitle"
+            style="@style/TextView_7"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/size16"
+            android:text="@string/txt_bubble"
+            android:textColor="@color/col_main"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toEndOf="@id/ivBack"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageView
+            android:id="@+id/ivReset"
+            android:layout_width="@dimen/size40"
+            android:layout_height="@dimen/size40"
+            android:layout_marginEnd="@dimen/size8"
+            android:padding="@dimen/size8"
+            android:src="@drawable/ic_history_2"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:tint="@color/col_main" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <View
+        android:id="@+id/vLine"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/size1"
+        android:background="@color/grey"
+        app:layout_constraintTop_toBottomOf="@id/clHeader" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rcvChatPreview"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toTopOf="@id/llBottomPanel"
+        app:layout_constraintTop_toBottomOf="@id/vLine"
+        tools:listitem="@layout/item_chat_left" />
+
+    <LinearLayout
+        android:id="@+id/llBottomPanel"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:background="@drawable/bg_border_sheet_custom"
+        android:orientation="vertical"
+        android:padding="@dimen/size16"
+        app:layout_constraintBottom_toBottomOf="parent">
+
+        <TextView
+            android:id="@+id/tvFont"
+            style="@style/TextView_7"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/txt_bubble_color"
+            android:textColor="@color/col_main"
+            android:textSize="@dimen/size14" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rcvFont"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/size200"
+            android:layout_marginTop="@dimen/size16"
+            android:orientation="vertical"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            tools:listitem="@layout/item_font" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btnApply"
+            style="@style/TextView_7"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/size16"
+            android:background="@drawable/bg_btn_r10_main"
+            android:gravity="center"
+            android:stateListAnimator="@null"
+            android:text="@string/txt_apply"
+            android:textColor="@color/white" />
+
+    </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

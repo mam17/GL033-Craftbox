@@ -205,4 +205,19 @@
     <string name="txt_cont_permission_system">Color SMS को शानदार फीचर्स के साथ ठीक से काम करने के लिए, इसे डिफ़ॉल्ट SMS ऐप होना आवश्यक है।</string>
     <string name="txt_ok">ठीक है</string>
     <string name="txt_automatic_contact_colors">स्वचालित कॉन्टैक्ट कलर</string>
+    <string name="txt_default">गलती करना</string>
+    <string name="txt_gradient">ढाल</string>
+    <string name="txt_color">रंग</string>
+    <string name="txt_picture">चित्र</string>
+    <string name="txt_blur">कलंक</string>
+    <string name="txt_library">पुस्तकालय</string>
+    <string name="txt_horizontal">क्षैतिज</string>
+    <string name="txt_vertical">खड़ा</string>
+    <string name="txt_style">शैली</string>
+    <string name="txt_bubble_color">बबल कलर</string>
+    <string name="txt_received">प्राप्त</string>
+    <string name="txt_sent">भेजा</string>
+    <string name="txt_text_color">पाठ का रंग</string>
+    <string name="txt_font">फ़ॉन्ट</string>
+    <string name="txt_version_v">संस्करण: %1$s</string>
 </resources>

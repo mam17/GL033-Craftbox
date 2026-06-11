@@ -205,4 +205,19 @@
     <string name="txt_cont_permission_system">Para que o Color SMS funcione corretamente e com recursos incríveis, ele precisa ser o aplicativo de SMS padrão.</string>
     <string name="txt_ok">OK</string>
     <string name="txt_automatic_contact_colors">Cores de contato automáticas</string>
+    <string name="txt_default">Padrão</string>
+    <string name="txt_gradient">Gradiente</string>
+    <string name="txt_color">Cor</string>
+    <string name="txt_picture">Foto</string>
+    <string name="txt_blur">Borrão</string>
+    <string name="txt_library">Biblioteca</string>
+    <string name="txt_horizontal">Horizontal</string>
+    <string name="txt_vertical">Vertical</string>
+    <string name="txt_style">Estilo</string>
+    <string name="txt_bubble_color">Cor de bolha</string>
+    <string name="txt_received">Recebido</string>
+    <string name="txt_sent">Enviado</string>
+    <string name="txt_text_color">Cor do texto</string>
+    <string name="txt_font">Fonte</string>
+    <string name="txt_version_v">Versão: %1$s</string>
 </resources>

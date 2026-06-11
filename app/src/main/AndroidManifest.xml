@@ -195,6 +195,10 @@
             android:name=".ui.components.custom.activity.CustomBubbleActivity"
             android:exported="false"
             android:windowSoftInputMode="adjustResize" />
+        <activity
+            android:name=".ui.components.custom.activity.CustomFontActivity"
+            android:exported="false"
+            android:windowSoftInputMode="adjustResize" />
     </application>
 
 </manifest>

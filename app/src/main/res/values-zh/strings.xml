@@ -165,7 +165,7 @@
     <string name="txt_failed_to_process_image">图像处理失败</string>
     <string name="txt_failed_to_send">消息发送失败。</string>
     <string name="txt_message_sent">信息已发送。</string>
-    <string name="txt_set_as_default_sms_required">将 Color SMS 设置为默认短信应用以发送消息。</string>
+    <string name="txt_set_as_default_sms_required">将 WA SMS 设置为默认短信应用以发送消息。</string>
     <string name="txt_send_fail_touch_to_retry">发送失败。点击重试。</string>
     <string name="txt_private_policy">私人政策</string>
     <string name="txt_rate_us">给我们评分</string>
@@ -202,7 +202,22 @@
     <string name="txt_font_size"><![CDATA[字体和大小]]></string>
     <string name="txt_bubble">气泡</string>
     <string name="txt_set_sms_color_as_your_default">将短信颜色设置为默认值</string>
-    <string name="txt_cont_permission_system">要让 Color SMS 的所有炫酷功能正常运行，它必须设置为默认短信应用。</string>
+    <string name="txt_cont_permission_system">要让 WA SMS 的所有炫酷功能正常运行，它必须设置为默认短信应用。</string>
     <string name="txt_ok">好的</string>
     <string name="txt_automatic_contact_colors">自动接触色</string>
+    <string name="txt_default">默认</string>
+    <string name="txt_gradient">坡度</string>
+    <string name="txt_color">颜色</string>
+    <string name="txt_picture">图片</string>
+    <string name="txt_blur">模糊</string>
+    <string name="txt_library">图书馆</string>
+    <string name="txt_horizontal">水平的</string>
+    <string name="txt_vertical">垂直的</string>
+    <string name="txt_style">风格</string>
+    <string name="txt_bubble_color">泡泡颜色</string>
+    <string name="txt_received">已收到</string>
+    <string name="txt_sent">发送</string>
+    <string name="txt_text_color">文本颜色</string>
+    <string name="txt_font">字体</string>
+    <string name="txt_version_v">版本：%1$s</string>
 </resources>

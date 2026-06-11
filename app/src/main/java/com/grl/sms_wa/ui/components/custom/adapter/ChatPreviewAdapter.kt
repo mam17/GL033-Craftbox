@@ -137,6 +137,21 @@ class ChatPreviewAdapter : BaseMultiAdapter<PreviewMessage>() {
                 bubbleView.setCaretSize(context.dpToPx(12), context.dpToPx(9))
                 bubbleView.setCornerRadius(cornerRadius)
             }
+            3 -> {
+                bubbleView.setCaretPosition(typeTwoCaretPosition)
+                bubbleView.setCaretSize(context.dpToPx(12), context.dpToPx(9))
+                bubbleView.setCornerRadius(cornerRadius * 2)
+            }
+            4 -> {
+                bubbleView.setCaretPosition(typeOneCaretPosition)
+                bubbleView.setCaretSize(context.dpToPx(16), context.dpToPx(12))
+                bubbleView.setCornerRadius(cornerRadius)
+            }
+            5 -> {
+                bubbleView.setCaretPosition(typeTwoCaretPosition)
+                bubbleView.setCaretSize(context.dpToPx(8), context.dpToPx(6))
+                bubbleView.setCornerRadius(cornerRadius / 2)
+            }
         }
     }
 }

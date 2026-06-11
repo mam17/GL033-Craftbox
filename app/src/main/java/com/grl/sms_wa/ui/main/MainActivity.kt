@@ -1,6 +1,7 @@
 package com.grl.sms_wa.ui.main
 
 import android.Manifest
+import android.annotation.SuppressLint
 import android.content.res.ColorStateList
 import android.content.pm.PackageManager
 import android.view.View
@@ -9,6 +10,7 @@ import androidx.core.content.ContextCompat
 import androidx.core.graphics.toColorInt
 import androidx.core.view.GravityCompat
 import androidx.fragment.app.Fragment
+import com.facebook.shimmer.BuildConfig
 import com.grl.sms_wa.R
 import com.grl.sms_wa.base.activity.BaseActivity
 import com.grl.sms_wa.databinding.ActivityMainBinding
@@ -83,6 +85,7 @@ class MainActivity : BaseActivity<ActivityMainBinding>(ActivityMainBinding::infl
         applyCurrentTheme()
     }
 
+    @SuppressLint("SetTextI18n")
     private fun initDrawer() {
         binding.layoutDrawer.ivBack.setOnClickListener {
             closeDrawer()
@@ -103,6 +106,9 @@ class MainActivity : BaseActivity<ActivityMainBinding>(ActivityMainBinding::infl
         binding.layoutDrawer.llBlocking.setOnClickListener {
             showDrawerFragment(BlockedFragment())
         }
+
+        val versionName = BuildConfig.VERSION_NAME
+        binding.layoutDrawer.tvVersion.text = getString(R.string.txt_version_v, versionName)
     }
 
     private fun showDrawerFragment(fragment: Fragment) {

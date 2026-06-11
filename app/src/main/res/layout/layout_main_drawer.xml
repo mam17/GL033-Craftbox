@@ -193,6 +193,7 @@
                 android:textColor="@color/col_main" />
 
             <TextView
+                android:id="@+id/tvVersion"
                 style="@style/TextView_4"
                 android:text="@string/txt_version"
                 android:textColor="@color/col_main" />

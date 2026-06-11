@@ -205,4 +205,19 @@
     <string name="txt_cont_permission_system">Для корректной работы Color SMS и всех его полезных функций, это приложение должно быть установлено по умолчанию для отправки SMS.</string>
     <string name="txt_ok">Хорошо</string>
     <string name="txt_automatic_contact_colors">Автоматические контактные цвета</string>
+    <string name="txt_default">По умолчанию</string>
+    <string name="txt_gradient">Градиент</string>
+    <string name="txt_color">Цвет</string>
+    <string name="txt_picture">Картина</string>
+    <string name="txt_blur">Размытие</string>
+    <string name="txt_library">Библиотека</string>
+    <string name="txt_horizontal">Горизонтальный</string>
+    <string name="txt_vertical">Вертикальный</string>
+    <string name="txt_style">Стиль</string>
+    <string name="txt_bubble_color">Цвет пузырька</string>
+    <string name="txt_received">Полученный</string>
+    <string name="txt_sent">Отправил</string>
+    <string name="txt_text_color">Цвет текста</string>
+    <string name="txt_font">Шрифт</string>
+    <string name="txt_version_v">Версия: %1$s</string>
 </resources>

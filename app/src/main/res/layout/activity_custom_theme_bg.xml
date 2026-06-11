@@ -196,6 +196,7 @@
             android:layout_marginTop="@dimen/size16"
             android:background="@drawable/bg_btn_r10_main"
             android:gravity="center"
+            android:stateListAnimator="@null"
             android:text="@string/txt_apply"
             android:textColor="@color/white" />
 

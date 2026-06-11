@@ -27,7 +27,7 @@
     <string name="txt_title_onb1">Welcome to</string>
     <string name="txt_desc_onb1">Messenger Color SMS</string>
     <string name="txt_title_onb2">Customize Easy</string>
-    <string name="txt_desc_onb2"></string>
+    <string name="txt_desc_onb2" translatable="false"></string>
     <string name="txt_title_onb3">Fast &amp; Easy</string>
     <string name="txt_desc_onb3">Send Messages to Everyone</string>
     <string name="txt_confirm">Confirm</string>
@@ -98,7 +98,7 @@
     <string name="txt_message_placeholder">[TB] Grab these special data packages for Tet!&#8230;</string>
     <string name="txt_date_placeholder">Feb 5th, 2026</string>
     <string name="txt_unknown_sender">Unknown sender</string>
-    <string name="txt_empty"></string>
+    <string name="txt_empty" translatable="false"></string>
     <string name="txt_menu">Menu</string>
     <string name="txt_me">Me</string>
     <string name="txt_archived">Archived</string>
@@ -148,7 +148,7 @@
     <string name="txt_300kb">300KB</string>
     <string name="txt_sync_messages">Sync messages</string>
     <string name="txt_sync_messages_desc">Re-sync your messages with the native Android SMS database</string>
-    <string name="txt_about_color_sms">About Color SMS</string>
+    <string name="txt_about_color_sms">About WA SMS</string>
     <string name="txt_version">Version x.x.x</string>
     <string name="txt_message">Message</string>
     <string name="txt_schedule_message">Schedule message</string>
@@ -216,7 +216,7 @@
     <string name="txt_font_size"><![CDATA[Font & size]]></string>
     <string name="txt_bubble">Bubble</string>
     <string name="txt_set_sms_color_as_your_default">Set SMS Color as Your Default</string>
-    <string name="txt_cont_permission_system">To make Color SMS work properly with cool features, it needs to be the default SMS app</string>
+    <string name="txt_cont_permission_system">To make SMS WA work properly with cool features, it needs to be the default SMS app</string>
     <string name="txt_ok">Ok</string>
     <string name="txt_automatic_contact_colors">Automatic contact colors</string>
     <string name="txt_default">Default</string>
@@ -232,4 +232,6 @@
     <string name="txt_received">Received</string>
     <string name="txt_sent">Sent</string>
     <string name="txt_text_color">Text Color</string>
+    <string name="txt_font">Font</string>
+    <string name="txt_version_v">Version: %1$s</string>
 </resources>

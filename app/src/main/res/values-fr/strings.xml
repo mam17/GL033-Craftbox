@@ -205,4 +205,19 @@
     <string name="txt_cont_permission_system">Pour que Color SMS fonctionne correctement avec ses fonctionnalités intéressantes, il doit être défini comme application SMS par défaut.</string>
     <string name="txt_ok">D\'accord</string>
     <string name="txt_automatic_contact_colors">Couleurs de contact automatiques</string>
+    <string name="txt_default">Défaut</string>
+    <string name="txt_gradient">Pente</string>
+    <string name="txt_color">Couleur</string>
+    <string name="txt_picture">Image</string>
+    <string name="txt_blur">Se brouiller</string>
+    <string name="txt_library">Bibliothèque</string>
+    <string name="txt_horizontal">Horizontal</string>
+    <string name="txt_vertical">Verticale</string>
+    <string name="txt_style">Style</string>
+    <string name="txt_bubble_color">Bulle de couleur</string>
+    <string name="txt_received">Reçu</string>
+    <string name="txt_sent">Envoyé</string>
+    <string name="txt_text_color">Couleur du texte</string>
+    <string name="txt_font">Fonte</string>
+    <string name="txt_version_v">Version : %1$s</string>
 </resources>

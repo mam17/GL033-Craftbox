@@ -40,7 +40,7 @@
     <string name="txt_ask_5">Người khác</string>
     <string name="txt_uninstall">Gỡ cài đặt</string>
     <string name="txt_want_uninstall">Bạn muốn gỡ cài đặt ứng dụng này?</string>
-    <string name="txt_title_noti_full">📩 Bạn vừa bỏ lỡ một tin nhắn thú vị...</string>
+    <string name="txt_title_noti_full">📩 Bạn vừa bỏ lỡ một tin nhắn thú vị…</string>
     <string name="txt_body_noti_full">Có người nhắn tin cho bạn. Hãy mở ngay trước khi cuộc trò chuyện nguội lạnh!</string>
     <string name="txt_network_error">Lỗi mạng</string>
     <string name="txt_network_error_message">Không có kết nối mạng, vui lòng thử lại!</string>
@@ -205,4 +205,19 @@
     <string name="txt_cont_permission_system">Để ứng dụng Color SMS hoạt động tốt với các tính năng thú vị, nó cần được đặt làm ứng dụng SMS mặc định.</string>
     <string name="txt_ok">Được rồi</string>
     <string name="txt_automatic_contact_colors">Màu tiếp xúc tự động</string>
+    <string name="txt_default">Mặc định</string>
+    <string name="txt_gradient">Độ dốc</string>
+    <string name="txt_color">Màu sắc</string>
+    <string name="txt_picture">Hình ảnh</string>
+    <string name="txt_blur">Mờ</string>
+    <string name="txt_library">Thư viện</string>
+    <string name="txt_horizontal">Nằm ngang</string>
+    <string name="txt_vertical">Thẳng đứng</string>
+    <string name="txt_style">Phong cách</string>
+    <string name="txt_bubble_color">Màu bong bóng</string>
+    <string name="txt_received">Đã nhận</string>
+    <string name="txt_sent">Đã gửi</string>
+    <string name="txt_text_color">Màu chữ</string>
+    <string name="txt_font">Phông chữ</string>
+    <string name="txt_version_v">Phiên bản: %1$s</string>
 </resources>

@@ -205,4 +205,19 @@
     <string name="txt_cont_permission_system">Agar Color SMS dapat berfungsi dengan baik dan memiliki fitur-fitur menarik, aplikasi ini harus menjadi aplikasi SMS default.</string>
     <string name="txt_ok">Oke</string>
     <string name="txt_automatic_contact_colors">Warna lensa kontak otomatis</string>
+    <string name="txt_default">Bawaan</string>
+    <string name="txt_gradient">Gradien</string>
+    <string name="txt_color">Warna</string>
+    <string name="txt_picture">Gambar</string>
+    <string name="txt_blur">Mengaburkan</string>
+    <string name="txt_library">Perpustakaan</string>
+    <string name="txt_horizontal">Horisontal</string>
+    <string name="txt_vertical">Vertikal</string>
+    <string name="txt_style">Gaya</string>
+    <string name="txt_bubble_color">Warna Gelembung</string>
+    <string name="txt_received">Diterima</string>
+    <string name="txt_sent">Terkirim</string>
+    <string name="txt_text_color">Warna Teks</string>
+    <string name="txt_font">Font</string>
+    <string name="txt_version_v">Versi: %1$s</string>
 </resources>

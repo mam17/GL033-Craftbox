@@ -92,12 +92,11 @@
                 android:layout_height="@dimen/size44"
                 android:layout_weight="1"
                 android:clickable="true"
-                app:strokeWidth="0dp"
                 android:focusable="true"
                 android:foreground="?attr/selectableItemBackground"
                 app:cardBackgroundColor="@color/col_main"
                 app:cardCornerRadius="@dimen/size30"
-               >
+                app:strokeWidth="0dp">
 
                 <TextView
                     android:id="@+id/tvAll"
@@ -157,6 +156,7 @@
             android:visibility="visible">
 
             <TextView
+                android:id="@+id/tvBBColor"
                 style="@style/TextView_7"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -225,7 +225,7 @@
                     android:textSize="@dimen/size14" />
 
                 <com.grl.sms_wa.views.RoundImageView
-                    android:id="@+id/ivColorBBSent"
+                    android:id="@+id/ivColorBBSentSL"
                     android:layout_width="@dimen/size24"
                     android:layout_height="@dimen/size24"
                     app:bgColor="@color/col_d9fdd3"
@@ -233,6 +233,7 @@
             </LinearLayout>
 
             <TextView
+                android:id="@+id/tvTextColor"
                 style="@style/TextView_7"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -318,6 +319,7 @@
             android:layout_marginTop="@dimen/size16"
             android:background="@drawable/bg_btn_r10_main"
             android:gravity="center"
+            android:stateListAnimator="@null"
             android:text="@string/txt_apply"
             android:textColor="@color/white" />
 
