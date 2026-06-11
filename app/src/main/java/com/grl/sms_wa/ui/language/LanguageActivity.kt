@@ -3,6 +3,7 @@ package com.grl.sms_wa.ui.language
 import android.util.Log
 import androidx.activity.viewModels
 import androidx.core.view.isVisible
+import com.grl.sms_wa.R
 import com.grl.sms_wa.base.activity.BaseActivity
 import com.grl.sms_wa.databinding.ActivityLanguageBinding
 import com.grl.sms_wa.ui.main.MainActivity
@@ -48,6 +49,7 @@ class LanguageActivity : BaseActivity<ActivityLanguageBinding>(ActivityLanguageB
             toolBarLanguage.btnBack.setOnClickListener { onBack() }
             toolBarLanguage.btnSelect.visible()
             toolBarLanguage.btnAction.gone()
+            toolBarLanguage.tvTitle.text = getString(R.string.txt_language)
             rclLanguage.adapter = mLanguageAdapter
             mLanguageAdapter.setOnItemClick { _, position ->
                 mLanguageAdapter.selectItem(position)
